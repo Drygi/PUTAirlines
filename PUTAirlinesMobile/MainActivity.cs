@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PUTAirlinesMobile
 {
-    [Activity(Label = "PUTAirlinesMobile", MainLauncher = true, Theme ="@style/Theme.Splash",  Icon = "@drawable/icon")]
+    [Activity(Label = "PUTAirlinesMobile", MainLauncher = true, Theme = "@style/Theme.Splash",  Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
 
@@ -17,10 +17,11 @@ namespace PUTAirlinesMobile
         protected override  void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-             Task.Delay(3000).Wait();
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
+            Task.Delay(3000).Wait();
             StartActivity(typeof(loginPage));
-  //
+            this.Finish();
+  
           
         }
     }

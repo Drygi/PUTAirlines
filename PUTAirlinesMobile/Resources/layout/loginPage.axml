@@ -18,7 +18,7 @@
         android:id="@+id/loginText"
         android:textStyle="bold"
         android:textSize="25sp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="150dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="10dp"
@@ -36,7 +36,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:id="@+id/passwordButton"
+        android:id="@+id/passwordText"
         android:password="true"
         android:paddingLeft="10dp" />
     <Button
@@ -48,7 +48,8 @@
         android:layout_marginTop="10dp"
         android:background="#003366"
         android:clickable="true"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:textColor="#FFFFFF"
         android:id="@+id/loginButton"
         android:layout_weight="5" />
     <CheckBox
@@ -68,9 +69,8 @@
         android:id="@+id/loginProgressBar"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp" 
-        android:visibility="invisible"   
-        />
+        android:layout_marginTop="20dp"
+        android:visibility="invisible" />
     <Button
         android:text="Nie posiadam jeszcze konta"
         android:layout_width="match_parent"
@@ -82,6 +82,7 @@
         android:background="#006699"
         android:gravity="center"
         android:linksClickable="true"
+        android:textColor="#FFFFFF"
         android:textStyle="normal"
         android:textSize="16sp"
         android:autoLink="none" />
