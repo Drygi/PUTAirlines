@@ -20,6 +20,28 @@ namespace PUTAirlinesMobile
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.loginPage);
+            Button logButton = FindViewById<Button>(Resource.Id.loginButton);
+            Button registerButton = FindViewById<Button>(Resource.Id.registerButton);
+
+            logButton.Click += LogButton_Click;
+            registerButton.Click += RegisterButton_Click;
+
+        }
+        private void setAlert(string message)
+        {
+            Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+            Android.App.AlertDialog alertDialog = alert.Create();
+            alertDialog.SetTitle(message);
+            alertDialog.Show();
+        }
+        private void RegisterButton_Click(object sender, EventArgs e)
+        {
+            setAlert("Rejestracja");
+        }
+
+        private void LogButton_Click(object sender, EventArgs e)
+        {
+            setAlert("Logowanie");
         }
     }
 }
