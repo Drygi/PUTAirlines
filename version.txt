@@ -1,0 +1,1 @@
+1.0 - panel logowania + sprawdzenie po³¹czenia z baz¹

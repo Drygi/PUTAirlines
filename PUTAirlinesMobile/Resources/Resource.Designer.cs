@@ -66,14 +66,17 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060002
 			public const int loginButton = 2131099650;
 			
+			// aapt resource value: 0x7f060004
+			public const int loginProgressBar = 2131099652;
+			
 			// aapt resource value: 0x7f060000
 			public const int loginText = 2131099648;
 			
 			// aapt resource value: 0x7f060001
 			public const int passwordButton = 2131099649;
 			
-			// aapt resource value: 0x7f060004
-			public const int registerButton = 2131099652;
+			// aapt resource value: 0x7f060005
+			public const int registerButton = 2131099653;
 			
 			// aapt resource value: 0x7f060003
 			public const int rememberLogin = 2131099651;

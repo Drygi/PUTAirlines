@@ -22,8 +22,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="10dp"
-        android:paddingLeft="10dp"
-         />
+        android:paddingLeft="10dp" />
     <EditText
         android:hint="Hasło"
         android:textStyle="bold"
@@ -39,8 +38,7 @@
         android:layout_marginBottom="5dp"
         android:id="@+id/passwordButton"
         android:password="true"
-        android:paddingLeft="10dp"
-        />
+        android:paddingLeft="10dp" />
     <Button
         android:text="Zaloguj Się"
         android:layout_width="match_parent"
@@ -52,8 +50,7 @@
         android:clickable="true"
         android:textSize="20sp"
         android:id="@+id/loginButton"
-        android:layout_weight="5" 
-        />
+        android:layout_weight="5" />
     <CheckBox
         android:text="Zapamiętaj dane "
         android:layout_width="match_parent"
@@ -65,13 +62,22 @@
         android:id="@+id/rememberLogin"
         android:layout_weight="5"
         android:textColor="#FFFFFF" />
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginProgressBar"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp" 
+        android:visibility="invisible"   
+        />
     <Button
         android:text="Nie posiadam jeszcze konta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/registerButton"
         android:background="#006699"
         android:gravity="center"
