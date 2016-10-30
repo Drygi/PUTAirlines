@@ -5,26 +5,23 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using System.Threading.Tasks;
 
 namespace PUTAirlinesMobile
 {
-    [Activity(Label = "PUTAirlinesMobile", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "PUTAirlinesMobile", MainLauncher = true, Theme ="@style/Theme.Splash",  Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
 
-        protected override void OnCreate(Bundle bundle)
+
+        protected override  void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
-
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
-
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+             Task.Delay(3000).Wait();
+            StartActivity(typeof(loginPage));
+  //
+          
         }
     }
 }
