@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/registerLogin"
-            android:textStyle="bold"
+      
             android:textSize="25sp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="40dp"
@@ -56,7 +56,6 @@
         <EditText
             android:hint="Hasło"
             android:text=""
-            android:textStyle="bold"
             android:textSize="25sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,7 +72,6 @@
         <EditText
             android:hint="Powtórz hasło"
             android:text=""
-            android:textStyle="bold"
             android:textSize="25sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,7 +88,7 @@
         <TextView
             android:text="Dane osobowe:"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
+         
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,7 +108,7 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/registerName"
-            android:textStyle="bold"
+        
             android:textSize="25sp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="40dp"
@@ -127,7 +125,6 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/registerSurname"
-            android:textStyle="bold"
             android:textSize="25sp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="40dp"
@@ -144,7 +141,6 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/registerPassportNumber"
-            android:textStyle="bold"
             android:textSize="25sp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="40dp"
@@ -161,7 +157,6 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/registerNationality"
-            android:textStyle="bold"
             android:textSize="25sp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="40dp"
@@ -171,7 +166,6 @@
         <TextView
             android:text="Adres zamieszkania:"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,7 +185,6 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/registerCity"
-            android:textStyle="bold"
             android:textSize="25sp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="40dp"
@@ -208,7 +201,6 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/registerStreet"
-            android:textStyle="bold"
             android:textSize="25sp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="40dp"
@@ -225,7 +217,6 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/registerPostCode"
-            android:textStyle="bold"
             android:textSize="25sp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="40dp"
