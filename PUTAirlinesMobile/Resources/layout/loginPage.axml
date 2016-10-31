@@ -7,8 +7,18 @@
     android:weightSum="100"
     android:minHeight="25px"
     android:minWidth="25px">
+    <ImageView
+        android:src="@drawable/userIcon"
+        android:layout_height="110dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/userIconID"
+        android:layout_width="fill_parent" />
     <EditText
         android:hint="Login"
+        android:text=""
         android:background="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
@@ -18,13 +28,14 @@
         android:id="@+id/loginText"
         android:textStyle="bold"
         android:textSize="25sp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="10dp"
         android:paddingLeft="10dp" />
     <EditText
         android:hint="Hasło"
+         android:text=""
         android:textStyle="bold"
         android:textSize="25sp"
         android:layout_width="match_parent"
@@ -69,7 +80,7 @@
         android:id="@+id/loginProgressBar"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:visibility="invisible" />
     <Button
         android:text="Nie posiadam jeszcze konta"
@@ -77,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/registerButton"
         android:background="#006699"
         android:gravity="center"

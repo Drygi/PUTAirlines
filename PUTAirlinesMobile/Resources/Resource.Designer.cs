@@ -50,6 +50,9 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f020001
 			public const int logo = 2130837505;
 			
+			// aapt resource value: 0x7f020002
+			public const int userIcon = 2130837506;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -63,23 +66,26 @@ namespace PUTAirlinesMobile
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060002
-			public const int loginButton = 2131099650;
-			
-			// aapt resource value: 0x7f060004
-			public const int loginProgressBar = 2131099652;
-			
-			// aapt resource value: 0x7f060000
-			public const int loginText = 2131099648;
-			
-			// aapt resource value: 0x7f060001
-			public const int passwordText = 2131099649;
+			// aapt resource value: 0x7f060003
+			public const int loginButton = 2131099651;
 			
 			// aapt resource value: 0x7f060005
-			public const int registerButton = 2131099653;
+			public const int loginProgressBar = 2131099653;
 			
-			// aapt resource value: 0x7f060003
-			public const int rememberLogin = 2131099651;
+			// aapt resource value: 0x7f060001
+			public const int loginText = 2131099649;
+			
+			// aapt resource value: 0x7f060002
+			public const int passwordText = 2131099650;
+			
+			// aapt resource value: 0x7f060006
+			public const int registerButton = 2131099654;
+			
+			// aapt resource value: 0x7f060004
+			public const int rememberLogin = 2131099652;
+			
+			// aapt resource value: 0x7f060000
+			public const int userIconID = 2131099648;
 			
 			static Id()
 			{

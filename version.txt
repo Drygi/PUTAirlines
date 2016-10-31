@@ -1,7 +1,9 @@
 1.0 - panel logowania + sprawdzenie po³¹czenia z baz¹
 1.1 - usprawnienie panelu logowania, dodanie ikony + nie konca dziala interakcja z baza a logowaniem
 1.2 - stworzenie klasy pomocniczej MySQLHelper , optymalizacja kodu activity LoginPage zg³oszenie poprawej do kolejnej wersji :
-* progress bar powinien snikac po otrzymaniu komunikatu
-* wprowadzenie aby przycisk logowania byl szary / dostepny w zaleznosci od tego czy login+haslo sa puste/wypelnione
-* blokada orienctacji (PortainMode)
-* obnizyc elementy na ekranie Login Panel oraz umiescic do góry jakiegos mini ludzika (User) grafika.
+1.3
+ - progress bar powinien snikac po otrzymaniu komunikatu - zrobione
+ - blokada orienctacji (PortainMode) - zrobione
+ - obnizyc elementy na ekranie Login Panel oraz umiescic do góry jakiegos mini ludzika (User) grafika. - zrobione
+1.4 do zrobienia
+ * wprowadzenie aby przycisk logowania byl szary / dostepny w zaleznosci od tego czy login+haslo sa puste/wypelnione
