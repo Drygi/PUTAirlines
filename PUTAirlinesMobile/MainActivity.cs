@@ -19,7 +19,7 @@ namespace PUTAirlinesMobile
             base.OnCreate(bundle);
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             Task.Delay(3000).Wait();
-            StartActivity(typeof(loginPage));
+            StartActivity(typeof(LoginPage));
             this.Finish();
   
           
