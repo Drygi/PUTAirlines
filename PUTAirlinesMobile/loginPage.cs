@@ -49,15 +49,18 @@ namespace PUTAirlinesMobile
             loginEditText.TextChanged += LoginEditText_TextChanged;
             passwordEditText.TextChanged += PasswordEditText_TextChanged;
 
+            logButton.Clickable = false;
+            logButton.SetBackgroundColor(Android.Graphics.Color.ParseColor("#9FA2A8"));
+
 
         }
 
         private void PasswordEditText_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            if(loginEditText.Text == "" && passwordEditText.Text == "")
+            if(loginEditText.Text == "" || passwordEditText.Text == "")
             {
                 logButton.Clickable = false;
-                logButton.SetBackgroundColor(   Android.Graphics.Color.ParseColor("#CCCC99"));
+                logButton.SetBackgroundColor(   Android.Graphics.Color.ParseColor("#9FA2A8"));
             }
             else
             {
@@ -70,10 +73,10 @@ namespace PUTAirlinesMobile
         private void LoginEditText_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
 
-            if (loginEditText.Text == "" && passwordEditText.Text == "")
+            if (loginEditText.Text == "" || passwordEditText.Text == "")
             {
                 logButton.Clickable = false;
-                logButton.SetBackgroundColor(Android.Graphics.Color.ParseColor("#CCCC99"));
+                logButton.SetBackgroundColor(Android.Graphics.Color.ParseColor("#9FA2A8"));
             }
             else
             {

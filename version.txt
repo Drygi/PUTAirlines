@@ -5,5 +5,5 @@
  - progress bar powinien snikac po otrzymaniu komunikatu - zrobione
  - blokada orienctacji (PortainMode) - zrobione
  - obnizyc elementy na ekranie Login Panel oraz umiescic do góry jakiegos mini ludzika (User) grafika. - zrobione
-1.4 do zrobienia
- * wprowadzenie aby przycisk logowania byl szary / dostepny w zaleznosci od tego czy login+haslo sa puste/wypelnione
+1.4 
+ - wprowadzenie aby przycisk logowania byl szary / dostepny w zaleznosci od tego czy login+haslo sa puste/wypelnione
