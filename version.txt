@@ -12,5 +12,6 @@
  - wprowadzenie aby przycisk logowania byl szary / dostepny w zaleznosci od tego czy login+haslo sa puste/wypelnione
 1.5  
  - panel rejestracji FrontEnd
- 1.5.1 
- * zrobiæ backEnd panelu rejestracji
+ 1.5.1 - polaczenie z baza podczas rejestracji i sprawdzenie czy login juz istnieje w bazie
+ 1.5.2 -
+ * zrobiæ backEnd panelu rejestracji - kazdy editText jezeli false podswietla sie na czerwono + dodanie klienta do bazy

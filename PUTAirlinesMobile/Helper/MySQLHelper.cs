@@ -55,5 +55,43 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
+
+        public static bool findLogin(string login, MySqlConnection conn)
+        {
+            MySqlDataReader rdr = null;
+            bool returned = true;
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Client WHERE Login=@log;", conn);
+
+                cmd.Parameters.AddWithValue("@log", login);
+               
+               var result = cmd.ExecuteReader();
+
+                if (result.HasRows)
+                    returned = true;
+                else
+                    returned = false;
+
+            }
+            catch (Exception ex)
+            {
+                returned = false;
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
+        }
     }
-}
+    }

@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using PUTAirlinesMobile.Resources;
+using MySql.Data.MySqlClient;
 
 namespace PUTAirlinesMobile
 {
@@ -20,12 +21,14 @@ namespace PUTAirlinesMobile
         Button register;
         ProgressBar registerBar;
         EditText login, password1, password2, name, lastName, passsportNumber, nationality, city, street, postCode;
+        MySqlConnection connection;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.RegisterPage);
             controlsInit();
-            // Create your application here
+            connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");
+            
         }
 
         void controlsInit()
@@ -56,7 +59,21 @@ namespace PUTAirlinesMobile
         {
             registerBar.Visibility = ViewStates.Visible;
 
+            bool loginExist = Helper.MySQLHelper.findLogin(this.login.Text, connection);
 
+            if (loginExist) setAlert("Podany login juz istnieje");
+
+            if (password1 != password2) setAlert("Podane has³a musz¹ byæ identyczne");
+
+           
+        }
+
+        private void setAlert(string message)
+        {
+            Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+            Android.App.AlertDialog alertDialog = alert.Create();
+            alertDialog.SetTitle(message);
+            alertDialog.Show();
         }
     }
 }
