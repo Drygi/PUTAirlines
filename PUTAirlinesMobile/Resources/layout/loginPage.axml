@@ -51,7 +51,7 @@
         android:password="true"
         android:paddingLeft="10dp" />
     <Button
-        android:text="Zaloguj się"
+        android:text="Zaloguj"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -61,6 +61,7 @@
         android:clickable="true"
         android:textSize="25sp"
         android:textColor="#FFFFFF"
+        android:padding="10dp"
         android:id="@+id/loginButton"
         android:layout_weight="5" />
     <CheckBox

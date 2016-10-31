@@ -96,13 +96,13 @@ namespace PUTAirlinesMobile
         
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            setAlert("Rejestracja");
+            StartActivity(typeof(RegisterPage));
+            
         }
         private void LogButton_Click(object sender, EventArgs e)
         {
             loginBar.Visibility = ViewStates.Visible;
             bool result = Helper.MySQLHelper.check_if_account_is_correct(this.loginEditText.Text, this.passwordEditText.Text,connection);
-
             if(result)
             {
                 // uruchomienie Panelu
@@ -115,6 +115,8 @@ namespace PUTAirlinesMobile
             {
                 setAlert("Podane dane logowania s¹ niepoprawne.");
                 loginBar.Visibility = ViewStates.Invisible;
+                loginEditText.Text = "";
+                passwordEditText.Text = "";
             }                        
 
         }

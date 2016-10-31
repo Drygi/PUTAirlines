@@ -51,7 +51,10 @@ namespace PUTAirlinesMobile
 			public const int logo = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int userIcon = 2130837506;
+			public const int registerIcon = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int userIcon = 2130837507;
 			
 			static Drawable()
 			{
@@ -81,8 +84,56 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060006
 			public const int registerButton = 2131099654;
 			
+			// aapt resource value: 0x7f060012
+			public const int registerCity = 2131099666;
+			
+			// aapt resource value: 0x7f060015
+			public const int registerClick = 2131099669;
+			
+			// aapt resource value: 0x7f060009
+			public const int registerLogin = 2131099657;
+			
+			// aapt resource value: 0x7f06000d
+			public const int registerName = 2131099661;
+			
+			// aapt resource value: 0x7f060010
+			public const int registerNationality = 2131099664;
+			
+			// aapt resource value: 0x7f06000f
+			public const int registerPassportNumber = 2131099663;
+			
+			// aapt resource value: 0x7f06000a
+			public const int registerPassword = 2131099658;
+			
+			// aapt resource value: 0x7f06000b
+			public const int registerPassword2 = 2131099659;
+			
+			// aapt resource value: 0x7f060014
+			public const int registerPostCode = 2131099668;
+			
+			// aapt resource value: 0x7f060016
+			public const int registerProgressBar = 2131099670;
+			
+			// aapt resource value: 0x7f060013
+			public const int registerStreet = 2131099667;
+			
+			// aapt resource value: 0x7f06000e
+			public const int registerSurname = 2131099662;
+			
 			// aapt resource value: 0x7f060004
 			public const int rememberLogin = 2131099652;
+			
+			// aapt resource value: 0x7f060007
+			public const int scrollViewRegister = 2131099655;
+			
+			// aapt resource value: 0x7f060011
+			public const int textView1 = 2131099665;
+			
+			// aapt resource value: 0x7f06000c
+			public const int textView2 = 2131099660;
+			
+			// aapt resource value: 0x7f060008
+			public const int textView3 = 2131099656;
 			
 			// aapt resource value: 0x7f060000
 			public const int userIconID = 2131099648;
@@ -105,6 +156,9 @@ namespace PUTAirlinesMobile
 			
 			// aapt resource value: 0x7f030001
 			public const int Main = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int RegisterPage = 2130903042;
 			
 			static Layout()
 			{

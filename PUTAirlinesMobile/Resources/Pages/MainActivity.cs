@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PUTAirlinesMobile
 {
-    [Activity(Label = "PUTAirlinesMobile", MainLauncher = true, Theme = "@style/Theme.Splash",  Icon = "@drawable/icon")]
+    [Activity(Label = "PUTAirlinesMobile", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, Theme = "@style/Theme.Splash",  Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
 
