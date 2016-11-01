@@ -23,7 +23,8 @@
             android:text="REJESTRACJA"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:textSize="45sp"
+            android:singleLine="true"
+            android:textSize="35sp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,6 +37,7 @@
         <EditText
             android:hint="Login"
             android:text=""
+            android:singleLine="true"
             android:background="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -43,19 +45,17 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/registerLogin"
-      
             android:textSize="25sp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="5dp"
-            android:paddingLeft="10dp" 
-            android:ellipsize="end"
-            
-            />
+            android:paddingLeft="10dp"
+            android:ellipsize="end" />
         <EditText
             android:hint="Hasło"
             android:text=""
+            android:singleLine="true"
             android:textSize="25sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,6 +72,7 @@
         <EditText
             android:hint="Powtórz hasło"
             android:text=""
+            android:singleLine="true"
             android:textSize="25sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,7 +89,7 @@
         <TextView
             android:text="Dane osobowe:"
             android:textColor="#FFFFFF"
-         
+            android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,6 +102,7 @@
         <EditText
             android:hint="Imię"
             android:text=""
+            android:singleLine="true"
             android:background="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -108,7 +110,6 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/registerName"
-        
             android:textSize="25sp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="40dp"
@@ -118,6 +119,7 @@
         <EditText
             android:hint="Nazwisko"
             android:text=""
+            android:singleLine="true"
             android:background="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -134,6 +136,7 @@
         <EditText
             android:hint="Numer paszportu"
             android:text=""
+            android:singleLine="true"
             android:background="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -150,6 +153,7 @@
         <EditText
             android:hint="Narodowość"
             android:text=""
+            android:singleLine="true"
             android:background="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -166,6 +170,7 @@
         <TextView
             android:text="Adres zamieszkania:"
             android:textColor="#FFFFFF"
+            android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -178,6 +183,7 @@
         <EditText
             android:hint="Miejscowość"
             android:text=""
+            android:singleLine="true"
             android:background="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -194,6 +200,7 @@
         <EditText
             android:hint="Ulica i numer domu"
             android:text=""
+            android:singleLine="true"
             android:background="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -210,6 +217,7 @@
         <EditText
             android:hint="kod pocztowy"
             android:text=""
+            android:singleLine="true"
             android:background="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"

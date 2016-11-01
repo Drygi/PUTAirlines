@@ -16,9 +16,12 @@
         android:layout_marginBottom="10dp"
         android:id="@+id/userIconID"
         android:layout_width="fill_parent" />
+    
     <EditText
+       
         android:hint="Login"
         android:text=""
+        android:singleLine="true"
         android:background="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
@@ -32,10 +35,12 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="10dp"
-        android:paddingLeft="10dp" />
+        android:paddingLeft="10dp"
+        />
     <EditText
         android:hint="Hasło"
         android:text=""
+        android:singleLine="true"
         android:textStyle="bold"
         android:textSize="25sp"
         android:layout_width="match_parent"
@@ -72,7 +77,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
-        android:id="@+id/rememberLogin"
+        android:id="@+id/rememberMeBox"
         android:layout_weight="5"
         android:textColor="#FFFFFF" />
     <ProgressBar

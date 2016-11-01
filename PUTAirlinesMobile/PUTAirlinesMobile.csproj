@@ -58,6 +58,7 @@
     <Compile Include="Resources\layout\GlobalHelper.cs" />
     <Compile Include="Resources\Pages\LoginPage.cs" />
     <Compile Include="Resources\Pages\MainActivity.cs" />
+    <Compile Include="Resources\Pages\panelPage.cs" />
     <Compile Include="Resources\Pages\RegisterPage.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,9 +74,10 @@
     <AndroidResource Include="Resources\layout\RegisterPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml">
+    <AndroidResource Include="Resources\drawable\editTextBorder.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\panelPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

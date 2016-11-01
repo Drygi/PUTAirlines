@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
+using PUTAirlinesMobile.Resources.Pages;
 
 namespace PUTAirlinesMobile
 {
@@ -22,6 +23,7 @@ namespace PUTAirlinesMobile
         EditText passwordEditText;
         ProgressBar loginBar;
         MySqlConnection connection;
+        CheckBox rememberMe;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             
@@ -51,7 +53,8 @@ namespace PUTAirlinesMobile
 
             logButton.Clickable = false;
             logButton.SetBackgroundColor(Android.Graphics.Color.ParseColor("#9FA2A8"));
-
+            rememberMe = FindViewById<CheckBox>(Resource.Id.rememberMeBox);
+            
 
         }
 
@@ -97,7 +100,9 @@ namespace PUTAirlinesMobile
         private void RegisterButton_Click(object sender, EventArgs e)
         {
             StartActivity(typeof(RegisterPage));
-            
+            loginEditText.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+            passwordEditText.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+
         }
         private void LogButton_Click(object sender, EventArgs e)
         {
@@ -110,6 +115,18 @@ namespace PUTAirlinesMobile
                 // this.Finish();
                 setAlert("Podane dane logowania s¹ poprawne.");
                 loginBar.Visibility = ViewStates.Invisible;
+                loginEditText.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+                passwordEditText.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+
+                if(rememberMe.Checked)
+                {
+                    ISharedPreferences pref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+                    ISharedPreferencesEditor edit = pref.Edit();
+                    edit.PutString("UserName", loginEditText.Text.Trim());
+                    edit.PutString("Password", passwordEditText.Text.Trim());
+                    edit.Apply();
+                }
+                StartActivity(typeof(panelPage));
             }
             else
             {
@@ -117,6 +134,8 @@ namespace PUTAirlinesMobile
                 loginBar.Visibility = ViewStates.Invisible;
                 loginEditText.Text = "";
                 passwordEditText.Text = "";
+                loginEditText.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+                passwordEditText.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
             }                        
 
         }

@@ -16,5 +16,7 @@
  - polaczenie z baza podczas rejestracji i sprawdzenie czy login juz istnieje w bazie
  1.6
  - jezeli login istnieje lub podano rozne hasla to wraca na gore i  na czerwono w editText wyswietla komunikat 
- 1.7  do zrobienia:
- * wyslanie danych do bazy //haslo w MD5 + przejesce do nowego panelu 
+ 1.7
+ - zapamietywanie loginu i hasla 
+1.8 
+* zrobiæ wysylanie danych na serwer bazy + kodowanie hasla w MD5

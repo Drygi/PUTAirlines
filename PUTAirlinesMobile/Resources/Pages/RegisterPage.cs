@@ -10,6 +10,9 @@ using Android.Views;
 using Android.Widget;
 using PUTAirlinesMobile.Resources;
 using MySql.Data.MySqlClient;
+using Android.Graphics.Drawables;
+using Android.Graphics.Drawables.Shapes;
+using Android.Graphics;
 
 namespace PUTAirlinesMobile
 {
@@ -21,6 +24,7 @@ namespace PUTAirlinesMobile
         ProgressBar registerBar;
         EditText login, password1, password2, name, lastName, passsportNumber, nationality, city, street, postCode;
         MySqlConnection connection;
+        ScrollView scroll;
         bool goodRegister;
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,23 +32,15 @@ namespace PUTAirlinesMobile
             SetContentView(Resource.Layout.RegisterPage);
             controlsInit();
             connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");
-            goodRegister = true;
         }
 
-        void controlsInit()
+
+    void controlsInit()
         {
             register = FindViewById<Button>(Resource.Id.registerClick);
             register.Click += Register_Click;
-           
-
             registerBar = FindViewById<ProgressBar>(Resource.Id.registerProgressBar);
             registerBar.Visibility = ViewStates.Invisible;
-
-
-        }
-
-        void variabelsFromAXAML()
-        {
             login = FindViewById<EditText>(Resource.Id.registerLogin);
             password1 = FindViewById<EditText>(Resource.Id.registerPassword);
             password2 = FindViewById<EditText>(Resource.Id.registerPassword2);
@@ -55,40 +51,111 @@ namespace PUTAirlinesMobile
             city = FindViewById<EditText>(Resource.Id.registerCity);
             street = FindViewById<EditText>(Resource.Id.registerStreet);
             postCode = FindViewById<EditText>(Resource.Id.registerPostCode);
+            scroll = FindViewById<ScrollView>(Resource.Id.scrollViewRegister);
         }
+
         private void Register_Click(object sender, EventArgs e)
         {
             registerBar.Visibility = ViewStates.Visible;
+            goodRegister = true;
 
-            variabelsFromAXAML();
             bool loginExist = Helper.MySQLHelper.findLogin(this.login.Text, connection);
 
             if (loginExist)
             {
                 goodRegister = false;
-                FindViewById<EditText>(Resource.Id.registerLogin).Text = "";
-                FindViewById<EditText>(Resource.Id.registerLogin).Hint = "Podany login ju¿ istnieje!";
-                FindViewById<EditText>(Resource.Id.registerLogin).SetHintTextColor(Android.Graphics.Color.Red);
+                login.Text = "";
                 registerBar.Visibility = ViewStates.Invisible;
-                FindViewById<ScrollView>(Resource.Id.scrollViewRegister).SmoothScrollTo(0, 0);
+                scroll.SmoothScrollTo(0, 0);
+                login.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+
             }
+            else
+                login.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
 
             if (password1.Text != password2.Text)
             {
                 goodRegister = false;
-                FindViewById<EditText>(Resource.Id.registerPassword).Text = "";
-                FindViewById<EditText>(Resource.Id.registerPassword2).Text = "";
-                FindViewById<EditText>(Resource.Id.registerPassword).Hint = "Podane has³a musz¹ byæ identyczne";
-                FindViewById<EditText>(Resource.Id.registerPassword).SetHintTextColor(Android.Graphics.Color.Red);
-                FindViewById<EditText>(Resource.Id.registerPassword2).Hint = "Podane has³a musz¹ byæ identyczne";
-                FindViewById<EditText>(Resource.Id.registerPassword2).SetHintTextColor(Android.Graphics.Color.Red);
-                FindViewById<ScrollView>(Resource.Id.scrollViewRegister).SmoothScrollTo(0, 0);
+                password1.Text = "";
+                password2.Text = "";
+                scroll.SmoothScrollTo(0, 0);
+                registerBar.Visibility = ViewStates.Invisible;
+                password1.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+                password2.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+            }
+            else
+            {
+                password1.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+                password2.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+            }
+           if(name.Text.Count()==0)
+            {
+                name.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+                goodRegister = false;
                 registerBar.Visibility = ViewStates.Invisible;
             }
+            else
+                name.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
 
-            if(goodRegister)
+            if (lastName.Text.Count() == 0)
+            {
+                lastName.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+                goodRegister = false;
+                registerBar.Visibility = ViewStates.Invisible;
+            }
+            else
+                lastName.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+
+            if (passsportNumber.Text.Count() == 0)
+            {
+                passsportNumber.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+                goodRegister = false;
+                registerBar.Visibility = ViewStates.Invisible;
+            }
+            else
+                passsportNumber.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+
+            if (nationality.Text.Count() == 0)
+            {
+                nationality.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+                goodRegister = false;
+                registerBar.Visibility = ViewStates.Invisible;
+            }
+            else
+                nationality.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+
+            if (city.Text.Count() == 0)
+            {
+                city.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+                goodRegister = false;
+                registerBar.Visibility = ViewStates.Invisible;
+            }
+            else
+                city.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+
+            if (street.Text.Count() == 0)
+            {
+                street.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+                goodRegister = false;
+                registerBar.Visibility = ViewStates.Invisible;
+            }
+            else
+                street.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+
+            if (postCode.Text.Count() == 0)
+            {
+                postCode.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+                goodRegister = false;
+                registerBar.Visibility = ViewStates.Invisible;
+            }
+            else
+                postCode.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
+
+
+            if (goodRegister)
             {
                 setAlert("Zarejestrowano pomyœlnie");
+               
             }
         }
         private void setAlert(string message)
