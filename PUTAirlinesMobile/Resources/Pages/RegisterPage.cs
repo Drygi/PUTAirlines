@@ -1,28 +1,22 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using PUTAirlinesMobile.Resources;
 using MySql.Data.MySqlClient;
-using Android.Graphics.Drawables;
-using Android.Graphics.Drawables.Shapes;
-using Android.Graphics;
+using PUTAirlinesMobile.Helper;
 
 namespace PUTAirlinesMobile
 {
     [Activity(Label = "RegisterPage", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class RegisterPage : Activity
     {
-        Client client;
+        Client client; 
         Button register;
         ProgressBar registerBar;
         EditText login, password1, password2, name, lastName, passsportNumber, nationality, city, street, postCode;
+        string individualNumber;
         MySqlConnection connection;
         ScrollView scroll;
         bool goodRegister;
@@ -32,6 +26,7 @@ namespace PUTAirlinesMobile
             SetContentView(Resource.Layout.RegisterPage);
             controlsInit();
             connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");
+            
         }
 
 
@@ -59,9 +54,21 @@ namespace PUTAirlinesMobile
             registerBar.Visibility = ViewStates.Visible;
             goodRegister = true;
 
-            bool loginExist = Helper.MySQLHelper.findLogin(this.login.Text, connection);
+            bool loginExist = Helper.MySQLHelper.findLogin(this.login.Text.Trim(), connection);
 
-            if (loginExist)
+            CheckRegister(loginExist);
+
+
+            if (goodRegister)
+            {
+                addToDataBase();
+            }
+        }
+
+        private void CheckRegister(bool findLogin)
+        {
+
+            if (findLogin || login.Text.Trim() == String.Empty)
             {
                 goodRegister = false;
                 login.Text = "";
@@ -73,7 +80,7 @@ namespace PUTAirlinesMobile
             else
                 login.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
 
-            if (password1.Text != password2.Text)
+            if (password1.Text.Trim() != password2.Text.Trim() || password1.Text.Trim() == String.Empty)
             {
                 goodRegister = false;
                 password1.Text = "";
@@ -88,7 +95,7 @@ namespace PUTAirlinesMobile
                 password1.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
                 password2.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
             }
-           if(name.Text.Count()==0)
+            if (name.Text.Trim() == String.Empty)
             {
                 name.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 goodRegister = false;
@@ -97,7 +104,7 @@ namespace PUTAirlinesMobile
             else
                 name.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
 
-            if (lastName.Text.Count() == 0)
+            if (lastName.Text.Trim() == String.Empty)
             {
                 lastName.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 goodRegister = false;
@@ -106,7 +113,7 @@ namespace PUTAirlinesMobile
             else
                 lastName.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
 
-            if (passsportNumber.Text.Count() == 0)
+            if (passsportNumber.Text.Trim() == String.Empty)
             {
                 passsportNumber.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 goodRegister = false;
@@ -115,7 +122,7 @@ namespace PUTAirlinesMobile
             else
                 passsportNumber.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
 
-            if (nationality.Text.Count() == 0)
+            if (nationality.Text.Trim() == String.Empty)
             {
                 nationality.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 goodRegister = false;
@@ -124,7 +131,7 @@ namespace PUTAirlinesMobile
             else
                 nationality.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
 
-            if (city.Text.Count() == 0)
+            if (city.Text.Trim() == String.Empty)
             {
                 city.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 goodRegister = false;
@@ -133,7 +140,7 @@ namespace PUTAirlinesMobile
             else
                 city.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
 
-            if (street.Text.Count() == 0)
+            if (street.Text.Trim() == String.Empty)
             {
                 street.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 goodRegister = false;
@@ -142,7 +149,7 @@ namespace PUTAirlinesMobile
             else
                 street.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
 
-            if (postCode.Text.Count() == 0)
+            if (postCode.Text.Trim() == String.Empty)
             {
                 postCode.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 goodRegister = false;
@@ -151,13 +158,37 @@ namespace PUTAirlinesMobile
             else
                 postCode.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
 
-
-            if (goodRegister)
-            {
-                setAlert("Zarejestrowano pomyœlnie");
-               
-            }
         }
+
+        private void addToDataBase()
+        {
+     
+
+            client.setName(name.Text.Trim());
+            client.setLastName(lastName.Text.Trim());
+            do
+            {
+              individualNumber = Helper.GlobalHelper.generateIdentify();
+
+            }
+            while (Helper.MySQLHelper.findIndividualNumber(individualNumber,connection));
+
+            setAlert(individualNumber);
+
+            client.setIndividualNumber(individualNumber);
+            client.setPassportNumber(passsportNumber.Text.Trim());
+            client.setCity(city.Text.Trim());
+            client.setStreet(street.Text.Trim());
+            client.setPostCode(postCode.Text.Trim());
+            client.setNationality(nationality.Text.Trim());
+            client.setLogin(login.Text.Trim());
+            client.setPassword(Helper.GlobalHelper.getMD5(password1.Text.Trim()));
+
+            Helper.MySQLHelper.InsertToDataBase(client, connection);
+            StartActivity(typeof(LoginPage));
+            this.Finish();
+        }
+
         private void setAlert(string message)
         {
             Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);

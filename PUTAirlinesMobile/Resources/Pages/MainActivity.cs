@@ -35,7 +35,7 @@ namespace PUTAirlinesMobile
             userName = pref.GetString("UserName", "");
             password = pref.GetString("Password", "");
 
-            if (userName == String.Empty || password == String.Empty)
+            if (userName.Trim() == String.Empty || password.Trim() == String.Empty)
             {
                 StartActivity(typeof(LoginPage));
                 this.Finish();

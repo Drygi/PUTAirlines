@@ -53,9 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\Client.cs" />
+    <Compile Include="Helper\GlobalHelper.cs" />
     <Compile Include="Helper\MySQLHelper.cs" />
-    <Compile Include="Resources\Client.cs" />
-    <Compile Include="Resources\layout\GlobalHelper.cs" />
     <Compile Include="Resources\Pages\LoginPage.cs" />
     <Compile Include="Resources\Pages\MainActivity.cs" />
     <Compile Include="Resources\Pages\panelPage.cs" />

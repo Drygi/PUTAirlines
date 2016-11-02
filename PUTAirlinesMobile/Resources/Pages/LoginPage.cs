@@ -12,6 +12,7 @@ using Android.Widget;
 using MySql.Data.MySqlClient;
 using PUTAirlinesMobile.Resources.Pages;
 
+
 namespace PUTAirlinesMobile
 {
     [Activity(Label = "loginPage", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
@@ -60,7 +61,7 @@ namespace PUTAirlinesMobile
 
         private void PasswordEditText_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            if(loginEditText.Text == "" || passwordEditText.Text == "")
+            if(loginEditText.Text.Trim() == String.Empty || passwordEditText.Text.Trim() == String.Empty)
             {
                 logButton.Clickable = false;
                 logButton.SetBackgroundColor(   Android.Graphics.Color.ParseColor("#9FA2A8"));
@@ -76,7 +77,7 @@ namespace PUTAirlinesMobile
         private void LoginEditText_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
 
-            if (loginEditText.Text == "" || passwordEditText.Text == "")
+            if (loginEditText.Text.Trim() == String.Empty || passwordEditText.Text.Trim() == String.Empty)
             {
                 logButton.Clickable = false;
                 logButton.SetBackgroundColor(Android.Graphics.Color.ParseColor("#9FA2A8"));
@@ -107,18 +108,14 @@ namespace PUTAirlinesMobile
         private void LogButton_Click(object sender, EventArgs e)
         {
             loginBar.Visibility = ViewStates.Visible;
+            passwordEditText.Text = Helper.GlobalHelper.getMD5(passwordEditText.Text);
             bool result = Helper.MySQLHelper.check_if_account_is_correct(this.loginEditText.Text, this.passwordEditText.Text,connection);
             if(result)
             {
-                // uruchomienie Panelu
-                // StartActivity(typeof(LoginPage));
-                // this.Finish();
-                setAlert("Podane dane logowania s¹ poprawne.");
                 loginBar.Visibility = ViewStates.Invisible;
                 loginEditText.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
                 passwordEditText.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
-
-                if(rememberMe.Checked)
+                if (rememberMe.Checked)
                 {
                     ISharedPreferences pref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
                     ISharedPreferencesEditor edit = pref.Edit();
@@ -127,6 +124,7 @@ namespace PUTAirlinesMobile
                     edit.Apply();
                 }
                 StartActivity(typeof(panelPage));
+                this.Finish();
             }
             else
             {
@@ -136,6 +134,8 @@ namespace PUTAirlinesMobile
                 passwordEditText.Text = "";
                 loginEditText.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 passwordEditText.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+
+
             }                        
 
         }

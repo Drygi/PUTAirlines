@@ -19,4 +19,4 @@
  1.7
  - zapamietywanie loginu i hasla 
 1.8 
-* zrobiæ wysylanie danych na serwer bazy + kodowanie hasla w MD5
+ - zrobiæ wysylanie danych na serwer bazy + kodowanie hasla w MD5 // nie dziala cos z klasa Client

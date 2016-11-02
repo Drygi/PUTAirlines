@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+
 namespace PUTAirlinesMobile.Resources.Pages
 {
     [Activity(Label = "panelPage", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
@@ -25,11 +26,17 @@ namespace PUTAirlinesMobile.Resources.Pages
 
 
         }
-
         private void ReLoadd_Click(object sender, EventArgs e)
         {
+            ISharedPreferences pref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+            ISharedPreferencesEditor edit = pref.Edit();
+            edit.Clear();
+            edit.Apply();
+
             StartActivity(typeof(LoginPage));
-            this.Finish();
+             this.Finish();
+
+        
         }
     }
 }
