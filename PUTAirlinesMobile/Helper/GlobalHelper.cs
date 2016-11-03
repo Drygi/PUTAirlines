@@ -35,7 +35,7 @@ namespace PUTAirlinesMobile.Helper
         public static string getMD5(string password)
         {
                 MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-                md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
+                md5.ComputeHash(ASCIIEncoding.UTF8.GetBytes(password));
                 byte[] result = md5.Hash;
                 StringBuilder str = new StringBuilder();
 

@@ -162,8 +162,8 @@ namespace PUTAirlinesMobile
 
         private void addToDataBase()
         {
-     
 
+            client = new Client();
             client.setName(name.Text.Trim());
             client.setLastName(lastName.Text.Trim());
             do
@@ -173,7 +173,7 @@ namespace PUTAirlinesMobile
             }
             while (Helper.MySQLHelper.findIndividualNumber(individualNumber,connection));
 
-            setAlert(individualNumber);
+           
 
             client.setIndividualNumber(individualNumber);
             client.setPassportNumber(passsportNumber.Text.Trim());
@@ -184,11 +184,17 @@ namespace PUTAirlinesMobile
             client.setLogin(login.Text.Trim());
             client.setPassword(Helper.GlobalHelper.getMD5(password1.Text.Trim()));
 
-            Helper.MySQLHelper.InsertToDataBase(client, connection);
-            StartActivity(typeof(LoginPage));
-            this.Finish();
+        var result=  Helper.MySQLHelper.InsertToDataBase(client, connection);
+         if(result)
+            {
+                StartActivity(typeof(LoginPage));
+                this.Finish();
+             }
+            else
+            {
+                setAlert("cos poszlo nie tak");
+            }
         }
-
         private void setAlert(string message)
         {
             Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);

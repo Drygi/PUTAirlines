@@ -134,12 +134,16 @@ namespace PUTAirlinesMobile.Helper
 
         public static bool InsertToDataBase(Client client, MySqlConnection conn)
         {
+         
             bool returned = true;
             try
             {
                 conn.Open();
-                string insert = "INSERT INTO Client VALUES ('@name',@surName','@individualNumber','@passportNumber','@city',";
-                insert += "'@street','@postcode','@nationality','@log','@pass'";
+                string insert = "INSERT INTO Client (Name, Surname,IndividualNumber,PassportNumber,City,Street,Postcode,Nationality,Login,Password) ";
+                insert+= "VALUES (@name,@surName,@individualNumber,@passportNumber,@city,@street,@postcode,@nationality,@log,@pass)";
+
+                
+
 
                 MySqlCommand cmd = new MySqlCommand(insert, conn);
 
@@ -154,6 +158,7 @@ namespace PUTAirlinesMobile.Helper
                 cmd.Parameters.AddWithValue("@log", client.getLogin());
                 cmd.Parameters.AddWithValue("@pass", client.getPassword());
 
+               var r= cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

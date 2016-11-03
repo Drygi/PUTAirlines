@@ -18,5 +18,4 @@
  - jezeli login istnieje lub podano rozne hasla to wraca na gore i  na czerwono w editText wyswietla komunikat 
  1.7
  - zapamietywanie loginu i hasla 
-1.8 
- - zrobiæ wysylanie danych na serwer bazy + kodowanie hasla w MD5 // nie dziala cos z klasa Client
+1.7.1 - dodawnie do bazy dziala z kodaniem MD5 nie dziala startowy ekran + SHARED PREFERENCE 

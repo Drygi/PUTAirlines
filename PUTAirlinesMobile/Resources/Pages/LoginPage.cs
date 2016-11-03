@@ -15,7 +15,7 @@ using PUTAirlinesMobile.Resources.Pages;
 
 namespace PUTAirlinesMobile
 {
-    [Activity(Label = "loginPage", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "loginPage", MainLauncher = true, Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class LoginPage : Activity
     {
         Button logButton;

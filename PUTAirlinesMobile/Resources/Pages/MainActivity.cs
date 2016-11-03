@@ -11,7 +11,7 @@ using PUTAirlinesMobile.Resources.Pages;
 
 namespace PUTAirlinesMobile
 {
-    [Activity(Label = "PUTAirlinesMobile", MainLauncher = true,ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, Theme = "@style/Theme.Splash",  Icon = "@drawable/icon")]
+    [Activity(Label = "PUTAirlinesMobile", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         MySqlConnection connection;
@@ -21,7 +21,8 @@ namespace PUTAirlinesMobile
         protected override  void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
+         
+            SetContentView(Resource.Layout.MainActivity);
 
             Task.Delay(3000).Wait();
             connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");
