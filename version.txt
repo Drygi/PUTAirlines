@@ -19,3 +19,8 @@
  1.7
  - zapamietywanie loginu i hasla 
 1.7.1 - dodawnie do bazy dziala z kodaniem MD5 nie dziala startowy ekran + SHARED PREFERENCE 
+1.7.2 - poprawienie ekranu startowego , uporzatkowanie metod , przerzucenie activity do sensownego katalogu
+
+ 1.8*
+ - komunikacja po rejestracji 
+ - ogarniecie w SENSOWNY SPOSOB jak przyjemnie przechodzic miedzy edittext zeby consola nie blokowala przejscia 

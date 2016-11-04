@@ -10,12 +10,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
-using PUTAirlinesMobile.Resources.Pages;
 
 
 namespace PUTAirlinesMobile
 {
-    [Activity(Label = "loginPage", MainLauncher = true, Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "loginPage", MainLauncher = false, Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class LoginPage : Activity
     {
         Button logButton;
@@ -123,7 +122,7 @@ namespace PUTAirlinesMobile
                     edit.PutString("Password", passwordEditText.Text.Trim());
                     edit.Apply();
                 }
-                StartActivity(typeof(panelPage));
+                StartActivity(typeof(PanelPage));
                 this.Finish();
             }
             else

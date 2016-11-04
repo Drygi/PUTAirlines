@@ -3,7 +3,6 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using PUTAirlinesMobile.Resources;
 using MySql.Data.MySqlClient;
 using PUTAirlinesMobile.Helper;
 

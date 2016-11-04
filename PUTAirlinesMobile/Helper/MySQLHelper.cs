@@ -10,7 +10,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
-using PUTAirlinesMobile.Resources;
 
 namespace PUTAirlinesMobile.Helper
 {
@@ -21,7 +20,7 @@ namespace PUTAirlinesMobile.Helper
             return new MySqlConnection(connectionString);
         }
 
-        public static bool check_if_account_is_correct(string login,string password, MySqlConnection conn)
+        public static bool check_if_account_is_correct(string login, string password, MySqlConnection conn)
         {
             MySqlDataReader rdr = null;
             bool returned = true;
@@ -66,8 +65,8 @@ namespace PUTAirlinesMobile.Helper
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM Client WHERE Login=@log;", conn);
 
                 cmd.Parameters.AddWithValue("@log", login);
-               
-               var result = cmd.ExecuteReader();
+
+                var result = cmd.ExecuteReader();
 
                 if (result.HasRows)
                     returned = true;
@@ -134,15 +133,15 @@ namespace PUTAirlinesMobile.Helper
 
         public static bool InsertToDataBase(Client client, MySqlConnection conn)
         {
-         
+
             bool returned = true;
             try
             {
                 conn.Open();
                 string insert = "INSERT INTO Client (Name, Surname,IndividualNumber,PassportNumber,City,Street,Postcode,Nationality,Login,Password) ";
-                insert+= "VALUES (@name,@surName,@individualNumber,@passportNumber,@city,@street,@postcode,@nationality,@log,@pass)";
+                insert += "VALUES (@name,@surName,@individualNumber,@passportNumber,@city,@street,@postcode,@nationality,@log,@pass)";
 
-                
+
 
 
                 MySqlCommand cmd = new MySqlCommand(insert, conn);
@@ -158,7 +157,7 @@ namespace PUTAirlinesMobile.Helper
                 cmd.Parameters.AddWithValue("@log", client.getLogin());
                 cmd.Parameters.AddWithValue("@pass", client.getPassword());
 
-               var r= cmd.ExecuteNonQuery();
+                var r = cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -175,6 +174,41 @@ namespace PUTAirlinesMobile.Helper
             return returned;
         }
 
+        public static bool check_saved_account(out string login, out string password, MySqlConnection connection)
+        {
+            ISharedPreferences pref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
+            string userName = pref.GetString("UserName", "");
+            string pass = pref.GetString("Password", "");
+
+            if (userName.Trim() == String.Empty || pass.Trim() == String.Empty)
+            {
+                login = null;
+                password = null;
+                return false;
+            }
+            else
+            {
+                bool result = Helper.MySQLHelper.check_if_account_is_correct(userName, pass, connection);
+                if (result)
+                {
+                    login = userName;
+                    password = pass;
+                    return true;
+                }
+                else
+                {
+                    ISharedPreferencesEditor edit = pref.Edit();
+                    edit.Clear();
+                    edit.Apply();
+                    login = null;
+                    password = null;
+                    return false;
+                }
+            }
+        }
     }
-    }
+}
+
+    
+    
     

@@ -11,10 +11,10 @@ using Android.Views;
 using Android.Widget;
 
 
-namespace PUTAirlinesMobile.Resources.Pages
+namespace PUTAirlinesMobile
 {
     [Activity(Label = "panelPage", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class panelPage : Activity
+    public class PanelPage : Activity
     {
         Button reLoadd;
         protected override void OnCreate(Bundle savedInstanceState)
