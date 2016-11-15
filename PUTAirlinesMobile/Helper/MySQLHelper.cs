@@ -146,16 +146,16 @@ namespace PUTAirlinesMobile.Helper
 
                 MySqlCommand cmd = new MySqlCommand(insert, conn);
 
-                cmd.Parameters.AddWithValue("@name", client.getName());
-                cmd.Parameters.AddWithValue("@surName", client.getLastName());
-                cmd.Parameters.AddWithValue("@individualNumber", client.getIndividualNumber());
-                cmd.Parameters.AddWithValue("@passportNumber", client.getPassportNumber());
-                cmd.Parameters.AddWithValue("@city", client.getCity());
-                cmd.Parameters.AddWithValue("@street", client.getStreet());
-                cmd.Parameters.AddWithValue("@postcode", client.getPostcode());
-                cmd.Parameters.AddWithValue("@nationality", client.getNationality());
-                cmd.Parameters.AddWithValue("@log", client.getLogin());
-                cmd.Parameters.AddWithValue("@pass", client.getPassword());
+                cmd.Parameters.AddWithValue("@name", client.Name);
+                cmd.Parameters.AddWithValue("@surName", client.Surname);
+                cmd.Parameters.AddWithValue("@individualNumber", client.IndividualNumber);
+                cmd.Parameters.AddWithValue("@passportNumber", client.PassportNumber);
+                cmd.Parameters.AddWithValue("@city", client.City);
+                cmd.Parameters.AddWithValue("@street", client.Street);
+                cmd.Parameters.AddWithValue("@postcode", client.Postcode);
+                cmd.Parameters.AddWithValue("@nationality", client.Nationality);
+                cmd.Parameters.AddWithValue("@log", client.Login);
+                cmd.Parameters.AddWithValue("@pass", client.Password);
 
                 var r = cmd.ExecuteNonQuery();
             }
@@ -209,6 +209,6 @@ namespace PUTAirlinesMobile.Helper
     }
 }
 
-    
-    
-    
+
+
+

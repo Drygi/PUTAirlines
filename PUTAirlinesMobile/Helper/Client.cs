@@ -14,114 +14,16 @@ namespace PUTAirlinesMobile.Helper
 {
     public class Client
     {
-        private int ID = 0;
-        private string name = "";
-        private string surName = "";
-        private string individualNumber = "";
-        private string passportNumber = "";
-        private string city = "";
-        private string street = "";
-        private string postcode = "";
-        private string nationality = "";
-        private string login = "";
-        private string password = "";
-
-        public int getID()
-        {
-            return this.ID;
-        }
-        public void setID(int id)
-        {
-           this.ID = id;
-        }
-
-        public string getName()
-        {
-            return this.name;
-        }
-        public void setName(string Name)
-        {
-            this.name = Name;
-        }
-
-        public string getLastName()
-        {
-            return this.surName;
-        }
-        public void setLastName(string lastName)
-        {
-            this.surName = lastName;
-        }
-
-        public string getIndividualNumber()
-        {
-            return this.individualNumber;
-        }
-        public void setIndividualNumber(string IndividualNumber)
-        {
-            this.individualNumber = IndividualNumber;
-        }
-        public string getPassportNumber()
-        {
-            return this.passportNumber;
-        }
-        public void setPassportNumber(string PassportNumber)
-        {
-            this.passportNumber = PassportNumber;
-        }
-
-        public string getCity()
-        {
-            return this.city;
-        }
-        public void setCity(string City)
-        {
-            this.city = City;
-        }
-
-        public string getStreet()
-        {
-            return this.street;
-        }
-        public void setStreet(string Street)
-        {
-            this.street = Street;
-        }
-
-        public string getPostcode()
-        {
-            return this.postcode;
-        }
-        public void setPostCode(string PostCode)
-        {
-            this.postcode = PostCode;
-        }
-
-        public string getNationality()
-        {
-            return this.nationality;
-        }
-        public void setNationality(string Nationality)
-        {
-            this.nationality = Nationality;
-        }
-
-        public string getLogin()
-        {
-            return this.login;
-        }
-        public void setLogin(string Login)
-        {
-            this.login = Login;
-        }
-
-        public string getPassword()
-        {
-            return this.password;
-        }
-        public void setPassword(string Password)
-        {
-            this.password = Password;
-        }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string IndividualNumber { get; set; }
+        public string PassportNumber { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
+        public string Postcode { get; set; }
+        public string Nationality { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
     }
 }
