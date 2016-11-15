@@ -108,9 +108,11 @@ namespace PUTAirlinesMobile
         {
             loginBar.Visibility = ViewStates.Visible;
             passwordEditText.Text = Helper.GlobalHelper.getMD5(passwordEditText.Text);
-            bool result = Helper.MySQLHelper.check_if_account_is_correct(this.loginEditText.Text, this.passwordEditText.Text,connection);
+            Helper.Client client;
+            bool result = Helper.MySQLHelper.check_if_account_is_correct(this.loginEditText.Text, this.passwordEditText.Text,connection , out client );
             if(result)
             {
+                GlobalMemory.m_client = client;
                 loginBar.Visibility = ViewStates.Invisible;
                 loginEditText.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));
                 passwordEditText.SetBackgroundColor(Android.Graphics.Color.ParseColor("#FFFFFF"));

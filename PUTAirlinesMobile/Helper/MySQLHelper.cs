@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
+using PUTAirlinesMobile.Helper;
 
 namespace PUTAirlinesMobile.Helper
 {
@@ -20,20 +21,36 @@ namespace PUTAirlinesMobile.Helper
             return new MySqlConnection(connectionString);
         }
 
-        public static bool check_if_account_is_correct(string login, string password, MySqlConnection conn)
+        public static bool check_if_account_is_correct(string login, string password, MySqlConnection conn,out Client client)
         {
-            MySqlDataReader rdr = null;
             bool returned = true;
+            Client objClient = null;
             try
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM Client WHERE Login=@log AND Password= @pass;", conn);
-
                 cmd.Parameters.AddWithValue("@log", login);
                 cmd.Parameters.AddWithValue("@pass", password);
 
                 var result = cmd.ExecuteReader();
-                if (result.HasRows) returned = true; else returned = false;
+                if (result.HasRows)
+                {
+                    result.Read();
+                    objClient = new Client();
+                    objClient.ID = Convert.ToInt16(result[0]);
+                    objClient.Name = result[1].ToString();
+                    objClient.Surname = result[2].ToString();
+                    objClient.IndividualNumber = result[3].ToString();
+                    objClient.PassportNumber = result[4].ToString();
+                    objClient.City = result[5].ToString();
+                    objClient.Street = result[6].ToString();
+                    objClient.Postcode = result[7].ToString();
+                    objClient.Nationality = result[8].ToString();
+                    objClient.Login = result[9].ToString();
+                    objClient.Password = result[10].ToString();
+                    returned = true;
+                }
+                 else returned = false;
 
             }
             catch (Exception ex)
@@ -42,22 +59,17 @@ namespace PUTAirlinesMobile.Helper
             }
             finally
             {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-
                 if (conn != null)
                 {
                     conn.Close();
                 }
             }
+            client = objClient;
             return returned;
         }
 
         public static bool findLogin(string login, MySqlConnection conn)
         {
-            MySqlDataReader rdr = null;
             bool returned = true;
             try
             {
@@ -69,7 +81,9 @@ namespace PUTAirlinesMobile.Helper
                 var result = cmd.ExecuteReader();
 
                 if (result.HasRows)
+                {
                     returned = true;
+                }
                 else
                     returned = false;
 
@@ -80,11 +94,6 @@ namespace PUTAirlinesMobile.Helper
             }
             finally
             {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-
                 if (conn != null)
                 {
                     conn.Close();
@@ -188,9 +197,11 @@ namespace PUTAirlinesMobile.Helper
             }
             else
             {
-                bool result = Helper.MySQLHelper.check_if_account_is_correct(userName, pass, connection);
+                Helper.Client client;
+                bool result = Helper.MySQLHelper.check_if_account_is_correct(userName, pass, connection , out client);
                 if (result)
                 {
+                    GlobalMemory.m_client = client;
                     login = userName;
                     password = pass;
                     return true;

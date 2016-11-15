@@ -21,6 +21,7 @@
 1.7.1 - dodawnie do bazy dziala z kodaniem MD5 nie dziala startowy ekran + SHARED PREFERENCE 
 1.7.2 - poprawienie ekranu startowego , uporzatkowanie metod , przerzucenie activity do sensownego katalogu
 1.7.3 - poprawnie klasy Client i MySQLHelper - ustawienie get; set;
+1.7.4 - dodanie GlobalMemory do przechowywania statycznych pól , poprawienie metody do sprawdzenia loginu (referencja do Client)
  1.8*
  - komunikacja po rejestracji 
  - ogarniecie w SENSOWNY SPOSOB jak przyjemnie przechodzic miedzy edittext zeby consola nie blokowala przejscia 

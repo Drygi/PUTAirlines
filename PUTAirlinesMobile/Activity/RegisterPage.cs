@@ -163,8 +163,8 @@ namespace PUTAirlinesMobile
         {
 
             client = new Client();
-            client.setName(name.Text.Trim());
-            client.setLastName(lastName.Text.Trim());
+            client.Name = (name.Text.Trim());
+            client.Surname = (lastName.Text.Trim());
             do
             {
               individualNumber = Helper.GlobalHelper.generateIdentify();
@@ -174,14 +174,14 @@ namespace PUTAirlinesMobile
 
            
 
-            client.setIndividualNumber(individualNumber);
-            client.setPassportNumber(passsportNumber.Text.Trim());
-            client.setCity(city.Text.Trim());
-            client.setStreet(street.Text.Trim());
-            client.setPostCode(postCode.Text.Trim());
-            client.setNationality(nationality.Text.Trim());
-            client.setLogin(login.Text.Trim());
-            client.setPassword(Helper.GlobalHelper.getMD5(password1.Text.Trim()));
+            client.IndividualNumber = (individualNumber);
+            client.PassportNumber = (passsportNumber.Text.Trim());
+            client.City = (city.Text.Trim());
+            client.Street = (street.Text.Trim());
+            client.Postcode = (postCode.Text.Trim());
+            client.Nationality = (nationality.Text.Trim());
+            client.Login = (login.Text.Trim());
+            client.Password =(Helper.GlobalHelper.getMD5(password1.Text.Trim()));
 
         var result=  Helper.MySQLHelper.InsertToDataBase(client, connection);
          if(result)
