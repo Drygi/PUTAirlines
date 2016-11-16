@@ -14,7 +14,7 @@ using MySql.Data.MySqlClient;
 
 namespace PUTAirlinesMobile
 {
-    [Activity(Label = "PUTAirlines",MainLauncher =true, Theme = "@android:style/Theme.Black.NoTitleBar.Fullscreen")]
+    [Activity(Label = "PUTAirlines",MainLauncher =true, Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class Home : Activity
     {
         MySqlConnection connection;
@@ -28,7 +28,7 @@ namespace PUTAirlinesMobile
             string login, haslo;
             if (Helper.MySQLHelper.check_saved_account(out login, out haslo, connection))
             {
-                StartActivity(typeof(PanelPage));
+                StartActivity(typeof(AccountPage));
                 this.Finish();
             }
             else

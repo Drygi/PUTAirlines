@@ -58,13 +58,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity\PasswordChange.cs" />
     <Compile Include="Helper\Client.cs" />
     <Compile Include="Helper\GlobalHelper.cs" />
     <Compile Include="Helper\GlobalMemory.cs" />
     <Compile Include="Helper\MySQLHelper.cs" />
     <Compile Include="Activity\Home.cs" />
     <Compile Include="Activity\LoginPage.cs" />
-    <Compile Include="Activity\PanelPage.cs" />
+    <Compile Include="Activity\AccountPage.cs" />
     <Compile Include="Activity\RegisterPage.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,10 +84,13 @@
     <AndroidResource Include="Resources\drawable\editTextBorder.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\panelPage.axml">
+    <AndroidResource Include="Resources\layout\AccountPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Home.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PasswordChange.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

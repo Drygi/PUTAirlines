@@ -6,9 +6,7 @@
     android:background="#006699"
     android:weightSum="100"
     android:minHeight="25px"
-    android:minWidth="25px"
-    android:id="@+id/linearL"         
-              >
+    android:minWidth="25px">
     <ImageView
         android:src="@drawable/userIcon"
         android:layout_height="110dp"
@@ -18,7 +16,9 @@
         android:layout_marginBottom="10dp"
         android:id="@+id/userIconID"
         android:layout_width="fill_parent" />
+    
     <EditText
+       
         android:hint="Login"
         android:text=""
         android:singleLine="true"
@@ -35,7 +35,8 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="10dp"
-        android:paddingLeft="10dp" />
+        android:paddingLeft="10dp"
+        />
     <EditText
         android:hint="Hasło"
         android:text=""

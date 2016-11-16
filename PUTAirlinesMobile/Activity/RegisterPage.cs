@@ -5,6 +5,8 @@ using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
 using PUTAirlinesMobile.Helper;
+using Android.Views.InputMethods;
+using Android.Content;
 
 namespace PUTAirlinesMobile
 {
@@ -17,15 +19,14 @@ namespace PUTAirlinesMobile
         EditText login, password1, password2, name, lastName, passsportNumber, nationality, city, street, postCode;
         string individualNumber;
         MySqlConnection connection;
-        ScrollView scroll;
+        ScrollView scrollV;
         bool goodRegister;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.RegisterPage);
             controlsInit();
-            connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");
-            
+            connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");           
         }
 
 
@@ -45,7 +46,14 @@ namespace PUTAirlinesMobile
             city = FindViewById<EditText>(Resource.Id.registerCity);
             street = FindViewById<EditText>(Resource.Id.registerStreet);
             postCode = FindViewById<EditText>(Resource.Id.registerPostCode);
-            scroll = FindViewById<ScrollView>(Resource.Id.scrollViewRegister);
+            scrollV = FindViewById<ScrollView>(Resource.Id.scrollViewRegister);
+            scrollV.ScrollChange += ScrollV_ScrollChange;
+        }
+
+        private void ScrollV_ScrollChange(object sender, View.ScrollChangeEventArgs e)
+        {
+            InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+            imm.HideSoftInputFromWindow(scrollV.WindowToken, 0);
         }
 
         private void Register_Click(object sender, EventArgs e)
@@ -72,7 +80,7 @@ namespace PUTAirlinesMobile
                 goodRegister = false;
                 login.Text = "";
                 registerBar.Visibility = ViewStates.Invisible;
-                scroll.SmoothScrollTo(0, 0);
+                scrollV.SmoothScrollTo(0, 0);
                 login.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
 
             }
@@ -84,7 +92,7 @@ namespace PUTAirlinesMobile
                 goodRegister = false;
                 password1.Text = "";
                 password2.Text = "";
-                scroll.SmoothScrollTo(0, 0);
+                scrollV.SmoothScrollTo(0, 0);
                 registerBar.Visibility = ViewStates.Invisible;
                 password1.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 password2.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));

@@ -22,6 +22,13 @@
 1.7.2 - poprawienie ekranu startowego , uporzatkowanie metod , przerzucenie activity do sensownego katalogu
 1.7.3 - poprawnie klasy Client i MySQLHelper - ustawienie get; set;
 1.7.4 - dodanie GlobalMemory do przechowywania statycznych pól , poprawienie metody do sprawdzenia loginu (referencja do Client)
- 1.8*
+ 1.8 
+  - dodanie klasy AccountPage - wyœwietlanie/edycja danych konta 
+  - dodanie klasy PasswordChange - zmiana has³a 
+  - edycja MySQLHelper - dodanie metdoy do Updatu danych 
+  - edycja loginPage, RegisterPage - po klikniecu/srcrollu klawiatura siê chowa
+  - zablokowanie zmiany orientacji ekranu podczas logowania 
+ 
+ 1.9*
  - komunikacja po rejestracji 
  - ogarniecie w SENSOWNY SPOSOB jak przyjemnie przechodzic miedzy edittext zeby consola nie blokowala przejscia 

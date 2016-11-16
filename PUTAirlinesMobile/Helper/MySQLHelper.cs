@@ -183,6 +183,43 @@ namespace PUTAirlinesMobile.Helper
             return returned;
         }
 
+        public static bool UpdateDataBase(Client client, MySqlConnection conn)
+        {
+            bool returned = true;
+            try
+            {
+                conn.Open();
+                string insert = "UPDATE Client SET Name =@name, Surname=@surname,PassportNumber=@passportNumber,City=@city,";
+                insert += "Street=@street,Postcode=@postcode,Nationality=@nationality,Password=@pass WHERE ClientID=@id";
+
+                MySqlCommand cmd = new MySqlCommand(insert, conn);
+
+                cmd.Parameters.AddWithValue("@name", client.Name);
+                cmd.Parameters.AddWithValue("@surName", client.Surname);
+                cmd.Parameters.AddWithValue("@id",client.ID);
+                cmd.Parameters.AddWithValue("@passportNumber", client.PassportNumber);
+                cmd.Parameters.AddWithValue("@city", client.City);
+                cmd.Parameters.AddWithValue("@street", client.Street);
+                cmd.Parameters.AddWithValue("@postcode", client.Postcode);
+                cmd.Parameters.AddWithValue("@nationality", client.Nationality);
+                cmd.Parameters.AddWithValue("@pass", client.Password);
+
+                var r = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                returned = false;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
+        }
         public static bool check_saved_account(out string login, out string password, MySqlConnection connection)
         {
             ISharedPreferences pref = Application.Context.GetSharedPreferences("UserInfo", FileCreationMode.Private);
