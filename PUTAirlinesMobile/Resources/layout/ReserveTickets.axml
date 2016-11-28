@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#0099FF"
+    android:layout_height="match_parent"
+    android:id="@+id/relLayout">
+    <TextView
+        android:text="Rezerwacja lotu"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textSize="30sp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="40dp"
+        android:gravity="center"
+        android:id="@+id/FlyText"
+        android:editable="false" />
+    <EditText
+        android:hint="Wylot z "
+        android:singleLine="true"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:id="@+id/startPlace"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/FlyText"
+        android:padding="5dp" />
+    <EditText
+        android:hint="Przylot do"
+        android:singleLine="true"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:id="@+id/finishPlace"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="5dp"
+        android:layout_below="@+id/FlyText"
+        android:layout_toRightOf="@+id/startPlace" />
+    <TextView
+        android:text="Wybierz datę"
+        android:textSize="20sp"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
+        android:padding="10dp"
+        android:editable="false"
+        android:id="@+id/date"
+        android:layout_below="@+id/startPlace" />
+    <Button
+        android:text="Szukaj"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:layout_below="@+id/date"
+        android:background="#9FA2A8"
+        android:clickable="false"
+        android:id="@+id/searchFlys" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchFlys"
+        android:gravity="center">
+      <TextView
+       android:text="Najbliższe loty:"
+       android:textColor="#FFFFFF"
+       android:textStyle="bold"
+       android:singleLine="true"
+       android:textSize="25sp"
+       android:textAppearance="?android:attr/textAppearanceSmall"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="30dp"
+       android:layout_marginRight="30dp"
+       android:paddingBottom="15dp"
+       android:paddingTop="10dp"
+       android:gravity="center"
+       android:id="@+id/ResText"
+       android:editable="false"
+       android:visibility="invisible" />
+
+      <ListView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView" />
+      
+    </LinearLayout>
+</RelativeLayout>

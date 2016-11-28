@@ -28,7 +28,7 @@ namespace PUTAirlinesMobile
             string login, haslo;
             if (Helper.MySQLHelper.check_saved_account(out login, out haslo, connection))
             {
-                StartActivity(typeof(AccountPage));
+                StartActivity(typeof(MenuPage));
                 this.Finish();
             }
             else

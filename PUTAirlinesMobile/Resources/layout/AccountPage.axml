@@ -58,8 +58,6 @@
             android:layout_marginBottom="10dp"
             android:paddingLeft="10dp"
             android:editable="false" />
-
- 
         <TextView
             android:text="Imie i Nazwisko:"
             android:textColor="#FFFFFF"
@@ -268,7 +266,6 @@
             android:background="#003366"
             android:id="@+id/changePasswordButton"
             android:visibility="visible" />
-
         <Button
             android:text="Zapisz zmiany"
             android:textStyle="bold"

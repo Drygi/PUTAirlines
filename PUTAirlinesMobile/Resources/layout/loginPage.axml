@@ -7,8 +7,7 @@
     android:weightSum="100"
     android:minHeight="25px"
     android:minWidth="25px"
-    android:id="@+id/linearL"         
-              >
+    android:id="@+id/linearL">
     <ImageView
         android:src="@drawable/userIcon"
         android:layout_height="110dp"

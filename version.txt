@@ -29,6 +29,8 @@
   - edycja loginPage, RegisterPage - po klikniecu/srcrollu klawiatura siê chowa
   - zablokowanie zmiany orientacji ekranu podczas logowania 
  
- 1.9*
- - komunikacja po rejestracji 
- - ogarniecie w SENSOWNY SPOSOB jak przyjemnie przechodzic miedzy edittext zeby consola nie blokowala przejscia 
+ 1.9
+  - dodanie klasy Flight - inofrmacje o locie
+  - dodanie klasy DatePickerFragment - klasa wyswietlajaca okno z wyborem data
+  - edycja MySQLHelper - dodanie metody wyszukujacej informacje o locie
+  - dodanie klasy ReserveTickets - wpisywanie lotniska startu i konca wybor daty, wyswietlenie w ListView aktualne loty 

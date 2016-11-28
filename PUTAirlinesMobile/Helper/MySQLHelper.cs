@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
 using PUTAirlinesMobile.Helper;
+using System.Data;
+using Java.Sql;
 
 namespace PUTAirlinesMobile.Helper
 {
@@ -150,9 +152,6 @@ namespace PUTAirlinesMobile.Helper
                 string insert = "INSERT INTO Client (Name, Surname,IndividualNumber,PassportNumber,City,Street,Postcode,Nationality,Login,Password) ";
                 insert += "VALUES (@name,@surName,@individualNumber,@passportNumber,@city,@street,@postcode,@nationality,@log,@pass)";
 
-
-
-
                 MySqlCommand cmd = new MySqlCommand(insert, conn);
 
                 cmd.Parameters.AddWithValue("@name", client.Name);
@@ -254,6 +253,44 @@ namespace PUTAirlinesMobile.Helper
                 }
             }
         }
+        public static List<Flight> getFlight(DateTime tDate, string startCity, string finishCity, MySqlConnection conn)
+        {
+            string stringCMD = "SELECT A.Name, A.City, AA.Name, AA.City, F.DepartureDate";
+            stringCMD += " FROM Flight F, Airport A, Connection C, Airport AA ";
+            stringCMD += "WHERE C.ConnectionID = F.ConnectionID AND F.DepartureDate >= @thisDate AND ";
+            stringCMD += "A.City=@StCity AND A.AirportID = C.DepartureAirportID  AND AA.AirportID = C.ArrivalAirportID ";
+            stringCMD += "AND AA.City=@FiCity";
+
+            List<Flight> flight = new List<Flight>();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(stringCMD, conn);
+                cmd.Parameters.AddWithValue("@StCity", startCity);
+                cmd.Parameters.AddWithValue("@FiCity", finishCity);
+                cmd.Parameters.AddWithValue("@thisDate", tDate);
+                var result = cmd.ExecuteReader();
+                
+                while (result.Read())
+                {             
+                    flight.Add(new Flight(result.GetString(0), result.GetString(1), result.GetString(2), result.GetString(3), result.GetDateTime(4)));                       
+                }
+
+            }
+            catch (Exception ex)
+            {
+                flight = null;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return flight;
+    }
     }
 }
 
