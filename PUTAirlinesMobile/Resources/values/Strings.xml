@@ -6,4 +6,5 @@
         <item name="android:windowBackground">@drawable/logoHome </item>
         <item name="android:windowNoTitle">true</item>
      </style>
+  
 </resources>

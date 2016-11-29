@@ -20,21 +20,25 @@ namespace PUTAirlinesMobile
     public class ReserveTickets : Activity
     {
         DateTime timeMemory;
+        Spinner startFlySpinner, finishFlySpinner;
         MySqlConnection connection;
         RelativeLayout lay;
         ListView listV;
-        EditText startFly, finishFly;
         TextView dateFly, resTxt;
         Button search;
         ArrayAdapter<Flight> adapter;
         List<Flight> flights;
         Flight selectedFlight = new Flight();
+        List<Airport> airports;
+        Airport startAirport = new Airport();
+        Airport finishAirport = new Airport();
+        // wypisywanie wszystkich lotnisk --> spinner
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ReserveTickets);
-            initControls();
             connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");
+            initControls();
         }
         
         private void initControls()
@@ -43,24 +47,35 @@ namespace PUTAirlinesMobile
             dateFly.Click += Date_Click;
             search = FindViewById<Button>(Resource.Id.searchFlys);
             search.Click += Search_Click;
-            startFly = FindViewById<EditText>(Resource.Id.startPlace);
-            startFly.TextChanged += StartFly_TextChanged;
-            finishFly = FindViewById<EditText>(Resource.Id.finishPlace);
-            finishFly.TextChanged += FinishFly_TextChanged;
+            airports = MySQLHelper.getAirports(connection);
+            var adp = new ArrayAdapter(this, Resource.Layout.spinner_layout, airports);
+            startFlySpinner = FindViewById<Spinner>(Resource.Id.spinner1);
+            startFlySpinner.Adapter = adp;
+            startFlySpinner.ItemSelected += StartFlySpinner_ItemSelected;
+            finishFlySpinner = FindViewById<Spinner>(Resource.Id.spinner2);
+            finishFlySpinner.Adapter = adp;
+            finishFlySpinner.ItemSelected += FinishFlySpinner_ItemSelected;
             search.Clickable = false;
             lay = FindViewById<RelativeLayout>(Resource.Id.relLayout);
             lay.Click += Lay_Click;
             listV = FindViewById<ListView>(Resource.Id.listView);
             listV.ItemClick += ListV_ItemClick;
-            resTxt = FindViewById<TextView>(Resource.Id.ResText);
-         
+            resTxt = FindViewById<TextView>(Resource.Id.ResText);        
         }
 
+        private void FinishFlySpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            finishAirport = airports[Convert.ToInt16(e.Id)];
+        }
+
+        private void StartFlySpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            startAirport = airports[Convert.ToInt16(e.Id)];
+        }
 
         private void ListV_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             selectedFlight = flights[Convert.ToInt16(e.Id)];
-            setAlert(selectedFlight.ToString());
             //trzeba tu zrobic przejsce do kolejnej strony i przekazac selctedFligh   
         }
         private void Lay_Click(object sender, EventArgs e)
@@ -69,37 +84,9 @@ namespace PUTAirlinesMobile
             imm.HideSoftInputFromWindow(lay.WindowToken, 0);
         }
 
-        private void FinishFly_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
-        {
-            if (startFly.Text.Trim() == String.Empty || finishFly.Text.Trim() == String.Empty || dateFly.Text == "Wybierz datê")
-            {
-                search.Clickable = false;
-                search.SetBackgroundColor(Android.Graphics.Color.ParseColor("#9FA2A8"));
-            }
-            else
-            {
-                search.Clickable = true;
-                search.SetBackgroundColor(Android.Graphics.Color.ParseColor("#003366"));
-            }
-        }
-
-        private void StartFly_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
-        {
-            if (startFly.Text.Trim() == String.Empty || finishFly.Text.Trim() == String.Empty || dateFly.Text== "Wybierz datê")
-            {
-                search.Clickable = false;
-                search.SetBackgroundColor(Android.Graphics.Color.ParseColor("#9FA2A8"));
-            }
-            else
-            {
-                search.Clickable = true;
-                search.SetBackgroundColor(Android.Graphics.Color.ParseColor("#003366"));
-            }
-        }
-
         private void Search_Click(object sender, EventArgs e)
-        {
-            flights = MySQLHelper.getFlight(timeMemory, startFly.Text, finishFly.Text, connection);
+        {         
+            flights = MySQLHelper.getFlight(timeMemory, startAirport.AirportID, finishAirport.AirportID, connection);
             adapter = new ArrayAdapter<Flight>(this, Android.Resource.Layout.SimpleListItem1, flights);
                         
             if (flights == null)
@@ -118,11 +105,10 @@ namespace PUTAirlinesMobile
                 timeMemory = time;
                 dateFly.SetTextColor((Android.Graphics.Color.ParseColor("#000000")));
                 dateFly.Text = timeMemory.ToShortDateString();
-                if(startFly.Text.Trim() != String.Empty && finishFly.Text.Trim() != String.Empty )
-                {
+               
                     search.Clickable = true;
                     search.SetBackgroundColor(Android.Graphics.Color.ParseColor("#003366"));
-                }
+                
             });
             frag.Show(FragmentManager, DatePickerFragment.TAG);
 

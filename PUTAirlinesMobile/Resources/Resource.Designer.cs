@@ -78,8 +78,8 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060010
 			public const int ProgressBar = 2131099664;
 			
-			// aapt resource value: 0x7f060036
-			public const int ResText = 2131099702;
+			// aapt resource value: 0x7f060037
+			public const int ResText = 2131099703;
 			
 			// aapt resource value: 0x7f06001a
 			public const int accountButton = 2131099674;
@@ -99,9 +99,6 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f06001d
 			public const int editTextPass = 2131099677;
 			
-			// aapt resource value: 0x7f060033
-			public const int finishPlace = 2131099699;
-			
 			// aapt resource value: 0x7f060011
 			public const int imageView1 = 2131099665;
 			
@@ -114,8 +111,8 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060012
 			public const int linearL = 2131099666;
 			
-			// aapt resource value: 0x7f060037
-			public const int listView = 2131099703;
+			// aapt resource value: 0x7f060038
+			public const int listView = 2131099704;
 			
 			// aapt resource value: 0x7f060015
 			public const int loginButton = 2131099669;
@@ -195,11 +192,17 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060022
 			public const int scrollViewRegister = 2131099682;
 			
-			// aapt resource value: 0x7f060035
-			public const int searchFlys = 2131099701;
+			// aapt resource value: 0x7f060036
+			public const int searchFlys = 2131099702;
 			
 			// aapt resource value: 0x7f060032
-			public const int startPlace = 2131099698;
+			public const int spinner1 = 2131099698;
+			
+			// aapt resource value: 0x7f060033
+			public const int spinner2 = 2131099699;
+			
+			// aapt resource value: 0x7f060035
+			public const int startPlace = 2131099701;
 			
 			// aapt resource value: 0x7f060007
 			public const int textView1 = 2131099655;
@@ -273,6 +276,9 @@ namespace PUTAirlinesMobile
 			
 			// aapt resource value: 0x7f030006
 			public const int ReserveTickets = 2130903046;
+			
+			// aapt resource value: 0x7f030007
+			public const int spinner_layout = 2130903047;
 			
 			static Layout()
 			{

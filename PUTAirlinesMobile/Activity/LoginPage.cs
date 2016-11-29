@@ -26,11 +26,14 @@ namespace PUTAirlinesMobile
         CheckBox rememberMe;
         LinearLayout lin;
         protected override void OnCreate(Bundle savedInstanceState)
-        {          
+        {
+            
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.loginPage);
             init_controls();
             connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");
+     
+           
         }
 
         void init_controls()

@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Activity\PasswordChange.cs" />
     <Compile Include="Activity\ReserveTickets.cs" />
+    <Compile Include="Helper\Airport.cs" />
     <Compile Include="Helper\Client.cs" />
     <Compile Include="Helper\DatePickerFragment.cs" />
     <Compile Include="Helper\Flight.cs" />
@@ -129,6 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\logoHome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\spinner_layout.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
