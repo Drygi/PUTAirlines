@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#0099FF"
+    android:layout_height="match_parent"
+    android:id="@+id/RelativeMenuLayout">
+    <ImageButton
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:id="@+id/ButtonMojeKonto"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/mojekonto_button"
+        android:background="@android:color/transparent" />
+    <ImageButton
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:id="@+id/ButtonMojeRezerwacje"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_toRightOf="@+id/ButtonMojeKonto"
+        android:src="@drawable/mojerezerwacje"
+        android:background="@android:color/transparent" />
+    <ImageButton
+        android:layout_width="170.0dp"
+        android:layout_height="170.0dp"
+        android:id="@+id/ButtonZarezerwuj"
+        android:layout_marginTop="0dp"
+        android:padding="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/ButtonMojeKonto"
+        android:src="@drawable/zarezerwuj"
+        android:background="@android:color/transparent" />
+    <ImageButton
+        android:layout_width="170.0dp"
+        android:layout_height="170.0dp"
+        android:id="@+id/WyjdzZAplikacji"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:padding="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/ButtonMojeRezerwacje"
+        android:layout_toRightOf="@+id/ButtonZarezerwuj"
+        android:src="@drawable/zamknij"
+        android:background="@android:color/transparent" />
+</RelativeLayout>

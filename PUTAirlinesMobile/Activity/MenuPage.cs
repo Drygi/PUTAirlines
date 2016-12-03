@@ -15,23 +15,23 @@ namespace PUTAirlinesMobile
     [Activity(Label = "MenuPage", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MenuPage : Activity
     {
-        Button account, reservation, logout;
+        ImageButton account, reservation, logout;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.MenuPage);
+            SetContentView(Resource.Layout.MenuLayout);
             initControlos();  
         }
 
         private void initControlos()
         {
-            account = FindViewById<Button>(Resource.Id.accountButton);
+            account = FindViewById<ImageButton>(Resource.Id.ButtonMojeKonto);
             account.Click += Account_Click;
             
-            reservation = FindViewById<Button>(Resource.Id.reservationButton);
+            reservation = FindViewById<ImageButton>(Resource.Id.ButtonMojeRezerwacje);
             reservation.Click += Reservation_Click;
 
-            logout = FindViewById<Button>(Resource.Id.logoutButton);
+            logout = FindViewById<ImageButton>(Resource.Id.WyjdzZAplikacji);
             logout.Click += Logout_Click;
         }
 

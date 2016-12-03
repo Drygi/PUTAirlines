@@ -22,20 +22,25 @@
 1.7.2 - poprawienie ekranu startowego , uporzatkowanie metod , przerzucenie activity do sensownego katalogu
 1.7.3 - poprawnie klasy Client i MySQLHelper - ustawienie get; set;
 1.7.4 - dodanie GlobalMemory do przechowywania statycznych pól , poprawienie metody do sprawdzenia loginu (referencja do Client)
- 1.8 
+1.8 
   - dodanie klasy AccountPage - wyœwietlanie/edycja danych konta 
   - dodanie klasy PasswordChange - zmiana has³a 
   - edycja MySQLHelper - dodanie metdoy do Updatu danych 
   - edycja loginPage, RegisterPage - po klikniecu/srcrollu klawiatura siê chowa
   - zablokowanie zmiany orientacji ekranu podczas logowania 
  
-  1.9
+ 1.9
   - dodanie klasy Flight - inofrmacje o locie
   - dodanie klasy DatePickerFragment - klasa wyswietlajaca okno z wyborem data
   - edycja MySQLHelper - dodanie metody wyszukujacej informacje o locie
   - dodanie klasy ReserveTickets - wpisywanie lotniska startu i konca wybor daty, wyswietlenie w ListView aktualne loty 
 
-  1.9.1 
+	1.9.1 
   - edycja metody getFlight wyszukiwanie lotu po ID
   - dodanie metody, getAirports ktora pobiera wszystkie lotniska
   - zamiana editTextow na Spinnery w ReserveTickets 
+
+  1.10
+  - Poprawienie wygladu MenuLayout
+
+
