@@ -48,5 +48,15 @@ namespace PUTAirlinesMobile
         {
             return NazwaLotniskaOdlotu + "-" + NazwaLotniskaPrzylotu + " [" + DataWylotu + "]";
         }
+
+        public string MiejsceWylotuToString()
+        {
+            return "\"" + NazwaLotniskaOdlotu + "\" " + details.MiejscowoscOdlotu + " (" + details.KrajOdlotu+")";
+        }
+
+        public string MiejscePrzylotuToString()
+        {
+            return "\"" + NazwaLotniskaPrzylotu + "\" " + details.MiejscowoscPrzylotu + " (" + details.KrajPrzylotu+")";
+        }
     }
 }

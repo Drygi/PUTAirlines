@@ -333,6 +333,79 @@ namespace PUTAirlinesMobile.Helper
             return airports;
         }
 
+        public static List<MyOrderData> get_order_data(int ClientID, MySqlConnection conn)
+        {
+            List<MyOrderData> returned = new List<MyOrderData>();
+            string stringCMD = "SELECT reservation.ReservationDate , reservation.JSON, " +
+                                        "flight.DepartureDate , flight.ArrivalDate, " +
+                                        "airport.Name, airport.City, airport.Country,  " +
+                                       "airport2.Name, airport2.City, airport2.Country " +
+                                  /*
+                                  0 - data rezerwacji
+                                  1 - json osob zapisanych pod bilet
+                                  2 - data wylotu
+                                  3 - data przylotu
+                                  4 - nawa lotniska wylotu
+                                  5 - miejscowosc lotniska wylotu
+                                  6 - kraj lotniska wylotu
+                                  7 - nazwa lotniska przylotu
+                                  8 - miejscowosc lotniska przylotu
+                                  9 - kraj lotniska przylotu 
+                                  */
+
+                               "FROM Reservation reservation , Flight flight, Connection connection , Airport airport, Airport airport2 " +
+                               "WHERE reservation.ClientID = @thisClientID " +
+                                                                  "AND reservation.FlightID = flight.FlightID " +
+                                                                  "AND flight.ConnectionID = connection.ConnectionID " +
+                                                                  "AND connection.DepartureAirportID = airport.airportID " +
+                                                                  "AND connection.ArrivalAirportID = airport2.airportID ";
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(stringCMD, conn);
+                cmd.Parameters.AddWithValue("@thisClientID", ClientID);
+                var result = cmd.ExecuteReader();
+
+                while (result.Read())
+                {
+                    MyOrderData order_1 = new MyOrderData();
+                    order_1.NazwaLotniskaOdlotu = result.GetString(4);
+                    order_1.NazwaLotniskaPrzylotu = result.GetString(7);
+                    order_1.DataWylotu = result.GetString(2);
+
+                    MyOrderDataDetails d_order_1 = new MyOrderDataDetails();
+                    d_order_1.DataPrzylotu = result.GetString(3);
+                    d_order_1.DataRezerwacji = result.GetString(0);
+                    d_order_1.KrajOdlotu = result.GetString(6);
+                    d_order_1.KrajPrzylotu = result.GetString(9);
+                    d_order_1.MiejscowoscOdlotu = result.GetString(5);
+                    d_order_1.MiejscowoscPrzylotu = result.GetString(8);
+
+
+
+
+                    List<ClientShort> c_order_1 = GlobalHelper.parsing_JSON(result.GetString(1));
+
+                    d_order_1.client = c_order_1;
+                    order_1.details = d_order_1;
+
+                    returned.Add(order_1);
+                }
+
+            }
+            catch (Exception ex)
+            {
+              
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
+        } 
     }
 }
 

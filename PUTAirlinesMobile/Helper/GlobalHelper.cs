@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using System.Security.Cryptography;
 using Android.Util;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace PUTAirlinesMobile.Helper
 {
@@ -18,7 +20,7 @@ namespace PUTAirlinesMobile.Helper
     {
          
         public static string generateIdentify()
-{
+        {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var stringChars = new char[8];
             var random = new Random();
@@ -31,7 +33,7 @@ namespace PUTAirlinesMobile.Helper
 
             return finalString;
        
-}
+        }       
         public static string getMD5(string password)
         {
                 MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
@@ -46,7 +48,11 @@ namespace PUTAirlinesMobile.Helper
 
                 return str.ToString();
         }
-
+        public static List<ClientShort> parsing_JSON(string value)
+        {
+            var yourClass = JsonConvert.DeserializeObject<ClientShortJSON>(value);
+            return yourClass.users.ToList<ClientShort>();
+        }
 
     }
 }

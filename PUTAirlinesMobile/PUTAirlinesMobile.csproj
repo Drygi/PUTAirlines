@@ -70,6 +70,7 @@
     <Compile Include="Activity\ReserveTickets.cs" />
     <Compile Include="Helper\Airport.cs" />
     <Compile Include="Helper\Client.cs" />
+    <Compile Include="Helper\ClientShortJSON.cs" />
     <Compile Include="Helper\DatePickerFragment.cs" />
     <Compile Include="Helper\ExpandableDataAdapter.cs" />
     <Compile Include="Helper\Flight.cs" />

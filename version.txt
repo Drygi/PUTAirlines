@@ -47,4 +47,8 @@
   - Dodanie obslugi ListView dla MojeZamowienie + test przykladowy
   - dodanie biblioteki JSON.NET
 
-
+  1.12
+  - zapytanie do bazy + odbior do obiektu
+  - serializowanie JSON + odbior do wyswietlania
+  - 100% implementacja "Moje zamowienia"
+  - [next] Potrzebne poprawki graficzne

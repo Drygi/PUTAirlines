@@ -63,8 +63,8 @@ namespace PUTAirlinesMobile
             }
             //  string newId = "", newValue = "";
             //  GetChildViewHelper(groupPosition, childPosition, out newId, out newValue);
-            row.FindViewById<TextView>(Resource.Id.t_mwylotu).Text = DataList[groupPosition].details.MiejscowoscOdlotu;
-            row.FindViewById<TextView>(Resource.Id.t_mprzylotu).Text = DataList[groupPosition].details.MiejscowoscPrzylotu;
+            row.FindViewById<TextView>(Resource.Id.t_mwylotu).Text = DataList[groupPosition].MiejsceWylotuToString();
+            row.FindViewById<TextView>(Resource.Id.t_mprzylotu).Text = DataList[groupPosition].MiejscePrzylotuToString();
             row.FindViewById<TextView>(Resource.Id.t_drezerwacji).Text = DataList[groupPosition].details.DataRezerwacji;
             row.FindViewById<TextView>(Resource.Id.t_dprzylotu).Text = DataList[groupPosition].details.DataPrzylotu;
             row.FindViewById<TextView>(Resource.Id.t_dodlutu).Text = DataList[groupPosition].DataWylotu;
