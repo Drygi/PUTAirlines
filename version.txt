@@ -43,4 +43,8 @@
   1.10
   - Poprawienie wygladu MenuLayout
 
+  1.11
+  - Dodanie obslugi ListView dla MojeZamowienie + test przykladowy
+  - dodanie biblioteki JSON.NET
+
 

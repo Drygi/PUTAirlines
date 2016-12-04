@@ -15,7 +15,7 @@ namespace PUTAirlinesMobile
     [Activity(Label = "MenuPage", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MenuPage : Activity
     {
-        ImageButton account, reservation, logout;
+        ImageButton account, reservation, logout,myOrder;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -28,11 +28,19 @@ namespace PUTAirlinesMobile
             account = FindViewById<ImageButton>(Resource.Id.ButtonMojeKonto);
             account.Click += Account_Click;
             
-            reservation = FindViewById<ImageButton>(Resource.Id.ButtonMojeRezerwacje);
+            reservation = FindViewById<ImageButton>(Resource.Id.ButtonZarezerwuj);
             reservation.Click += Reservation_Click;
 
             logout = FindViewById<ImageButton>(Resource.Id.WyjdzZAplikacji);
             logout.Click += Logout_Click;
+
+            myOrder= FindViewById<ImageButton>(Resource.Id.ButtonMojeRezerwacje);
+            myOrder.Click += MyOrder_Click;
+        }
+
+        private void MyOrder_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(MyOrder));
         }
 
         private void Logout_Click(object sender, EventArgs e)

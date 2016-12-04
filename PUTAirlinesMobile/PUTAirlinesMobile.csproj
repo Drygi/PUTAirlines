@@ -54,6 +54,10 @@
     <Reference Include="MySql.Data.CF">
       <HintPath>..\Components\MySQL-Plugin-1.0\lib\android\MySql.Data.CF.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -61,14 +65,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity\MyOrder.cs" />
     <Compile Include="Activity\PasswordChange.cs" />
     <Compile Include="Activity\ReserveTickets.cs" />
     <Compile Include="Helper\Airport.cs" />
     <Compile Include="Helper\Client.cs" />
     <Compile Include="Helper\DatePickerFragment.cs" />
+    <Compile Include="Helper\ExpandableDataAdapter.cs" />
     <Compile Include="Helper\Flight.cs" />
     <Compile Include="Helper\GlobalHelper.cs" />
     <Compile Include="Helper\GlobalMemory.cs" />
+    <Compile Include="Helper\MyOrderData.cs" />
     <Compile Include="Helper\MySQLHelper.cs" />
     <Compile Include="Activity\Home.cs" />
     <Compile Include="Activity\LoginPage.cs" />
@@ -81,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
+    <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\loginPage.axml">
@@ -107,6 +115,11 @@
     <AndroidResource Include="Resources\layout\MenuLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\MyOrderLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ListGroup.axml" />
+    <AndroidResource Include="Resources\layout\DataListItem.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -151,6 +164,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\zamknij.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\one_order.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

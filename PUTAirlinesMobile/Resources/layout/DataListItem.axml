@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/DataRow"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+        android:text="Miejsce wylotu:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/h_mwylotu"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <TextView
+        android:text="Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/t_mwylotu"
+        android:layout_marginLeft="35dp" />
+    <TextView
+        android:text="Miejsce przylotu:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hmprzylotu"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <TextView
+        android:text="Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/t_mprzylotu"
+        android:layout_marginLeft="35dp" />
+    <TextView
+        android:text="Data rezerwacji:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hdrezerwacji"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <TextView
+        android:text="Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/t_drezerwacji"
+        android:layout_marginLeft="35dp" />
+    <TextView
+        android:text="Data przylotu:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/h_dprzylotu"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <TextView
+        android:text="Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/t_dprzylotu"
+        android:layout_marginLeft="35dp" />
+    <TextView
+        android:text="Data odlotu:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/h_dodlotu"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <TextView
+        android:text="Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/t_dodlutu"
+        android:layout_marginLeft="35dp" />
+    <TextView
+        android:text="Osoby przypisne rezerwacji:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/h_o"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <TextView
+        android:text="Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/t_o"
+        android:layout_marginLeft="35dp" />
+</LinearLayout>
