@@ -46,6 +46,7 @@ namespace PUTAirlinesMobile
             vSpinner.Adapter = adapter;
             vSpinner.ItemSelected += VSpinner_ItemSelected;
             nextToBox = FindViewById<CheckBox>(Resource.Id.nextToCheckBox);
+            nextToBox.Visibility = ViewStates.Invisible;
             addLuggage = FindViewById<Button>(Resource.Id.addLaggageButton);
             addLuggage.Click += AddLuggage_Click;
             Name = FindViewById<EditText>(Resource.Id.name);
@@ -89,8 +90,7 @@ namespace PUTAirlinesMobile
                 nextToBox.Clickable = false;
                 luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected));
                 clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
-                
-                //wysylanie danych na serwer
+               
                 if (counter == LuggageValue)
                 {
                     Flight f = GlobalMemory.mFlight;
@@ -111,10 +111,7 @@ namespace PUTAirlinesMobile
 
                     StartActivity(typeof(MenuPage));
                     this.Finish();
-
-
-                  
-                   
+          
                 }
 
                 else if (counter == LuggageValue - 1)
@@ -144,11 +141,16 @@ namespace PUTAirlinesMobile
         private void VSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             if (e.Id == 0)
+            {
                 nextToBox.Clickable = false;
+                nextToBox.Visibility = ViewStates.Invisible;
+            }
             else
+            {
                 nextToBox.Clickable = true;
-
-            LuggageValue = Convert.ToInt16(e.Id) + 1;
+                nextToBox.Visibility = ViewStates.Visible;
+            }
+        LuggageValue = Convert.ToInt16(e.Id) + 1;
         }
 
         private void setAlert(string message)
@@ -168,10 +170,6 @@ namespace PUTAirlinesMobile
             }
             return values;
         }
-        
-       private void insertCountOFClients(int flightID, int countOfClients)
-       {
-            MySQLHelper.updateCountOfClient(flightID, countOfClients, connection);     
-       }
+       
     }
 }

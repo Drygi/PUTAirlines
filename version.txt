@@ -57,3 +57,5 @@
   -  polaczenie mojej czesci z czescia Kuby
   1.13 
    - dodanie metod w MySQLHelper, odpowiedzialnych za dodawanie rezerwacji, baga¿u do bazy 
+   1.13.1 
+   - drobne poprawki 
