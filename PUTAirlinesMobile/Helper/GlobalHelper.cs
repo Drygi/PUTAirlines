@@ -56,19 +56,7 @@ namespace PUTAirlinesMobile.Helper
 
         public static string ToJSON(List<ClientShort> jsons)
         {
-
-            //List<MyClass> data = new List<MyClass>() { new MyClass()
-            //{ email_address = "email1@email.com", status = "good2go" },
-            //    new MyClass() { email_address = "email2@email.com", status = "good2go" } };
-            //var json = JsonConvert.SerializeObject(new
-            //{
-            //    operations = data
-            //});
-             
-
-
-
-            return "";
+            return JsonConvert.SerializeObject(new { users = jsons }); 
         }
     }
 }

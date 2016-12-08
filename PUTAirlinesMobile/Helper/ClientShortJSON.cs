@@ -15,5 +15,15 @@ namespace PUTAirlinesMobile
     public class ClientShortJSON
     {
         public ClientShort[] users { get; set; }
+
+        public void addUsers(List<ClientShort> clients)
+        {
+            users = new ClientShort[clients.Count];
+
+            for (int i = 0; i < clients.Count; i++)
+            {
+                users[i] = clients[i];
+            }
+        }
     }
 }

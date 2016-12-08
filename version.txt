@@ -55,11 +55,5 @@
 
   1.12.1 
   -  polaczenie mojej czesci z czescia Kuby
-
-
-  1.12.2
-  - dodanie poprawki graficznej
-
-  1.12.3
-  - poprawka
-
+  1.13 
+   - dodanie metod w MySQLHelper, odpowiedzialnych za dodawanie rezerwacji, baga¿u do bazy 

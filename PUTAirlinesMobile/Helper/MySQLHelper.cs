@@ -402,73 +402,21 @@ namespace PUTAirlinesMobile.Helper
             return returned;
         }
 
-        public static bool InsertReservation(List<Luggage> luggages, Client client, Flight flight, MySqlConnection conn)
+        public static bool InsertReservation(int clientID, int flightID, string JSON, MySqlConnection conn)
         {
             bool returned = true;
             try
             {
-                //wedlug mnie nie dziala przez powiazania z FOREIGN KEY 
                 conn.Open();
-                string insertReservation = "INSERT INTO Reservation (ClientID,ConnectionID,FlightID,ReservationDate,LastModificationDate,isRealized) VALUES (@clientID,@connectionID,@flightID,@actualTime,@actualTime,@zero)";
+                string insertReservation = "INSERT INTO Reservation (ClientID,FlightID,ReservationDate,LastModificationDate,isRealized,JSON) VALUES (@clientID,@flightID,@actualTime,@actualTime,@zero,@json)";
 
-                for (int i = 0; i < luggages.Count; i++)
-                {
-                    MySqlCommand cmd = new MySqlCommand(insertReservation, conn);
-
-                    cmd.Parameters.AddWithValue("@clientID", client.ID);
-                    cmd.Parameters.AddWithValue("@connectionID", flight.ConnectionID);
-                    cmd.Parameters.AddWithValue("@flightID", flight.FlightID);
-                    cmd.Parameters.AddWithValue("@actualTime", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@zero", 0);
-                    var r = cmd.ExecuteNonQuery();
-                }
-                string getReservationID = "SELECT ReservationID FROM Reservation WHERE ClientID=@clientID";
-                MySqlCommand cmd1 = new MySqlCommand(getReservationID, conn);
-                cmd1.Parameters.AddWithValue("@clientID", client.ID);
-                var result = cmd1.ExecuteReader();
-
-                List<int> reservationIDs = new List<int>();
-                while (result.Read())
-                {
-                    reservationIDs.Add(result.GetInt32(0));
-                }
-
-                string insertLuggage = "INSERT INTO `Luggage` (`LuggageID`, `Lenght`, `Height`, `Widht`, `Weight`, `isDangerous`,`ReservationID`) VALUES ('', @lenght, @height,@width, @weight, @isDanger,@reservationID)";
-                int c = 0;
-                foreach (var item in luggages)
-                {
-                    MySqlCommand cmdLuggage = new MySqlCommand(insertLuggage, conn);
-
-                    cmdLuggage.Parameters.AddWithValue("@lenght", item.Lenght);
-                    cmdLuggage.Parameters.AddWithValue("@height", item.Height);
-                    cmdLuggage.Parameters.AddWithValue("@width", item.Width);
-                    cmdLuggage.Parameters.AddWithValue("@weight", item.Weight);
-                    cmdLuggage.Parameters.AddWithValue("@isDanger", item.IsDangerous);
-                    cmdLuggage.Parameters.AddWithValue("@reservationID", reservationIDs[c]);
-                    var r = cmdLuggage.ExecuteNonQuery();
-                    c++;
-                }
-
-                string insertReservationDetails = "INSERT INTO `ReservationDetails` (`ReservationID`, `LuggageID`, `Name`, `Surname`, `IndividualNumber`,";
-                insertReservationDetails += "`PassportNumber`, `City`, `Street`, `Postcode`, `Nationality`) VALUES (@resID, '', @name, @surName, @idNr, @passportNr,";
-                insertReservationDetails += "@city, @street,@postcode, @nationality)";
-
-                foreach (var item in reservationIDs)
-                {
-                    MySqlCommand cmdResDetails = new MySqlCommand(insertReservationDetails, conn);
-
-                    cmdResDetails.Parameters.AddWithValue("@resID", item);
-                    cmdResDetails.Parameters.AddWithValue("@name", client.Name);
-                    cmdResDetails.Parameters.AddWithValue("@surName", client.Surname);
-                    cmdResDetails.Parameters.AddWithValue("@idNr", client.IndividualNumber);
-                    cmdResDetails.Parameters.AddWithValue("@passportNr", client.PassportNumber);
-                    cmdResDetails.Parameters.AddWithValue("@city", client.City);
-                    cmdResDetails.Parameters.AddWithValue("@street", client.Street);
-                    cmdResDetails.Parameters.AddWithValue("@postcode", client.Postcode);
-                    cmdResDetails.Parameters.AddWithValue("@nationality", client.Nationality);
-                    var rr = cmdResDetails.ExecuteNonQuery();
-                }
-
+                MySqlCommand cmd = new MySqlCommand(insertReservation, conn);
+                cmd.Parameters.AddWithValue("@clientID", clientID);
+                cmd.Parameters.AddWithValue("@flightID", flightID);
+                cmd.Parameters.AddWithValue("@actualTime", DateTime.Now);
+                cmd.Parameters.AddWithValue("@zero", 1);
+                cmd.Parameters.AddWithValue("@json", JSON);
+                var r = cmd.ExecuteNonQuery();
 
             }
             catch (Exception ex)
@@ -484,6 +432,104 @@ namespace PUTAirlinesMobile.Helper
                 }
             }
             return returned;
+        }
+        public static bool updateCountOfClient(int flightID, int countOfClients, MySqlConnection conn)
+        {
+            bool returned = true;
+            try
+            {
+                conn.Open();
+                string insert = "UPDATE Flight SET CountOfClient = CountOfClient + @clients WHERE FlightID = @Fid ";
+
+                MySqlCommand cmd = new MySqlCommand(insert, conn);
+
+                cmd.Parameters.AddWithValue("@Fid", flightID);
+                cmd.Parameters.AddWithValue("@clients", countOfClients);
+
+                var r = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                returned = false;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
+        }
+
+        public static int getResevationID(int clientID, int flightID, MySqlConnection conn)
+        {
+            try
+            { 
+                conn.Open();
+                string getID = "SELECT ReservationID FROM Reservation WHERE ClientID=@clientID AND FlightID=@flightID ";
+                MySqlCommand cmd = new MySqlCommand(getID, conn);
+
+                cmd.Parameters.AddWithValue("@clientID", clientID);
+                cmd.Parameters.AddWithValue("@flightID", flightID);
+
+                var result = cmd.ExecuteReader();
+
+                result.Read();            
+                   return result.GetInt16(0);
+                   
+             
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+        }
+
+        public static bool InsertLuggage(Luggage lugagge,int reservationID, MySqlConnection conn)
+        {
+            bool returned = true;
+            try
+            {
+                conn.Open();
+                string insertLuggage = "INSERT INTO `Luggage` (`ReservationID`,`Length`, `Height`, `Width`, `Weight`, `isDangerous`) VALUES (@reservationID, @length,@height,@width, @weight, @isDanger)";
+
+                MySqlCommand cmdLuggage = new MySqlCommand(insertLuggage, conn);
+
+                cmdLuggage.Parameters.AddWithValue("@reservationID", reservationID);
+                cmdLuggage.Parameters.AddWithValue("@length", lugagge.Lenght);
+                cmdLuggage.Parameters.AddWithValue("@height", lugagge.Height);
+                cmdLuggage.Parameters.AddWithValue("@width", lugagge.Width);
+                cmdLuggage.Parameters.AddWithValue("@weight", lugagge.Weight);
+                cmdLuggage.Parameters.AddWithValue("@isDanger", lugagge.IsDangerous);
+
+                var r = cmdLuggage.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                returned = false;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
+
         }
 
     }
