@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/LinearMyOrder"
     android:minWidth="25px"
-    android:minHeight="25px"
-    android:background="@drawable/background_myorder">
+    android:minHeight="25px">
     <ExpandableListView
         android:minWidth="25px"
         android:minHeight="25px"
