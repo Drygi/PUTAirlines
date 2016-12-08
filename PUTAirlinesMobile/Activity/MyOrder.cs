@@ -14,7 +14,7 @@ using PUTAirlinesMobile.Helper;
 
 namespace PUTAirlinesMobile
 {
-    [Activity(Label = "MyOrder")]
+    [Activity(Label = "Moje zamówienia", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MyOrder : Activity
     {
         Helper.Client client;
@@ -28,9 +28,13 @@ namespace PUTAirlinesMobile
             client = GlobalMemory.m_client;
             listView = FindViewById<ExpandableListView>(Resource.Id.expandableListView1);
             connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");
-            listView.SetAdapter(new ExpandableDataAdapter(this,GetData()));
-
-
+            List<MyOrderData> data = GetData();
+            if (data.Count > 0)
+                listView.SetAdapter(new ExpandableDataAdapter(this, GetData()));
+            else
+                setAlert("Brak zarezerwowanych lotów.");
+            
+            
         }
 
         public List<MyOrderData> GetData()
@@ -38,6 +42,13 @@ namespace PUTAirlinesMobile
            return MySQLHelper.get_order_data(client.ID, connection);
         }
 
-       
+        private void setAlert(string message)
+        {
+            Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+            Android.App.AlertDialog alertDialog = alert.Create();
+            alertDialog.SetTitle(message);
+            alertDialog.Show();
+        }
+
     }
 }
