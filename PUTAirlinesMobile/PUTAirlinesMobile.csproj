@@ -68,6 +68,7 @@
     <Compile Include="Activity\MyOrder.cs" />
     <Compile Include="Activity\PasswordChange.cs" />
     <Compile Include="Activity\ReserveTickets.cs" />
+    <Compile Include="Activity\ReserveTickets_2.cs" />
     <Compile Include="Helper\Airport.cs" />
     <Compile Include="Helper\Client.cs" />
     <Compile Include="Helper\ClientShortJSON.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Helper\Flight.cs" />
     <Compile Include="Helper\GlobalHelper.cs" />
     <Compile Include="Helper\GlobalMemory.cs" />
+    <Compile Include="Helper\Luggage.cs" />
     <Compile Include="Helper\MyOrderData.cs" />
     <Compile Include="Helper\MySQLHelper.cs" />
     <Compile Include="Activity\Home.cs" />
@@ -121,6 +123,9 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ListGroup.axml" />
     <AndroidResource Include="Resources\layout\DataListItem.axml" />
+    <AndroidResource Include="Resources\layout\ReserveTickets_2.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

@@ -28,13 +28,9 @@ namespace PUTAirlinesMobile
             client = GlobalMemory.m_client;
             listView = FindViewById<ExpandableListView>(Resource.Id.expandableListView1);
             connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");
-            List<MyOrderData> data = GetData();
-            if (data.Count > 0)
-                listView.SetAdapter(new ExpandableDataAdapter(this, GetData()));
-            else
-                setAlert("Brak zarezerwowanych lotów.");
-            
-            
+            listView.SetAdapter(new ExpandableDataAdapter(this,GetData()));
+
+
         }
 
         public List<MyOrderData> GetData()

@@ -129,8 +129,14 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060030
 			public const int actualPassword = 2131099696;
 			
+			// aapt resource value: 0x7f060056
+			public const int addLaggageButton = 2131099734;
+			
 			// aapt resource value: 0x7f06000e
 			public const int changePasswordButton = 2131099662;
+			
+			// aapt resource value: 0x7f060055
+			public const int dangerousBox = 2131099733;
 			
 			// aapt resource value: 0x7f060046
 			public const int date = 2131099718;
@@ -159,6 +165,9 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060016
 			public const int hdrezerwacji = 2131099670;
 			
+			// aapt resource value: 0x7f060052
+			public const int heightLuggage = 2131099730;
+			
 			// aapt resource value: 0x7f060014
 			public const int hmprzylotu = 2131099668;
 			
@@ -168,8 +177,17 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060003
 			public const int individualNumber = 2131099651;
 			
+			// aapt resource value: 0x7f060050
+			public const int laggTxt = 2131099728;
+			
 			// aapt resource value: 0x7f06002e
 			public const int layoutID = 2131099694;
+			
+			// aapt resource value: 0x7f060051
+			public const int lengthLuggage = 2131099729;
+			
+			// aapt resource value: 0x7f06004c
+			public const int leyouutLin = 2131099724;
 			
 			// aapt resource value: 0x7f060020
 			public const int linearL = 2131099680;
@@ -191,6 +209,9 @@ namespace PUTAirlinesMobile
 			
 			// aapt resource value: 0x7f060032
 			public const int newPassword2 = 2131099698;
+			
+			// aapt resource value: 0x7f06004f
+			public const int nextToCheckBox = 2131099727;
 			
 			// aapt resource value: 0x7f060022
 			public const int passwordText = 2131099682;
@@ -246,6 +267,9 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060000
 			public const int scroll = 2131099648;
 			
+			// aapt resource value: 0x7f06004b
+			public const int scrollViewLay = 2131099723;
+			
 			// aapt resource value: 0x7f060034
 			public const int scrollViewRegister = 2131099700;
 			
@@ -296,6 +320,18 @@ namespace PUTAirlinesMobile
 			
 			// aapt resource value: 0x7f060021
 			public const int userIconID = 2131099681;
+			
+			// aapt resource value: 0x7f06004e
+			public const int valueSpinner = 2131099726;
+			
+			// aapt resource value: 0x7f06004d
+			public const int valueTxt = 2131099725;
+			
+			// aapt resource value: 0x7f060054
+			public const int weightLuggage = 2131099732;
+			
+			// aapt resource value: 0x7f060053
+			public const int widthLuggage = 2131099731;
 			
 			// aapt resource value: 0x7f06000a
 			public const int yourCity = 2131099658;
@@ -362,7 +398,10 @@ namespace PUTAirlinesMobile
 			public const int ReserveTickets = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int spinner_layout = 2130903050;
+			public const int ReserveTickets_2 = 2130903050;
+			
+			// aapt resource value: 0x7f03000b
+			public const int spinner_layout = 2130903051;
 			
 			static Layout()
 			{
