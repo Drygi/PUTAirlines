@@ -52,3 +52,6 @@
   - serializowanie JSON + odbior do wyswietlania
   - 100% implementacja "Moje zamowienia"
   - [next] Potrzebne poprawki graficzne
+
+  1.12.1 
+  -  polaczenie mojej czesci z czescia Kuby

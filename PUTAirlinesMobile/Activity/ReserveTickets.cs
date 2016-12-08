@@ -28,7 +28,6 @@ namespace PUTAirlinesMobile
         Button search;
         ArrayAdapter<Flight> adapter;
         List<Flight> flights;
-        Flight selectedFlight = new Flight();
         List<Airport> airports;
         Airport startAirport = new Airport();
         Airport finishAirport = new Airport();
@@ -40,9 +39,9 @@ namespace PUTAirlinesMobile
             connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd");
             initControls();
         }
-        
+
         private void initControls()
-        {            
+        {
             dateFly = FindViewById<TextView>(Resource.Id.date);
             dateFly.Click += Date_Click;
             search = FindViewById<Button>(Resource.Id.searchFlys);
@@ -60,7 +59,7 @@ namespace PUTAirlinesMobile
             lay.Click += Lay_Click;
             listV = FindViewById<ListView>(Resource.Id.listView);
             listV.ItemClick += ListV_ItemClick;
-            resTxt = FindViewById<TextView>(Resource.Id.ResText);        
+            resTxt = FindViewById<TextView>(Resource.Id.ResText);
         }
 
         private void FinishFlySpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -75,8 +74,9 @@ namespace PUTAirlinesMobile
 
         private void ListV_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            selectedFlight = flights[Convert.ToInt16(e.Id)];
-            //trzeba tu zrobic przejsce do kolejnej strony i przekazac selctedFligh   
+            GlobalMemory.mFlight = flights[Convert.ToInt16(e.Id)];
+            StartActivity(typeof(ReserveTickets_2));
+
         }
         private void Lay_Click(object sender, EventArgs e)
         {
@@ -85,10 +85,10 @@ namespace PUTAirlinesMobile
         }
 
         private void Search_Click(object sender, EventArgs e)
-        {         
+        {
             flights = MySQLHelper.getFlight(timeMemory, startAirport.AirportID, finishAirport.AirportID, connection);
             adapter = new ArrayAdapter<Flight>(this, Android.Resource.Layout.SimpleListItem1, flights);
-                        
+
             if (flights == null)
                 setAlert("Brak mo¿liwoœci rezerwacji dla podanej daty");
             else
@@ -105,10 +105,10 @@ namespace PUTAirlinesMobile
                 timeMemory = time;
                 dateFly.SetTextColor((Android.Graphics.Color.ParseColor("#000000")));
                 dateFly.Text = timeMemory.ToShortDateString();
-               
-                    search.Clickable = true;
-                    search.SetBackgroundColor(Android.Graphics.Color.ParseColor("#003366"));
-                
+
+                search.Clickable = true;
+                search.SetBackgroundColor(Android.Graphics.Color.ParseColor("#003366"));
+
             });
             frag.Show(FragmentManager, DatePickerFragment.TAG);
 
