@@ -59,3 +59,5 @@
    - dodanie metod w MySQLHelper, odpowiedzialnych za dodawanie rezerwacji, baga¿u do bazy 
    1.13.1 
    - drobne poprawki 
+   1.13.2
+   - kolejne drobne poprawki 
