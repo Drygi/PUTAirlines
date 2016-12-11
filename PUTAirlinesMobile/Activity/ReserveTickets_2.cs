@@ -79,7 +79,7 @@ namespace PUTAirlinesMobile
         private void AddLuggage_Click(object sender, EventArgs e)
         {
             vSpinner.Clickable = false;
-            if (Name.Text.Trim()==String.Empty || Name.Text.Trim()==String.Empty || Lenght.Text.Trim() == String.Empty || Height.Text.Trim() == String.Empty || Width.Text.Trim() == String.Empty || Weight.Text.Trim() == String.Empty)
+            if (Name.Text.Trim() == String.Empty || Name.Text.Trim() == String.Empty || Lenght.Text.Trim() == String.Empty || Height.Text.Trim() == String.Empty || Width.Text.Trim() == String.Empty || Weight.Text.Trim() == String.Empty)
             {
                 setAlert("Nie wypelniono wszystkich pól");
             }
@@ -92,21 +92,21 @@ namespace PUTAirlinesMobile
                     f.CountOfClient += LuggageValue;
                     GlobalMemory.mFlight = f;
                     MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), connection);
-                       
+
                     MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
-                     
+
 
                     reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
-                 
+
                     foreach (var item in luggages)
                     {
                         MySQLHelper.InsertLuggage(item, reservationID, connection);
-                      
+
                     }
 
                     StartActivity(typeof(MenuPage));
                     this.Finish();
-          
+
                 }
 
                 else if (counter == LuggageValue - 1)
@@ -127,7 +127,7 @@ namespace PUTAirlinesMobile
                     counter++;
                     setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (LuggageValue - counter).ToString());
                     txt.Text = "Baga¿ nr " + (counter + 1).ToString();
-                    txtNames.Text = "Imie i Nazwisko osoby nr " + (counter+1).ToString();
+                    txtNames.Text = "Imie i Nazwisko osoby nr " + (counter + 1).ToString();
                     Name.Text = "";
                     LastName.Text = "";
                     Lenght.Text = "";
@@ -144,7 +144,7 @@ namespace PUTAirlinesMobile
         private void VSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
 
-           LuggageValue = Convert.ToInt16(e.Id) + 1;
+            LuggageValue = Convert.ToInt16(e.Id) + 1;
         }
 
         private void setAlert(string message)
@@ -164,6 +164,6 @@ namespace PUTAirlinesMobile
             }
             return values;
         }
-       
+
     }
 }

@@ -75,3 +75,6 @@
   - poprawienie generowanie MD5 (ucinales 1 znak - for(int i=1 ....))
   - dodanie usuwania Reseracji z bazy (Usuniecie z reservation oraz decrementacja CountOfClient w FlightID)
   - dodanie przycisku "Edytuj" - nie obslugiwany
+
+  1.14.1 
+  - poprawione 
