@@ -19,17 +19,18 @@ namespace PUTAirlinesMobile
     public class ReserveTickets_2 : Activity
     {
         Spinner vSpinner;
-        CheckBox nextToBox;
         MySqlConnection connection;
         Button addLuggage;
-        EditText Lenght, Height, Width, Weight;
+        EditText Lenght, Height, Width, Weight, Name, LastName;
         CheckBox isDanger;
         ScrollView scroll_;
         LinearLayout layout_;
         int LuggageValue;
         int counter;
-        TextView txt;
+        TextView txt, txtNames;
         List<Luggage> luggages = new List<Luggage>();
+        List<ClientShort> clientsShort = new List<ClientShort>();
+        int reservationID;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -39,14 +40,17 @@ namespace PUTAirlinesMobile
         }
         private void initControls()
         {
-
             vSpinner = FindViewById<Spinner>(Resource.Id.valueSpinner);
             var adapter = new ArrayAdapter(this, Resource.Layout.spinner_layout, GetLuggageValue(15));
             vSpinner.Adapter = adapter;
             vSpinner.ItemSelected += VSpinner_ItemSelected;
-            nextToBox = FindViewById<CheckBox>(Resource.Id.nextToCheckBox);
+
             addLuggage = FindViewById<Button>(Resource.Id.addLaggageButton);
             addLuggage.Click += AddLuggage_Click;
+            Name = FindViewById<EditText>(Resource.Id.name);
+            LastName = FindViewById<EditText>(Resource.Id.surName);
+            txtNames = FindViewById<TextView>(Resource.Id.nameLastTxt);
+
             Lenght = FindViewById<EditText>(Resource.Id.lengthLuggage);
             Height = FindViewById<EditText>(Resource.Id.heightLuggage);
             Width = FindViewById<EditText>(Resource.Id.widthLuggage);
@@ -74,39 +78,58 @@ namespace PUTAirlinesMobile
 
         private void AddLuggage_Click(object sender, EventArgs e)
         {
-
-            if (Lenght.Text.Trim() == String.Empty || Height.Text.Trim() == String.Empty || Width.Text.Trim() == String.Empty || Weight.Text.Trim() == String.Empty)
+            vSpinner.Clickable = false;
+            if (Name.Text.Trim()==String.Empty || Name.Text.Trim()==String.Empty || Lenght.Text.Trim() == String.Empty || Height.Text.Trim() == String.Empty || Width.Text.Trim() == String.Empty || Weight.Text.Trim() == String.Empty)
             {
                 setAlert("Nie wypelniono wszystkich pól");
             }
             else
             {
-                nextToBox.Clickable = false;
-                luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected));
-                //wysylanie danych na serwer
+
                 if (counter == LuggageValue)
                 {
-                    //przypisanie liczby rezerwacji
                     Flight f = GlobalMemory.mFlight;
                     f.CountOfClient += LuggageValue;
                     GlobalMemory.mFlight = f;
+                    MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), connection);
+                       
+                    MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
+                     
 
-                    if (!MySQLHelper.InsertReservation(luggages, GlobalMemory.m_client, GlobalMemory.mFlight, connection))
-                        setAlert("Coœ posz³o nie tak");
-                    else
-                        setAlert("Zarezerwowano pomyœlnie");
+                    reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
+                 
+                    foreach (var item in luggages)
+                    {
+                        MySQLHelper.InsertLuggage(item, reservationID, connection);
+                      
+                    }
+
+                    StartActivity(typeof(MenuPage));
+                    this.Finish();
+          
                 }
 
                 else if (counter == LuggageValue - 1)
                 {
-                    addLuggage.Text = "Zarezerwuj";
                     counter++;
+                    luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected));
+                    clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
+                    setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (LuggageValue - counter).ToString());
+                    txt.Text = "Baga¿ nr " + (counter + 1).ToString();
+                    addLuggage.Text = "Zarezerwuj";
+
                 }
                 else
                 {
+                    luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected));
+                    clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
+
                     counter++;
-                    setAlert("Dodano baga¿ nr " + counter.ToString() + "Pozosta³o " + (LuggageValue - counter).ToString());
+                    setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (LuggageValue - counter).ToString());
                     txt.Text = "Baga¿ nr " + (counter + 1).ToString();
+                    txtNames.Text = "Imie i Nazwisko osoby nr " + (counter+1).ToString();
+                    Name.Text = "";
+                    LastName.Text = "";
                     Lenght.Text = "";
                     Height.Text = "";
                     Width.Text = "";
@@ -120,12 +143,8 @@ namespace PUTAirlinesMobile
 
         private void VSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            if (e.Id == 0)
-                nextToBox.Clickable = false;
-            else
-                nextToBox.Clickable = true;
 
-            LuggageValue = Convert.ToInt16(e.Id) + 1;
+           LuggageValue = Convert.ToInt16(e.Id) + 1;
         }
 
         private void setAlert(string message)
@@ -145,5 +164,6 @@ namespace PUTAirlinesMobile
             }
             return values;
         }
+       
     }
 }

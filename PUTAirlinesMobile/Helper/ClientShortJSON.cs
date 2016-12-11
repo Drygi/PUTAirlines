@@ -15,5 +15,6 @@ namespace PUTAirlinesMobile
     public class ClientShortJSON
     {
         public ClientShort[] users { get; set; }
+
     }
 }

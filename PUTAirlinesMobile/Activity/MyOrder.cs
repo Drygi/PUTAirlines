@@ -14,7 +14,7 @@ using PUTAirlinesMobile.Helper;
 
 namespace PUTAirlinesMobile
 {
-    [Activity(Label = "Moje zamówienia", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "Moje zamówienia", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MyOrder : Activity
     {
         Helper.Client client;
