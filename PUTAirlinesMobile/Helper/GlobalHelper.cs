@@ -41,7 +41,7 @@ namespace PUTAirlinesMobile.Helper
                 byte[] result = md5.Hash;
                 StringBuilder str = new StringBuilder();
 
-                for (int i = 1; i < result.Length; i++)
+                for (int i = 0; i < result.Length; i++)
                 {
                     str.Append(result[i].ToString("x2"));
                 }

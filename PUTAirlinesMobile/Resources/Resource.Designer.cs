@@ -93,62 +93,68 @@ namespace PUTAirlinesMobile
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060028
-			public const int ButtonMojeKonto = 2131099688;
+			// aapt resource value: 0x7f06002b
+			public const int ButtonMojeKonto = 2131099691;
 			
-			// aapt resource value: 0x7f060029
-			public const int ButtonMojeRezerwacje = 2131099689;
+			// aapt resource value: 0x7f06002c
+			public const int ButtonMojeRezerwacje = 2131099692;
 			
-			// aapt resource value: 0x7f06002a
-			public const int ButtonZarezerwuj = 2131099690;
+			// aapt resource value: 0x7f06002d
+			public const int ButtonZarezerwuj = 2131099693;
 			
-			// aapt resource value: 0x7f06001f
-			public const int DataHeader = 2131099679;
+			// aapt resource value: 0x7f060022
+			public const int DataHeader = 2131099682;
 			
 			// aapt resource value: 0x7f060011
 			public const int DataRow = 2131099665;
 			
-			// aapt resource value: 0x7f060043
-			public const int FlyText = 2131099715;
+			// aapt resource value: 0x7f06001f
+			public const int Edytuj = 2131099679;
 			
-			// aapt resource value: 0x7f06002c
-			public const int LinearMyOrder = 2131099692;
+			// aapt resource value: 0x7f060046
+			public const int FlyText = 2131099718;
+			
+			// aapt resource value: 0x7f06002f
+			public const int LinearMyOrder = 2131099695;
 			
 			// aapt resource value: 0x7f060010
 			public const int ProgressBar = 2131099664;
 			
-			// aapt resource value: 0x7f060027
-			public const int RelativeMenuLayout = 2131099687;
+			// aapt resource value: 0x7f06002a
+			public const int RelativeMenuLayout = 2131099690;
 			
-			// aapt resource value: 0x7f060049
-			public const int ResText = 2131099721;
+			// aapt resource value: 0x7f06004c
+			public const int ResText = 2131099724;
 			
-			// aapt resource value: 0x7f06002b
-			public const int WyjdzZAplikacji = 2131099691;
+			// aapt resource value: 0x7f060020
+			public const int Usun = 2131099680;
 			
-			// aapt resource value: 0x7f060030
-			public const int actualPassword = 2131099696;
+			// aapt resource value: 0x7f06002e
+			public const int WyjdzZAplikacji = 2131099694;
 			
-			// aapt resource value: 0x7f060056
-			public const int addLaggageButton = 2131099734;
+			// aapt resource value: 0x7f060033
+			public const int actualPassword = 2131099699;
+			
+			// aapt resource value: 0x7f060059
+			public const int addLaggageButton = 2131099737;
 			
 			// aapt resource value: 0x7f06000e
 			public const int changePasswordButton = 2131099662;
 			
-			// aapt resource value: 0x7f060055
-			public const int dangerousBox = 2131099733;
+			// aapt resource value: 0x7f060058
+			public const int dangerousBox = 2131099736;
 			
-			// aapt resource value: 0x7f060046
-			public const int date = 2131099718;
+			// aapt resource value: 0x7f060049
+			public const int date = 2131099721;
 			
 			// aapt resource value: 0x7f06000d
 			public const int editButton = 2131099661;
 			
-			// aapt resource value: 0x7f06002f
-			public const int editTextPass = 2131099695;
+			// aapt resource value: 0x7f060032
+			public const int editTextPass = 2131099698;
 			
-			// aapt resource value: 0x7f06002d
-			public const int expandableListView1 = 2131099693;
+			// aapt resource value: 0x7f060030
+			public const int expandableListView1 = 2131099696;
 			
 			// aapt resource value: 0x7f06001a
 			public const int h_dodlotu = 2131099674;
@@ -165,125 +171,128 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060016
 			public const int hdrezerwacji = 2131099670;
 			
-			// aapt resource value: 0x7f060052
-			public const int heightLuggage = 2131099730;
+			// aapt resource value: 0x7f060055
+			public const int heightLuggage = 2131099733;
 			
 			// aapt resource value: 0x7f060014
 			public const int hmprzylotu = 2131099668;
 			
-			// aapt resource value: 0x7f06001e
-			public const int imageView1 = 2131099678;
+			// aapt resource value: 0x7f060021
+			public const int imageView1 = 2131099681;
 			
 			// aapt resource value: 0x7f060003
 			public const int individualNumber = 2131099651;
 			
-			// aapt resource value: 0x7f060050
-			public const int laggTxt = 2131099728;
+			// aapt resource value: 0x7f060053
+			public const int laggTxt = 2131099731;
 			
-			// aapt resource value: 0x7f06002e
-			public const int layoutID = 2131099694;
+			// aapt resource value: 0x7f060031
+			public const int layoutID = 2131099697;
 			
-			// aapt resource value: 0x7f060051
-			public const int lengthLuggage = 2131099729;
+			// aapt resource value: 0x7f060054
+			public const int lengthLuggage = 2131099732;
 			
-			// aapt resource value: 0x7f06004c
-			public const int leyouutLin = 2131099724;
-			
-			// aapt resource value: 0x7f060020
-			public const int linearL = 2131099680;
-			
-			// aapt resource value: 0x7f06004a
-			public const int listView = 2131099722;
+			// aapt resource value: 0x7f06004f
+			public const int leyouutLin = 2131099727;
 			
 			// aapt resource value: 0x7f060023
-			public const int loginButton = 2131099683;
+			public const int linearL = 2131099683;
 			
-			// aapt resource value: 0x7f060025
-			public const int loginProgressBar = 2131099685;
+			// aapt resource value: 0x7f06004d
+			public const int listView = 2131099725;
+			
+			// aapt resource value: 0x7f060026
+			public const int loginButton = 2131099686;
+			
+			// aapt resource value: 0x7f060028
+			public const int loginProgressBar = 2131099688;
 			
 			// aapt resource value: 0x7f060001
 			public const int loginText = 2131099649;
 			
-			// aapt resource value: 0x7f060031
-			public const int newPassword1 = 2131099697;
+			// aapt resource value: 0x7f060034
+			public const int newPassword1 = 2131099700;
 			
-			// aapt resource value: 0x7f060032
-			public const int newPassword2 = 2131099698;
+			// aapt resource value: 0x7f060035
+			public const int newPassword2 = 2131099701;
 			
-			// aapt resource value: 0x7f06004f
-			public const int nextToCheckBox = 2131099727;
+			// aapt resource value: 0x7f060052
+			public const int nextToCheckBox = 2131099730;
 			
-			// aapt resource value: 0x7f060022
-			public const int passwordText = 2131099682;
+			// aapt resource value: 0x7f060025
+			public const int passwordText = 2131099685;
 			
-			// aapt resource value: 0x7f060026
-			public const int registerButton = 2131099686;
-			
-			// aapt resource value: 0x7f06003d
-			public const int registerCity = 2131099709;
+			// aapt resource value: 0x7f060029
+			public const int registerButton = 2131099689;
 			
 			// aapt resource value: 0x7f060040
-			public const int registerClick = 2131099712;
+			public const int registerCity = 2131099712;
 			
-			// aapt resource value: 0x7f060036
-			public const int registerLogin = 2131099702;
+			// aapt resource value: 0x7f060043
+			public const int registerClick = 2131099715;
 			
 			// aapt resource value: 0x7f060039
-			public const int registerName = 2131099705;
+			public const int registerLogin = 2131099705;
 			
 			// aapt resource value: 0x7f06003c
-			public const int registerNationality = 2131099708;
-			
-			// aapt resource value: 0x7f06003b
-			public const int registerPassportNumber = 2131099707;
-			
-			// aapt resource value: 0x7f060037
-			public const int registerPassword = 2131099703;
-			
-			// aapt resource value: 0x7f060038
-			public const int registerPassword2 = 2131099704;
+			public const int registerName = 2131099708;
 			
 			// aapt resource value: 0x7f06003f
-			public const int registerPostCode = 2131099711;
-			
-			// aapt resource value: 0x7f060041
-			public const int registerProgressBar = 2131099713;
+			public const int registerNationality = 2131099711;
 			
 			// aapt resource value: 0x7f06003e
-			public const int registerStreet = 2131099710;
+			public const int registerPassportNumber = 2131099710;
 			
 			// aapt resource value: 0x7f06003a
-			public const int registerSurname = 2131099706;
+			public const int registerPassword = 2131099706;
+			
+			// aapt resource value: 0x7f06003b
+			public const int registerPassword2 = 2131099707;
 			
 			// aapt resource value: 0x7f060042
-			public const int relLayout = 2131099714;
+			public const int registerPostCode = 2131099714;
 			
-			// aapt resource value: 0x7f060024
-			public const int rememberMeBox = 2131099684;
+			// aapt resource value: 0x7f060044
+			public const int registerProgressBar = 2131099716;
 			
-			// aapt resource value: 0x7f060033
-			public const int saveChange = 2131099699;
+			// aapt resource value: 0x7f060041
+			public const int registerStreet = 2131099713;
+			
+			// aapt resource value: 0x7f06003d
+			public const int registerSurname = 2131099709;
+			
+			// aapt resource value: 0x7f060045
+			public const int relLayout = 2131099717;
+			
+			// aapt resource value: 0x7f06001e
+			public const int relativeLayout1 = 2131099678;
+			
+			// aapt resource value: 0x7f060027
+			public const int rememberMeBox = 2131099687;
+			
+			// aapt resource value: 0x7f060036
+			public const int saveChange = 2131099702;
 			
 			// aapt resource value: 0x7f060000
 			public const int scroll = 2131099648;
 			
+			// aapt resource value: 0x7f06004e
+			public const int scrollViewLay = 2131099726;
+			
+			// aapt resource value: 0x7f060037
+			public const int scrollViewRegister = 2131099703;
+			
 			// aapt resource value: 0x7f06004b
-			public const int scrollViewLay = 2131099723;
-			
-			// aapt resource value: 0x7f060034
-			public const int scrollViewRegister = 2131099700;
-			
-			// aapt resource value: 0x7f060048
-			public const int searchFlys = 2131099720;
-			
-			// aapt resource value: 0x7f060044
-			public const int spinner1 = 2131099716;
-			
-			// aapt resource value: 0x7f060045
-			public const int spinner2 = 2131099717;
+			public const int searchFlys = 2131099723;
 			
 			// aapt resource value: 0x7f060047
-			public const int startPlace = 2131099719;
+			public const int spinner1 = 2131099719;
+			
+			// aapt resource value: 0x7f060048
+			public const int spinner2 = 2131099720;
+			
+			// aapt resource value: 0x7f06004a
+			public const int startPlace = 2131099722;
 			
 			// aapt resource value: 0x7f06001b
 			public const int t_dodlutu = 2131099675;
@@ -309,8 +318,8 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060004
 			public const int textView2 = 2131099652;
 			
-			// aapt resource value: 0x7f060035
-			public const int textView3 = 2131099701;
+			// aapt resource value: 0x7f060038
+			public const int textView3 = 2131099704;
 			
 			// aapt resource value: 0x7f060002
 			public const int textView4 = 2131099650;
@@ -318,20 +327,20 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f06000f
 			public const int updateButton = 2131099663;
 			
-			// aapt resource value: 0x7f060021
-			public const int userIconID = 2131099681;
+			// aapt resource value: 0x7f060024
+			public const int userIconID = 2131099684;
 			
-			// aapt resource value: 0x7f06004e
-			public const int valueSpinner = 2131099726;
+			// aapt resource value: 0x7f060051
+			public const int valueSpinner = 2131099729;
 			
-			// aapt resource value: 0x7f06004d
-			public const int valueTxt = 2131099725;
+			// aapt resource value: 0x7f060050
+			public const int valueTxt = 2131099728;
 			
-			// aapt resource value: 0x7f060054
-			public const int weightLuggage = 2131099732;
+			// aapt resource value: 0x7f060057
+			public const int weightLuggage = 2131099735;
 			
-			// aapt resource value: 0x7f060053
-			public const int widthLuggage = 2131099731;
+			// aapt resource value: 0x7f060056
+			public const int widthLuggage = 2131099734;
 			
 			// aapt resource value: 0x7f06000a
 			public const int yourCity = 2131099658;

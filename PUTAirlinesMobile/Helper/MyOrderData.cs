@@ -44,9 +44,15 @@ namespace PUTAirlinesMobile
         public string NazwaLotniskaPrzylotu { get; set; }
         public string DataWylotu { get; set; }
         public MyOrderDataDetails details { get; set; }
+        public int ReservationID { get; set; }
         public override string ToString()
         {
             return NazwaLotniskaOdlotu + "-" + NazwaLotniskaPrzylotu + " [" + DataWylotu + "]";
+        }
+
+        public string ToShortString()
+        {
+            return NazwaLotniskaOdlotu + "-" + NazwaLotniskaPrzylotu;
         }
 
         public string MiejsceWylotuToString()

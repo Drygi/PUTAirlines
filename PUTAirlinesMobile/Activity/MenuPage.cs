@@ -49,7 +49,6 @@ namespace PUTAirlinesMobile
             ISharedPreferencesEditor edit = pref.Edit();
             edit.Clear();
             edit.Apply();
-            StartActivity(typeof(LoginPage));
             GlobalMemory.m_client = null;
             this.Finish();
 

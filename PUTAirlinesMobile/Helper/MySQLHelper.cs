@@ -334,7 +334,7 @@ namespace PUTAirlinesMobile.Helper
             string stringCMD = "SELECT reservation.ReservationDate , reservation.JSON, " +
                                         "flight.DepartureDate , flight.ArrivalDate, " +
                                         "airport.Name, airport.City, airport.Country,  " +
-                                       "airport2.Name, airport2.City, airport2.Country " +
+                                       "airport2.Name, airport2.City, airport2.Country , reservation.ReservationID " +
                                   /*
                                   0 - data rezerwacji
                                   1 - json osob zapisanych pod bilet
@@ -367,7 +367,7 @@ namespace PUTAirlinesMobile.Helper
                     order_1.NazwaLotniskaOdlotu = result.GetString(4);
                     order_1.NazwaLotniskaPrzylotu = result.GetString(7);
                     order_1.DataWylotu = result.GetString(2);
-
+                    order_1.ReservationID = result.GetInt16(10);
                     MyOrderDataDetails d_order_1 = new MyOrderDataDetails();
                     d_order_1.DataPrzylotu = result.GetString(3);
                     d_order_1.DataRezerwacji = result.GetString(0);
@@ -409,7 +409,9 @@ namespace PUTAirlinesMobile.Helper
             {
                 //wedlug mnie nie dziala przez powiazania z FOREIGN KEY 
                 conn.Open();
-                string insertReservation = "INSERT INTO Reservation (ClientID,ConnectionID,FlightID,ReservationDate,LastModificationDate,isRealized) VALUES (@clientID,@connectionID,@flightID,@actualTime,@actualTime,@zero)";
+                string insertReservation = "INSERT INTO Reservation "+
+                                "(ClientID,ConnectionID,FlightID,ReservationDate,LastModificationDate,isRealized)"+
+                                "VALUES (@clientID,@connectionID,@flightID,@actualTime,@actualTime,@zero)";
 
                 for (int i = 0; i < luggages.Count; i++)
                 {
@@ -433,7 +435,9 @@ namespace PUTAirlinesMobile.Helper
                     reservationIDs.Add(result.GetInt32(0));
                 }
 
-                string insertLuggage = "INSERT INTO `Luggage` (`LuggageID`, `Lenght`, `Height`, `Widht`, `Weight`, `isDangerous`,`ReservationID`) VALUES ('', @lenght, @height,@width, @weight, @isDanger,@reservationID)";
+                string insertLuggage = "INSERT INTO `Luggage`"+
+                    "(`LuggageID`, `Lenght`, `Height`, `Widht`, `Weight`, `isDangerous`,`ReservationID`)"+
+                    "VALUES ('', @lenght, @height,@width, @weight, @isDanger,@reservationID)";
                 int c = 0;
                 foreach (var item in luggages)
                 {
@@ -449,8 +453,10 @@ namespace PUTAirlinesMobile.Helper
                     c++;
                 }
 
-                string insertReservationDetails = "INSERT INTO `ReservationDetails` (`ReservationID`, `LuggageID`, `Name`, `Surname`, `IndividualNumber`,";
-                insertReservationDetails += "`PassportNumber`, `City`, `Street`, `Postcode`, `Nationality`) VALUES (@resID, '', @name, @surName, @idNr, @passportNr,";
+                string insertReservationDetails = "INSERT INTO `ReservationDetails` "+
+                                            "(`ReservationID`, `LuggageID`, `Name`, `Surname`, `IndividualNumber`,";
+                insertReservationDetails += "`PassportNumber`, `City`, `Street`, `Postcode`, `Nationality`)"+
+                                            "VALUES (@resID, '', @name, @surName, @idNr, @passportNr,";
                 insertReservationDetails += "@city, @street,@postcode, @nationality)";
 
                 foreach (var item in reservationIDs)
@@ -484,6 +490,42 @@ namespace PUTAirlinesMobile.Helper
                 }
             }
             return returned;
+        }
+
+        public static bool remove_order(int OrderID, int countOfUser, MySqlConnection conn)
+        {
+            int FlightID = 0;
+            // szukamy loty aby zmnieszyæ CountOfClinet
+            string stringCMD = "SELECT FlightID FROM Reservation WHERE ReservationID=@thisOrderID";
+                            
+             conn.Open();
+             MySqlCommand cmd = new MySqlCommand(stringCMD, conn);
+             cmd.Parameters.AddWithValue("@thisOrderID", OrderID);
+             var result = cmd.ExecuteReader();
+             if (!result.HasRows) return false;
+             while (result.Read())
+             {
+                   FlightID = result.GetInt16(0);
+             }
+            // mamy FlighID - mozemy usuwaæ
+             conn.Close();
+             conn.Open();
+             stringCMD = "DELETE FROM Reservation WHERE ReservationID=@thisOrderID";
+             cmd = new MySqlCommand(stringCMD, conn);
+             cmd.Parameters.AddWithValue("@thisOrderID", OrderID);
+            cmd.ExecuteNonQuery();
+            // usuniete
+            conn.Close();
+            conn.Open();
+            stringCMD = "UPDATE Flight SET CountOfClient = CountOfClient - @countOfUser WHERE FlightID = @thisFlightID";
+            cmd = new MySqlCommand(stringCMD, conn);
+            cmd.Parameters.AddWithValue("@countOfUser", countOfUser);
+            cmd.Parameters.AddWithValue("@thisFlightID", FlightID);
+            cmd.ExecuteNonQuery();
+
+
+            conn.Close();
+            return true;
         }
 
     }
