@@ -63,7 +63,15 @@
   1.12.3
   - poprawka
 
-  1.13
+ 1.13 
+   - dodanie metod w MySQLHelper, odpowiedzialnych za dodawanie rezerwacji, baga¿u do bazy 
+   1.13.1 
+   - drobne poprawki 
+   - drobne poprawki 
+   1.13.2
+   - kolejne drobne poprawki 
+
+  1.14
   - poprawienie generowanie MD5 (ucinales 1 znak - for(int i=1 ....))
   - dodanie usuwania Reseracji z bazy (Usuniecie z reservation oraz decrementacja CountOfClient w FlightID)
   - dodanie przycisku "Edytuj" - nie obslugiwany
