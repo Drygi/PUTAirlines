@@ -16,7 +16,7 @@ namespace PUTAirlinesMobile
     public class Flight
     {
         public Flight() { }
-        public Flight(string departureName, string departureCity, string arrivalName, string arrivalCity, DateTime flighDate, int flightID, int connectionID)
+        public Flight(string departureName, string departureCity, string arrivalName, string arrivalCity, DateTime flighDate, int flightID, int connectionID,double price)
         {
             this.DepartureName = departureName;
             this.DepartureCity = departureCity;
@@ -25,8 +25,9 @@ namespace PUTAirlinesMobile
             this.FlightDate = flighDate;
             this.ConnectionID = connectionID;
             this.FlightID = flightID;
+            this.Price = price;
         }
-        public Flight(string departureName, string departureCity, string arrivalName, string arrivalCity, DateTime flighDate, int flightID, int connectionID, int countOfClient)
+        public Flight(string departureName, string departureCity, string arrivalName, string arrivalCity, DateTime flighDate, int flightID, int connectionID, int countOfClient,double price)
         {
 
             this.DepartureName = departureName;
@@ -37,12 +38,15 @@ namespace PUTAirlinesMobile
             this.CountOfClient = countOfClient;
             this.ConnectionID = connectionID;
             this.FlightID = flightID;
+            this.Price = price;
         }
 
         public override string ToString()
         {
-            return "Wylot o godzinie: " + FlightDate.ToShortTimeString() + "\nDnia: " + FlightDate.ToShortDateString();
+
+            return "Cena biletu: "+ String.Format("{0:N2}",Price.ToString())+" z³"+ "\nWylot o godzinie: " + FlightDate.ToShortTimeString() + "\nDnia: " + FlightDate.ToShortDateString();
         }
+        public double Price { get; set; }
         public int FlightID { get; set; }
         public DateTime FlightDate { get; set; }
         public string DepartureCity { get; set; }

@@ -21,13 +21,14 @@ namespace PUTAirlinesMobile
         Spinner vSpinner;
         MySqlConnection connection;
         Button addLuggage;
+        CheckBox luggage;
         EditText Lenght, Height, Width, Weight, Name, LastName;
         CheckBox isDanger;
         ScrollView scroll_;
         LinearLayout layout_;
-        int LuggageValue;
+        int countOfPeople;
         int counter;
-        TextView txt, txtNames;
+        TextView txt, txtNames, finalPrice;
         List<Luggage> luggages = new List<Luggage>();
         List<ClientShort> clientsShort = new List<ClientShort>();
         int reservationID;
@@ -44,13 +45,15 @@ namespace PUTAirlinesMobile
             var adapter = new ArrayAdapter(this, Resource.Layout.spinner_layout, GetLuggageValue(15));
             vSpinner.Adapter = adapter;
             vSpinner.ItemSelected += VSpinner_ItemSelected;
-
+            finalPrice = FindViewById<TextView>(Resource.Id.allPrice);
             addLuggage = FindViewById<Button>(Resource.Id.addLaggageButton);
             addLuggage.Click += AddLuggage_Click;
             Name = FindViewById<EditText>(Resource.Id.name);
             LastName = FindViewById<EditText>(Resource.Id.surName);
             txtNames = FindViewById<TextView>(Resource.Id.nameLastTxt);
-
+            luggage = FindViewById<CheckBox>(Resource.Id.laggTxt);
+            luggage.Checked = true;
+            luggage.Click += Luggage_Click;
             Lenght = FindViewById<EditText>(Resource.Id.lengthLuggage);
             Height = FindViewById<EditText>(Resource.Id.heightLuggage);
             Width = FindViewById<EditText>(Resource.Id.widthLuggage);
@@ -62,6 +65,14 @@ namespace PUTAirlinesMobile
             scroll_.ScrollChange += Scroll__ScrollChange;
             txt = FindViewById<TextView>(Resource.Id.laggTxt);
             counter = 0;
+        }
+
+        private void Luggage_Click(object sender, EventArgs e)
+        {
+            if (luggage.Checked)
+                setBackground("#FFFFFF", true);
+            else
+                setBackground("#C0C0C0", false);
         }
 
         private void Layout__Click(object sender, EventArgs e)
@@ -79,55 +90,123 @@ namespace PUTAirlinesMobile
         private void AddLuggage_Click(object sender, EventArgs e)
         {
             vSpinner.Clickable = false;
-            if (Name.Text.Trim() == String.Empty || Name.Text.Trim() == String.Empty || Lenght.Text.Trim() == String.Empty || Height.Text.Trim() == String.Empty || Width.Text.Trim() == String.Empty || Weight.Text.Trim() == String.Empty)
-            {
-                setAlert("Nie wypelniono wszystkich pól");
+            if (luggage.Checked)
+            {              
+                if (Name.Text.Trim() == String.Empty || LastName.Text.Trim() == String.Empty || Lenght.Text.Trim() == String.Empty || Height.Text.Trim() == String.Empty || Width.Text.Trim() == String.Empty || Weight.Text.Trim() == String.Empty)
+                {
+                    setAlert("Nie wypelniono wszystkich pól");
+                }
+                else
+                {
+
+                    if (counter == countOfPeople)
+                    {
+                        Flight f = GlobalMemory.mFlight;
+                        f.CountOfClient += countOfPeople;
+                        GlobalMemory.mFlight = f;
+                        double cost = Math.Round((f.Price * countOfPeople),2);
+
+                        MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort),cost,countOfPeople, connection);
+                        MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
+                        reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
+
+                        foreach (var item in luggages)
+                        {
+                            MySQLHelper.InsertLuggage(item, reservationID, connection);
+
+                        }
+                        this.Finish();
+                        
+                       
+
+                    }
+
+                    else if (counter == countOfPeople - 1)
+                    {
+                        counter++;
+                        luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected));
+                        clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
+                        setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
+                        setBackground("#C0C0C0", false);
+                        Name.SetBackgroundColor(Android.Graphics.Color.ParseColor("#C0C0C0"));
+                        Name.Enabled = false;
+                        LastName.SetBackgroundColor(Android.Graphics.Color.ParseColor("#C0C0C0"));
+                        LastName.Enabled = false;
+                        finalPrice.Text = "Koszt: " + String.Format("{0:N2}",GlobalMemory.mFlight.Price * (countOfPeople) )+ " z³";
+                        finalPrice.Visibility = ViewStates.Visible;
+                        addLuggage.Text = "Zarezerwuj";
+                    }
+                    else
+                    {
+                        luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected));
+                        clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
+                        counter++;
+                        setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
+                        txt.Text = "   Baga¿ nr " + (counter + 1).ToString();
+                        txtNames.Text = "Imie i Nazwisko nr " + (counter + 1).ToString();
+                        Name.Text = "";
+                        LastName.Text = "";
+                        Lenght.Text = "";
+                        Height.Text = "";
+                        Width.Text = "";
+                        Weight.Text = "";
+                        isDanger.Selected = false;
+                    }
+
+                }
             }
             else
             {
-
-                if (counter == LuggageValue)
+                if(Name.Text.Trim() == String.Empty || LastName.Text.Trim() == String.Empty )
+                {
+                    setAlert("Nie wypelniono wszystkich pól");
+                }
+                else
+               if (counter == countOfPeople)
                 {
                     Flight f = GlobalMemory.mFlight;
-                    f.CountOfClient += LuggageValue;
+                    f.CountOfClient += countOfPeople;
                     GlobalMemory.mFlight = f;
-                    MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), connection);
+                    double cost = Math.Round((f.Price * countOfPeople), 2);
 
+                    MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort),cost,countOfPeople, connection);
                     MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
-
-
                     reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
 
                     foreach (var item in luggages)
                     {
                         MySQLHelper.InsertLuggage(item, reservationID, connection);
 
-                    }
-
-                    StartActivity(typeof(MenuPage));
+                    }                 
                     this.Finish();
+                    
 
                 }
 
-                else if (counter == LuggageValue - 1)
+                else if (counter == countOfPeople - 1)
                 {
                     counter++;
-                    luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected));
+                    setBackground("#C0C0C0", false);
+                    Name.SetBackgroundColor(Android.Graphics.Color.ParseColor("#C0C0C0"));
+                    Name.Enabled = false;
+                    LastName.SetBackgroundColor(Android.Graphics.Color.ParseColor("#C0C0C0"));
+                    LastName.Enabled = false;
                     clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
-                    setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (LuggageValue - counter).ToString());
-                    txt.Text = "Baga¿ nr " + (counter + 1).ToString();
+                    setAlert("Dodano osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
+
+                    finalPrice.Text = "Koszt: " + String.Format("{0:N2}", GlobalMemory.mFlight.Price * (countOfPeople))+" z³";
+                    finalPrice.Visibility = ViewStates.Visible;
                     addLuggage.Text = "Zarezerwuj";
 
                 }
                 else
-                {
-                    luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected));
+                {        
                     clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
 
                     counter++;
-                    setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (LuggageValue - counter).ToString());
-                    txt.Text = "Baga¿ nr " + (counter + 1).ToString();
-                    txtNames.Text = "Imie i Nazwisko osoby nr " + (counter + 1).ToString();
+                    setAlert("Dodano osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
+                    txt.Text = "   Baga¿ nr " + (counter + 1).ToString();
+                    txtNames.Text = "Imie i Nazwisko nr " + (counter + 1).ToString();
                     Name.Text = "";
                     LastName.Text = "";
                     Lenght.Text = "";
@@ -141,10 +220,12 @@ namespace PUTAirlinesMobile
             }
         }
 
+        
+
         private void VSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
 
-            LuggageValue = Convert.ToInt16(e.Id) + 1;
+            countOfPeople = Convert.ToInt16(e.Id) + 1;
         }
 
         private void setAlert(string message)
@@ -153,6 +234,22 @@ namespace PUTAirlinesMobile
             Android.App.AlertDialog alertDialog = alert.Create();
             alertDialog.SetTitle(message);
             alertDialog.Show();
+        }
+
+        private void setBackground(string color,bool selected)
+        {
+
+            Lenght.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
+            Lenght.Enabled = selected;
+            Width.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
+            Width.Enabled = selected;
+            Weight.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
+            Weight.Enabled = selected;
+            Height.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
+            Height.Enabled = selected;
+            isDanger.Enabled = selected;
+            isDanger.SetTextColor(Android.Graphics.Color.ParseColor(color));
+
         }
         private List<string> GetLuggageValue(int length)
         {

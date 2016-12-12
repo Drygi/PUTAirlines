@@ -48,9 +48,8 @@
             android:layout_marginBottom="20.5dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp" />
-
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp" />
         <TextView
             android:text="Imię i Nazwisko osoby"
             android:textColor="#FFFFFF"
@@ -80,8 +79,8 @@
             android:id="@+id/name"
             android:textSize="25sp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="5dp"
             android:paddingLeft="10dp"
             android:ellipsize="end" />
@@ -98,13 +97,13 @@
             android:id="@+id/surName"
             android:textSize="25sp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="5dp"
             android:paddingLeft="10dp"
             android:ellipsize="end" />
-        <TextView
-            android:text="Bagaż"
+        <CheckBox
+            android:text="   Bagaż"
             android:textColor="#FFFFFF"
             android:singleLine="true"
             android:textSize="25sp"
@@ -116,7 +115,6 @@
             android:layout_marginRight="30dp"
             android:paddingBottom="20dp"
             android:paddingTop="10dp"
-            android:gravity="center"
             android:id="@+id/laggTxt"
             android:editable="false" />
         <EditText
@@ -132,8 +130,8 @@
             android:id="@+id/lengthLuggage"
             android:textSize="25sp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="5dp"
             android:paddingLeft="10dp"
             android:ellipsize="end" />
@@ -150,8 +148,8 @@
             android:id="@+id/heightLuggage"
             android:textSize="25sp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="5dp"
             android:paddingLeft="10dp"
             android:ellipsize="end" />
@@ -168,8 +166,8 @@
             android:id="@+id/widthLuggage"
             android:textSize="25sp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="30dp"
             android:paddingLeft="10dp"
             android:ellipsize="end" />
@@ -186,8 +184,8 @@
             android:id="@+id/weightLuggage"
             android:textSize="25sp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="30dp"
             android:paddingLeft="10dp"
             android:ellipsize="end" />
@@ -197,12 +195,28 @@
             android:padding="5dp"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_height="wrap_content"
             android:id="@+id/dangerousBox" />
+        <TextView
+            android:text="Koszt całkowity: "
+            android:textColor="#FFFFFF"
+            android:singleLine="true"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:paddingBottom="20dp"
+            android:paddingTop="10dp"
+            android:visibility="invisible"
+            android:id="@+id/allPrice"
+            android:editable="false" />
         <Button
-            android:text="Dodaj bagaż"
+            android:text="Dodaj"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"

@@ -106,7 +106,7 @@ namespace PUTAirlinesMobile
             update.SetBackgroundColor(Android.Graphics.Color.ParseColor("#9FA2A8"));
             passwordChange.Clickable = true;
             passwordChange.SetBackgroundColor(Android.Graphics.Color.ParseColor("#003366"));
-            editableEditTexts(false);
+            editableEditTexts("#C0C0C0",false);
             scrollV.SmoothScrollTo(0, 0);
             
 
@@ -125,19 +125,26 @@ namespace PUTAirlinesMobile
             return c;
         }
 
-        private void editableEditTexts(bool value)
+        private void editableEditTexts(string color,bool value)
         {
             name.FocusableInTouchMode = value;
+            name.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
             lastName.FocusableInTouchMode = value;
+            lastName.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
             passsportNumber.FocusableInTouchMode = value;
+            passsportNumber.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
             nationality.FocusableInTouchMode = value;
+            nationality.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
             city.FocusableInTouchMode = value;
+            city.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
             street.FocusableInTouchMode = value;
+            street.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
             postCode.FocusableInTouchMode = value;
+            postCode.SetBackgroundColor(Android.Graphics.Color.ParseColor(color));
         }
         private void Edit_Click(object sender, EventArgs e)
         {
-            editableEditTexts(true);
+            editableEditTexts("#FFFFFF",true);
 
             edit.Clickable = false;
             edit.SetBackgroundColor(Android.Graphics.Color.ParseColor("#9FA2A8"));   

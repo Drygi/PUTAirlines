@@ -259,7 +259,7 @@ namespace PUTAirlinesMobile.Helper
 
         public static List<Flight> getFlight(DateTime tDate, int startID, int finishID, MySqlConnection conn)
         {
-            string stringCMD = "Select A.Name, A.City, AA.Name, AA.City, F.DepartureDate, F.FlightID, F.ConnectionID ";
+            string stringCMD = "Select A.Name, A.City, AA.Name, AA.City, F.DepartureDate, F.FlightID, F.ConnectionID, F.PriceOfTicket ";
             stringCMD += "FROM Flight F, Airport A, Connection C, Airport AA WHERE C.ConnectionID";
             stringCMD += " = F.ConnectionID AND F.DepartureDate >= @thisDate AND A.AirportId = @stID AND AA.AirportID = @finID";
             stringCMD += " AND A.AirportID = C.DepartureAirportID  AND AA.AirportID = C.ArrivalAirportID";
@@ -276,7 +276,7 @@ namespace PUTAirlinesMobile.Helper
                 
                 while (result.Read())
                 {
-                    flight.Add(new Flight(result.GetString(0), result.GetString(1), result.GetString(2), result.GetString(3), result.GetDateTime(4), result.GetInt32(5), result.GetInt32(6)));
+                    flight.Add(new Flight(result.GetString(0), result.GetString(1), result.GetString(2), result.GetString(3), result.GetDateTime(4), result.GetInt32(5), result.GetInt32(6),result.GetDouble(7)));
                 }
 
             }
@@ -402,19 +402,21 @@ namespace PUTAirlinesMobile.Helper
             return returned;
         }
 
-        public static bool InsertReservation(int clientID, int flightID, string JSON, MySqlConnection conn)
+        public static bool InsertReservation(int clientID, int flightID, string JSON, double allCost,int countOfPeople,MySqlConnection conn)
         {
             bool returned = true;
             try
             {
                 conn.Open();
-                string insertReservation = "INSERT INTO Reservation (ClientID,FlightID,ReservationDate,LastModificationDate,isRealized,JSON) VALUES (@clientID,@flightID,@actualTime,@actualTime,@zero,@json)";
+                string insertReservation = "INSERT INTO Reservation (ClientID,FlightID,ReservationDate,LastModificationDate,isRealized,JSON,Price,countOfPeople) VALUES (@clientID,@flightID,@actualTime,@actualTime,@zero,@json,@price,@people)";
 
                 MySqlCommand cmd = new MySqlCommand(insertReservation, conn);
                 cmd.Parameters.AddWithValue("@clientID", clientID);
                 cmd.Parameters.AddWithValue("@flightID", flightID);
                 cmd.Parameters.AddWithValue("@actualTime", DateTime.Now);
                 cmd.Parameters.AddWithValue("@zero", 1);
+                cmd.Parameters.AddWithValue("@price", allCost);
+                cmd.Parameters.AddWithValue("@people", countOfPeople);
                 cmd.Parameters.AddWithValue("@json", JSON);
                 var r = cmd.ExecuteNonQuery();
 

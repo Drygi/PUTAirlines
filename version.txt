@@ -78,3 +78,7 @@
 
   1.14.1 
   - poprawione 
+  1.15
+  - dodanie ceny biletu oraz ceny rezerwacji
+  - poprawione edytowanie danych - gdy nie mo¿na edytowaæ s¹ szare
+  - mozliwoœæ dodania rezerwacji bez baga¿u 

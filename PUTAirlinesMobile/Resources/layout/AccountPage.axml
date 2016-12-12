@@ -45,7 +45,7 @@
         <EditText
             android:hint="Numer Klienta (IDK)"
             android:singleLine="true"
-            android:background="#FFFFFF"
+            android:background="#C0C0C0"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_weight="15"
@@ -76,7 +76,7 @@
         <EditText
             android:hint="Imię"
             android:singleLine="true"
-            android:background="#FFFFFF"
+            android:background="#C0C0C0"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_weight="15"
@@ -94,7 +94,7 @@
         <EditText
             android:hint="Nazwisko"
             android:singleLine="true"
-            android:background="#FFFFFF"
+            android:background="#C0C0C0"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_weight="15"
@@ -125,7 +125,7 @@
         <EditText
             android:hint="Ulica i numer domu"
             android:singleLine="true"
-            android:background="#FFFFFF"
+            android:background="#C0C0C0"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_weight="15"
@@ -142,7 +142,7 @@
         <EditText
             android:hint="kod pocztowy"
             android:singleLine="true"
-            android:background="#FFFFFF"
+            android:background="#C0C0C0"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_weight="15"
@@ -159,7 +159,7 @@
         <EditText
             android:hint="Miejscowość"
             android:singleLine="true"
-            android:background="#FFFFFF"
+            android:background="#C0C0C0"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_weight="15"
@@ -191,7 +191,7 @@
         <EditText
             android:hint="Numer paszportu:"
             android:singleLine="true"
-            android:background="#FFFFFF"
+            android:background="#C0C0C0"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_weight="15"
@@ -223,7 +223,7 @@
         <EditText
             android:hint="Narodowość"
             android:singleLine="true"
-            android:background="#FFFFFF"
+            android:background="#C0C0C0"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_weight="15"

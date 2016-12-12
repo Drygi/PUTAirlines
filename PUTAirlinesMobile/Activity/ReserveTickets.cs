@@ -76,6 +76,7 @@ namespace PUTAirlinesMobile
         {
             GlobalMemory.mFlight = flights[Convert.ToInt16(e.Id)];
             StartActivity(typeof(ReserveTickets_2));
+            this.Finish();
 
         }
         private void Lay_Click(object sender, EventArgs e)
