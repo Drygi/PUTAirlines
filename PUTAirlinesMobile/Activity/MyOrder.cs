@@ -78,5 +78,13 @@ namespace PUTAirlinesMobile
                 .SetTitle("Potwierdü operacje")
                 .Show(); 
         }
+
+        public void start_edit_activity(int index)
+        {
+            GlobalMemory.order = contener;
+            GlobalMemory.actual_edited = index;
+            StartActivity(typeof(EditOrder));
+            Finish();
+        }
     }
 }

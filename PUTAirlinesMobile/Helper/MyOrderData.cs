@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using PUTAirlinesMobile.Helper;
 
 namespace PUTAirlinesMobile
 {
@@ -45,6 +46,7 @@ namespace PUTAirlinesMobile
         public string DataWylotu { get; set; }
         public MyOrderDataDetails details { get; set; }
         public int ReservationID { get; set; }
+        public List<Luggage> luggages { get; set; }
         public override string ToString()
         {
             return NazwaLotniskaOdlotu + "-" + NazwaLotniskaPrzylotu + " [" + DataWylotu + "]";

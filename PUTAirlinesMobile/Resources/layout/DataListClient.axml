@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/DataRowClient"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+        android:text="Imie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/h_mwylotu"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <EditText
+        android:text="{Imie}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/c_imie"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp" />
+    <TextView
+        android:text="Nazwisko"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hmprzylotu"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <EditText
+        android:text="{Nazwisko}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/c_nazwisko"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp" />
+    <CheckBox
+        android:text="Bagaż"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/isBagaz"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="5dp" />
+    <TextView
+        android:text="Długość [mm]"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hdrezerwacji"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <EditText
+        android:text="{długość}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/b_dlugosc"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp" />
+    <TextView
+        android:text="Wysokość [mm]"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/b_dprzylotu"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <EditText
+        android:text="{wysokość}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/b_wysokosc"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp" />
+    <TextView
+        android:text="Szerokość [mm]"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/h_dodlotu"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <EditText
+        android:text="{szerokość}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/b_szerokosc"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp" />
+    <TextView
+        android:text="Waga bagażu [ kg]"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/h_o"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <EditText
+        android:text="{waga}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/b_waga"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp" />
+    <CheckBox
+        android:text="Bagaż należy do niebezpiecznych"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/is_dangerous"
+        android:layout_marginLeft="25dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout1">
+        <Button
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Edytuj"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="20dp"
+            android:padding="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:text="Zapisz zmiany" />
+        <Button
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Usun"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="20dp"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_toRightOf="@+id/Edytuj"
+            android:text="Usun" />
+    </RelativeLayout>
+</LinearLayout>

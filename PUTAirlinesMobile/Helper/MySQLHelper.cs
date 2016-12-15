@@ -376,7 +376,7 @@ namespace PUTAirlinesMobile.Helper
                     d_order_1.MiejscowoscOdlotu = result.GetString(5);
                     d_order_1.MiejscowoscPrzylotu = result.GetString(8);
 
-
+                    //order_1.luggages = get_LuggageForReservation(order_1.ReservationID, new MySqlConnection(conn.ConnectionString));
 
 
                     List<ClientShort> c_order_1 = GlobalHelper.parsing_JSON(result.GetString(1));
@@ -385,6 +385,12 @@ namespace PUTAirlinesMobile.Helper
                     order_1.details = d_order_1;
 
                     returned.Add(order_1);
+                }
+
+                conn.Close();
+                foreach(var i in returned)
+                {
+                    i.luggages = get_LuggageForReservation(i.ReservationID, conn);
                 }
 
             }
@@ -402,6 +408,33 @@ namespace PUTAirlinesMobile.Helper
             return returned;
         }
 
+        public static List<Luggage> get_LuggageForReservation(int ReservationID , MySqlConnection conn)
+        {
+            List<Luggage> retuned = new List<Luggage>();
+            string cmdString = "SELECT * FROM Luggage WHERE ReservationID = @thisReservationID";
+
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand(cmdString, conn);
+            cmd.Parameters.AddWithValue("@thisReservationID", ReservationID);
+            var result = cmd.ExecuteReader();
+
+            while (result.Read())
+            {
+                Luggage luggage = new Luggage();
+                luggage.LuggageID = result.GetInt16("LuggageID");
+                luggage.ReservationID = result.GetInt16("ReservationID");
+                luggage.Lenght = result.GetInt16("Length");
+                luggage.Height = result.GetInt16("Height");
+                luggage.Width = result.GetInt16("Width");
+                luggage.Weight = result.GetInt16("Weight");
+                luggage.IsDangerous = result.GetBoolean("isDangerous");
+                luggage.userToken = result.GetString("userToken");
+
+                retuned.Add(luggage);
+            }
+
+            return retuned;
+        }
         public static bool InsertReservation(int clientID, int flightID, string JSON, double allCost,int countOfPeople,MySqlConnection conn)
         {
             bool returned = true;
@@ -464,7 +497,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
         public static int getResevationID(int clientID, int flightID, MySqlConnection conn)
         {
             try
@@ -497,7 +529,6 @@ namespace PUTAirlinesMobile.Helper
             }
 
         }
-
         public static bool InsertLuggage(Luggage lugagge, int reservationID, MySqlConnection conn)
         {
             bool returned = true;
@@ -533,7 +564,6 @@ namespace PUTAirlinesMobile.Helper
             return returned;
 
         }
-
         public static bool remove_order(int OrderID, int countOfUser, MySqlConnection conn)
         {
             int FlightID = 0;
@@ -564,9 +594,15 @@ namespace PUTAirlinesMobile.Helper
             cmd.Parameters.AddWithValue("@countOfUser", countOfUser);
             cmd.Parameters.AddWithValue("@thisFlightID", FlightID);
             cmd.ExecuteNonQuery();
-
-
             conn.Close();
+
+            conn.Open();
+            stringCMD = "DELETE FROM Luggage WHERE ReservationID=@thisOrderID";
+            cmd = new MySqlCommand(stringCMD, conn);
+            cmd.Parameters.AddWithValue("@thisOrderID", OrderID);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
             return true;
         }
 

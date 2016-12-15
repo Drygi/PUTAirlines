@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity\EditOrder.cs" />
     <Compile Include="Activity\MyOrder.cs" />
     <Compile Include="Activity\PasswordChange.cs" />
     <Compile Include="Activity\ReserveTickets.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Helper\ClientShortJSON.cs" />
     <Compile Include="Helper\DatePickerFragment.cs" />
     <Compile Include="Helper\ExpandableDataAdapter.cs" />
+    <Compile Include="Helper\ExpandableDataAdapterForClient.cs" />
     <Compile Include="Helper\Flight.cs" />
     <Compile Include="Helper\GlobalHelper.cs" />
     <Compile Include="Helper\GlobalMemory.cs" />
@@ -127,6 +129,15 @@
     <AndroidResource Include="Resources\layout\ReserveTickets_2.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\EditOrder.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DataListClient.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ClientGroup.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -177,6 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\someuser.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

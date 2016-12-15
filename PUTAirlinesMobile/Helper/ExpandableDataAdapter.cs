@@ -102,7 +102,7 @@ namespace PUTAirlinesMobile
             {
                 row.FindViewById<Button>(Resource.Id.Edytuj).Click += (o, e) => 
                 {
-                    obj.setAlert(groupPosition.ToString());
+                    obj.start_edit_activity(groupPosition);
                 };
 
                 click_is_declared[groupPosition].edit = true;

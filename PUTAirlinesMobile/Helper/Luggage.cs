@@ -33,5 +33,6 @@ namespace PUTAirlinesMobile.Helper
         public int Width { get; set; }
         public int Weight { get; set; }
         public bool IsDangerous { get; set; }
+       public string userToken { get; set; } 
     }
 }

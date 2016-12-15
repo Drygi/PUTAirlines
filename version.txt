@@ -82,3 +82,11 @@
   - dodanie ceny biletu oraz ceny rezerwacji
   - poprawione edytowanie danych - gdy nie mo¿na edytowaæ s¹ szare
   - mozliwoœæ dodania rezerwacji bez baga¿u 
+
+  1.16
+  - dodanie pól w bazie 
+  - zaciaganie bagazy w czasie pobierania moich rezerwacji
+  - utworzenie layoutow pod edycje i wstepne przejscia
+  *Do zrobienia :
+  - sciaganie dla kogo jest przypisany konkretny bagaz / czy jest ( wyswietlanie poczatkowe w czasie edycji)
+  - dokonczenie calego procesu edycji
