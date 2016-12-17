@@ -257,7 +257,7 @@ namespace PUTAirlinesMobile.Helper
             }
         }
 
-        public static List<Flight> getFlight(DateTime tDate, int startID, int finishID, MySqlConnection conn)
+       public static List<Flight> getFlight(DateTime tDate, int startID, int finishID, MySqlConnection conn)
         {
             string stringCMD = "Select A.Name, A.City, AA.Name, AA.City, F.DepartureDate, F.FlightID, F.ConnectionID, F.PriceOfTicket ";
             stringCMD += "FROM Flight F, Airport A, Connection C, Airport AA WHERE C.ConnectionID";
@@ -428,7 +428,7 @@ namespace PUTAirlinesMobile.Helper
                 luggage.Width = result.GetInt16("Width");
                 luggage.Weight = result.GetInt16("Weight");
                 luggage.IsDangerous = result.GetBoolean("isDangerous");
-                luggage.userToken = result.GetString("userToken");
+                luggage.UserToken = result.GetString("userToken");
 
                 retuned.Add(luggage);
             }
@@ -499,6 +499,7 @@ namespace PUTAirlinesMobile.Helper
         }
         public static int getResevationID(int clientID, int flightID, MySqlConnection conn)
         {
+            List<int> ids = new List<int>();
             try
             {
                 conn.Open();
@@ -510,8 +511,12 @@ namespace PUTAirlinesMobile.Helper
 
                 var result = cmd.ExecuteReader();
 
-                result.Read();
-                return result.GetInt16(0);
+              //  result.Read();
+                while (result.Read())
+                {
+                    ids.Add(result.GetInt32(0));
+                }
+                return ids[ids.Count - 1];
 
 
             }
@@ -535,7 +540,7 @@ namespace PUTAirlinesMobile.Helper
             try
             {
                 conn.Open();
-                string insertLuggage = "INSERT INTO `Luggage` (`ReservationID`,`Length`, `Height`, `Width`, `Weight`, `isDangerous`) VALUES (@reservationID, @length,@height,@width, @weight, @isDanger)";
+                string insertLuggage = "INSERT INTO `Luggage` (`ReservationID`,`Length`, `Height`, `Width`, `Weight`, `isDangerous`, `userToken`) VALUES (@reservationID, @length,@height,@width, @weight, @isDanger,@uToken)";
 
                 MySqlCommand cmdLuggage = new MySqlCommand(insertLuggage, conn);
 
@@ -544,7 +549,11 @@ namespace PUTAirlinesMobile.Helper
                 cmdLuggage.Parameters.AddWithValue("@height", lugagge.Height);
                 cmdLuggage.Parameters.AddWithValue("@width", lugagge.Width);
                 cmdLuggage.Parameters.AddWithValue("@weight", lugagge.Weight);
-                cmdLuggage.Parameters.AddWithValue("@isDanger", lugagge.IsDangerous);
+                if(lugagge.IsDangerous) 
+                    cmdLuggage.Parameters.AddWithValue("@isDanger", 1);
+                else
+                    cmdLuggage.Parameters.AddWithValue("@isDanger", 0);
+                cmdLuggage.Parameters.AddWithValue("@uToken", lugagge.UserToken);
 
                 var r = cmdLuggage.ExecuteNonQuery();
 
@@ -606,6 +615,49 @@ namespace PUTAirlinesMobile.Helper
             return true;
         }
 
+        public static bool InsertIntoRes(int clientID,int flightId, string JSON, int countOfPeople, MySqlConnection conn)
+        {
+            int returned = 1;
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("InsertIntoReservation", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@_ClientID", clientID);
+                cmd.Parameters["@_ClientID"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@_Flightid", flightId);
+                cmd.Parameters["@_Flightid"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@_ReservationDate", DateTime.Now);
+                cmd.Parameters["@_ReservationDate"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@_LastModificationDate", DateTime.Now);
+                cmd.Parameters["@_LastModificationDate"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@_isRealized", 1);
+                cmd.Parameters["@_isRealized"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@_JSON", JSON);
+                cmd.Parameters["@_JSON"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@_CountOfPeople", countOfPeople);
+                cmd.Parameters["@_CountOfPeople"].Direction = ParameterDirection.Input;
+                cmd.Connection.Open();
+                returned =  cmd.ExecuteNonQuery();
+                cmd.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                returned = 0;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            if (returned == 0)
+                return false;
+            else
+                return true;
+
+        }
     }
 }
 

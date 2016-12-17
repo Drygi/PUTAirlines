@@ -18,14 +18,18 @@ namespace PUTAirlinesMobile
     {
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
-        public ClientShort(string imie , string nawisko)
+        public string UserToken { get; set; }
+
+        public ClientShort(string imie , string nawisko,string userToken )
         {
             this.Imie = imie;
             this.Nazwisko = nawisko;
+            this.UserToken = userToken;
         }
+       
         public override string ToString()
         {
-            return Imie + " " + Nazwisko;
+            return Imie + " " + Nazwisko + " " + UserToken;
         }
     }
 

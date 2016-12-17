@@ -87,6 +87,11 @@
   - dodanie pól w bazie 
   - zaciaganie bagazy w czasie pobierania moich rezerwacji
   - utworzenie layoutow pod edycje i wstepne przejscia
-  *Do zrobienia :
+
+  1.17
+  - dodanie metody która wstawia rezerwacje z funkcji z serwera 
+  - poprawienie getReservationID 
+  - edycja JSONA
+    *Do zrobienia :
   - sciaganie dla kogo jest przypisany konkretny bagaz / czy jest ( wyswietlanie poczatkowe w czasie edycji)
   - dokonczenie calego procesu edycji

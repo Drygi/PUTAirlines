@@ -32,6 +32,7 @@ namespace PUTAirlinesMobile
         List<Luggage> luggages = new List<Luggage>();
         List<ClientShort> clientsShort = new List<ClientShort>();
         int reservationID;
+        string userToken;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -106,9 +107,13 @@ namespace PUTAirlinesMobile
                         GlobalMemory.mFlight = f;
                         double cost = Math.Round((f.Price * countOfPeople),2);
 
-                        MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort),cost,countOfPeople, connection);
+                      // MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort),cost,countOfPeople, connection);
+                        MySQLHelper.InsertIntoRes(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), countOfPeople, connection);
+                        
                         MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
                         reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
+                        if (reservationID == -1)
+                            setAlert("Error");
 
                         foreach (var item in luggages)
                         {
@@ -116,16 +121,15 @@ namespace PUTAirlinesMobile
 
                         }
                         this.Finish();
-                        
                        
-
                     }
 
                     else if (counter == countOfPeople - 1)
                     {
                         counter++;
-                        luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected));
-                        clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
+                        userToken = GlobalHelper.generateIdentify();
+                        luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected,userToken));
+                        clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim(),userToken));
                         setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
                         setBackground("#C0C0C0", false);
                         Name.SetBackgroundColor(Android.Graphics.Color.ParseColor("#C0C0C0"));
@@ -138,8 +142,9 @@ namespace PUTAirlinesMobile
                     }
                     else
                     {
-                        luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected));
-                        clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
+                        userToken = GlobalHelper.generateIdentify();
+                        luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected,userToken));
+                        clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim(),userToken));
                         counter++;
                         setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
                         txt.Text = "   Baga¿ nr " + (counter + 1).ToString();
@@ -191,7 +196,8 @@ namespace PUTAirlinesMobile
                     Name.Enabled = false;
                     LastName.SetBackgroundColor(Android.Graphics.Color.ParseColor("#C0C0C0"));
                     LastName.Enabled = false;
-                    clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
+
+                    clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim(),"brak"));
                     setAlert("Dodano osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
 
                     finalPrice.Text = "Koszt: " + String.Format("{0:N2}", GlobalMemory.mFlight.Price * (countOfPeople))+" z³";
@@ -201,7 +207,7 @@ namespace PUTAirlinesMobile
                 }
                 else
                 {        
-                    clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim()));
+                    clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim(),"brak baga¿u"));
 
                     counter++;
                     setAlert("Dodano osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());

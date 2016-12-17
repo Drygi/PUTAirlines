@@ -16,7 +16,7 @@ namespace PUTAirlinesMobile.Helper
     {
         public Luggage() { }
 
-        public Luggage( int length, int height, int width, int weight, bool isDangerous)
+        public Luggage( int length, int height, int width, int weight, bool isDangerous,string userToken)
         {
             // this.LuggageID = luggageID;
             this.Lenght = length;
@@ -24,6 +24,7 @@ namespace PUTAirlinesMobile.Helper
             this.Width = width;
             this.Weight = weight;
             this.IsDangerous = isDangerous;
+            this.UserToken = userToken;
         }
 
         public int LuggageID { get; set; }
@@ -33,6 +34,6 @@ namespace PUTAirlinesMobile.Helper
         public int Width { get; set; }
         public int Weight { get; set; }
         public bool IsDangerous { get; set; }
-       public string userToken { get; set; } 
+        public string UserToken { get; set; } 
     }
 }
