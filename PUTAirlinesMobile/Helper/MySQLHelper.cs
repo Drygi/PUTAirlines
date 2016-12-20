@@ -142,6 +142,8 @@ namespace PUTAirlinesMobile.Helper
             return returned;
         }
 
+
+
         public static bool InsertToDataBase(Client client, MySqlConnection conn)
         {
 
@@ -376,8 +378,6 @@ namespace PUTAirlinesMobile.Helper
                     d_order_1.MiejscowoscOdlotu = result.GetString(5);
                     d_order_1.MiejscowoscPrzylotu = result.GetString(8);
 
-                    //order_1.luggages = get_LuggageForReservation(order_1.ReservationID, new MySqlConnection(conn.ConnectionString));
-
 
                     List<ClientShort> c_order_1 = GlobalHelper.parsing_JSON(result.GetString(1));
 
@@ -432,7 +432,7 @@ namespace PUTAirlinesMobile.Helper
 
                 retuned.Add(luggage);
             }
-
+            conn.Close();
             return retuned;
         }
         public static bool InsertReservation(int clientID, int flightID, string JSON, double allCost,int countOfPeople,MySqlConnection conn)
@@ -497,6 +497,7 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
+
         public static int getResevationID(int clientID, int flightID, MySqlConnection conn)
         {
             List<int> ids = new List<int>();
@@ -534,6 +535,112 @@ namespace PUTAirlinesMobile.Helper
             }
 
         }
+
+        public static bool UpdateLuggage(Luggage lugagge , MySqlConnection conn)
+        {
+            bool returned = true;
+            try
+            {
+                conn.Open();
+                string insertLuggage = "UPDATE Luggage SET  " +
+                    "Length=@length, Height=@height, Width=@width, Weight=@weight, isDangerous=@isDanger " +
+                    "WHERE LuggageID = @this_LuggageID";
+
+                MySqlCommand cmdLuggage = new MySqlCommand(insertLuggage, conn);
+
+                
+                cmdLuggage.Parameters.AddWithValue("@length", lugagge.Lenght);
+                cmdLuggage.Parameters.AddWithValue("@height", lugagge.Height);
+                cmdLuggage.Parameters.AddWithValue("@width", lugagge.Width);
+                cmdLuggage.Parameters.AddWithValue("@weight", lugagge.Weight);
+                if (lugagge.IsDangerous)
+                    cmdLuggage.Parameters.AddWithValue("@isDanger", 1);
+                else
+                    cmdLuggage.Parameters.AddWithValue("@isDanger", 0);
+                cmdLuggage.Parameters.AddWithValue("@this_LuggageID", lugagge.LuggageID);
+                cmdLuggage.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+                returned = false;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
+        }
+
+        public static bool UpdateJSON(string JSON, string ReservationID, MySqlConnection conn)
+        {
+            bool returned = true;
+            try
+            {
+                conn.Open();
+                string insert = "UPDATE Reservation SET JSON = @thisJSON WHERE ReservationID = @thisReservationID";
+
+                MySqlCommand cmd = new MySqlCommand(insert, conn);
+
+                cmd.Parameters.AddWithValue("@thisJSON", JSON);
+                cmd.Parameters.AddWithValue("@thisReservationID", ReservationID);
+
+                var r = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                returned = false;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
+        }
+
+        public static bool DeleteLuggage(string LugaggeID, string JSON , string ReservationID, MySqlConnection conn)
+        {
+            bool returned = true;
+            try
+            {
+                conn.Open();
+                string insertLuggage = "DELETE FROM Luggage WHERE LuggageID=@thisLuggageID";
+                MySqlCommand cmdLuggage = new MySqlCommand(insertLuggage, conn);
+                cmdLuggage.Parameters.AddWithValue("@thisLuggageID", LugaggeID);
+                cmdLuggage.ExecuteNonQuery();
+                conn.Close();
+                conn.Open();
+                string updateReservation = "UPDATE Reservation SET  JSON=@thisJSON " +
+                    "WHERE ReservationID = @thisReservationID";
+                cmdLuggage = new MySqlCommand(updateReservation, conn);
+                cmdLuggage.Parameters.AddWithValue("@thisJSON", JSON);
+                cmdLuggage.Parameters.AddWithValue("@thisReservationID", ReservationID);
+                cmdLuggage.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                returned = false;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
+        }
+
         public static bool InsertLuggage(Luggage lugagge, int reservationID, MySqlConnection conn)
         {
             bool returned = true;
@@ -558,7 +665,7 @@ namespace PUTAirlinesMobile.Helper
                 var r = cmdLuggage.ExecuteNonQuery();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 returned = false;
             }
@@ -573,6 +680,7 @@ namespace PUTAirlinesMobile.Helper
             return returned;
 
         }
+
         public static bool remove_order(int OrderID, int countOfUser, MySqlConnection conn)
         {
             int FlightID = 0;

@@ -93,7 +93,7 @@ namespace PUTAirlinesMobile
             string temp = "";
             foreach(var i in DataList[groupPosition].details.client)
             {
-                temp += i.ToString() + "\n";
+                temp += i.ToStringWithoutToken() + "\n";
             }
 
             row.FindViewById<TextView>(Resource.Id.t_o).Text = temp;

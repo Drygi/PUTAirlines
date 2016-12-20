@@ -95,3 +95,14 @@
     *Do zrobienia :
   - sciaganie dla kogo jest przypisany konkretny bagaz / czy jest ( wyswietlanie poczatkowe w czasie edycji)
   - dokonczenie calego procesu edycji
+
+  1.18
+  - dodanie modyfikacji bagazu :
+    * dodanie bagazu 
+	* modyfikacja parametrow bagazu
+	* usuniecie bagazu
+
+* Do zrobienia : 
+  - zliczenie ceny
+  - usuwanie / dodawanie osoby
+  - poprawienie mini bledu (klikanie kilka razy w jedno row powoduje duplikowanie sie eventu .click )

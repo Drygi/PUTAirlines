@@ -47,15 +47,16 @@ namespace PUTAirlinesMobile
             street = FindViewById<EditText>(Resource.Id.registerStreet);
             postCode = FindViewById<EditText>(Resource.Id.registerPostCode);
             scrollV = FindViewById<ScrollView>(Resource.Id.scrollViewRegister);
-            scrollV.ScrollChange += ScrollV_ScrollChange;
+            //scrollV.ScrollChange += ScrollV_ScrollChange;
         }
 
+        /*
         private void ScrollV_ScrollChange(object sender, View.ScrollChangeEventArgs e)
         {
             InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
             imm.HideSoftInputFromWindow(scrollV.WindowToken, 0);
         }
-
+        */
         private void Register_Click(object sender, EventArgs e)
         {
             registerBar.Visibility = ViewStates.Visible;

@@ -63,7 +63,7 @@ namespace PUTAirlinesMobile
             layout_ = FindViewById<LinearLayout>(Resource.Id.leyouutLin);
             layout_.Click += Layout__Click;
             scroll_ = FindViewById<ScrollView>(Resource.Id.scrollViewLay);
-            scroll_.ScrollChange += Scroll__ScrollChange;
+            //scroll_.ScrollChange += Scroll__ScrollChange;
             txt = FindViewById<TextView>(Resource.Id.laggTxt);
             counter = 0;
         }
@@ -82,11 +82,13 @@ namespace PUTAirlinesMobile
             imm.HideSoftInputFromWindow(scroll_.WindowToken, 0);
         }
 
+        /*
         private void Scroll__ScrollChange(object sender, View.ScrollChangeEventArgs e)
         {
             InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
             imm.HideSoftInputFromWindow(layout_.WindowToken, 0);
         }
+        */
 
         private void AddLuggage_Click(object sender, EventArgs e)
         {

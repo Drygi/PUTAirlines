@@ -31,6 +31,11 @@ namespace PUTAirlinesMobile
         {
             return Imie + " " + Nazwisko + " " + UserToken;
         }
+
+        public string ToStringWithoutToken()
+        {
+            return Imie + " " + Nazwisko;
+        }
     }
 
     public class MyOrderDataDetails

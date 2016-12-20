@@ -50,7 +50,6 @@
         android:textStyle="bold"
         android:textSize="16dp" />
     <EditText
-        android:text="{długość}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/b_dlugosc"
@@ -65,7 +64,6 @@
         android:textStyle="bold"
         android:textSize="16dp" />
     <EditText
-        android:text="{wysokość}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/b_wysokosc"
@@ -80,7 +78,6 @@
         android:textStyle="bold"
         android:textSize="16dp" />
     <EditText
-        android:text="{szerokość}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/b_szerokosc"
@@ -95,7 +92,6 @@
         android:textStyle="bold"
         android:textSize="16dp" />
     <EditText
-        android:text="{waga}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/b_waga"

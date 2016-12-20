@@ -66,7 +66,7 @@ namespace PUTAirlinesMobile
             update = FindViewById<Button>(Resource.Id.updateButton);
             update.Click += Update_Click;
             scrollV = FindViewById<ScrollView>(Resource.Id.scroll);
-            scrollV.ScrollChange += ScrollV_ScrollChange;
+            //scrollV.ScrollChange += ScrollV_ScrollChange;
             update.Clickable = false;
             passwordChange = FindViewById<Button>(Resource.Id.changePasswordButton);
             passwordChange.Click += PasswordChange_Click;
@@ -76,13 +76,14 @@ namespace PUTAirlinesMobile
         {
             StartActivity(typeof(PasswordChange));
         }
+        /*
         private void ScrollV_ScrollChange(object sender, View.ScrollChangeEventArgs e)
         {
             //chowanie klawiatury
             InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
             imm.HideSoftInputFromWindow(scrollV.WindowToken, 0);
         }
-
+        */
         private void Update_Click(object sender, EventArgs e)
         {
             pBar.Visibility = ViewStates.Invisible;
