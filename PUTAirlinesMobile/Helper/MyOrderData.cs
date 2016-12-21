@@ -56,6 +56,7 @@ namespace PUTAirlinesMobile
         public MyOrderDataDetails details { get; set; }
         public int ReservationID { get; set; }
         public List<Luggage> luggages { get; set; }
+        public float CenaBiletu { get; set; }
         public override string ToString()
         {
             return NazwaLotniskaOdlotu + "-" + NazwaLotniskaPrzylotu + " [" + DataWylotu + "]";

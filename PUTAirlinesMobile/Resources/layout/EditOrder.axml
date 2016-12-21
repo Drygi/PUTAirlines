@@ -2,30 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/blue">
     <TextView
         android:text="Liczba zarezerwowanych miejsc : {0}"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/liczba_miejsc" />
+        android:id="@+id/liczba_miejsc"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp" />
     <TextView
         android:text="Koszt lotu dla jednej osoby : {0,00} zł"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/kosztOsoba" />
+        android:id="@+id/kosztOsoba"
+        android:layout_gravity="center" />
     <TextView
         android:text="Koszt całkowity : {0,00} zł"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/kosztCalkowity" />
+        android:id="@+id/kosztCalkowity"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp" />
     <ExpandableListView
         android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listviewClientOfReservation"
-        android:background="@drawable/background" />
+        android:background="@drawable/background"
+        android:minHeight="25px" />
 </LinearLayout>

@@ -117,16 +117,5 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="5dp"
             android:text="Zapisz zmiany" />
-        <Button
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/Usun"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="20dp"
-            android:padding="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="15dp"
-            android:layout_toRightOf="@+id/Edytuj"
-            android:text="Usun" />
     </RelativeLayout>
 </LinearLayout>

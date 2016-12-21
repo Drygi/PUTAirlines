@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MySql.Data.MySqlClient;
+using PUTAirlinesMobile.Helper;
+using Newtonsoft.Json;
 
 namespace PUTAirlinesMobile
 {
@@ -28,7 +30,7 @@ namespace PUTAirlinesMobile
             init_title();
             connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd"); 
             MyOrderData order = GlobalMemory.order[GlobalMemory.actual_edited];
-            set_title(order.details.client.Count, 0, 0);
+            set_title(order.details.client.Count, order.CenaBiletu, order.CenaBiletu*order.details.client.Count());
             listView = FindViewById<ExpandableListView>(Resource.Id.listviewClientOfReservation);
             listView.SetAdapter(new ExpandableDataAdapterForClient(this, order,this));
         }
@@ -45,13 +47,48 @@ namespace PUTAirlinesMobile
             _costSingle.Text = "Koszt lotu dla jednej osoby : " + cost + " z³";
             _costGlobal.Text = "Koszt ca³kowity : " + cost_global + " z³";
         }
-
         public void setAlert(string message)
         {
             Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
             Android.App.AlertDialog alertDialog = alert.Create();
             alertDialog.SetTitle(message);
             alertDialog.Show();
+        }
+        public void remove_operation(int indeks, MyOrderData order)
+        {
+            new AlertDialog.Builder(this)
+                .SetPositiveButton("Tak", (sender, args) =>
+                {
+                    try
+                    {
+                        string token = order.details.client[indeks].UserToken;
+                        order.details.client.RemoveAt(indeks);
+                        ClientShortJSON jsonObj = new ClientShortJSON()
+                        {
+                            users = order.details.client.ToArray()
+                        };
+                        MySQLHelper.removeUser
+                        (
+                            JsonConvert.SerializeObject(jsonObj), 
+                            token, order.details.client.Count, 
+                            order.ReservationID.ToString(), 
+                            order.CenaBiletu, 
+                            connection
+                            );
+
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                })
+                .SetNegativeButton("Nie", (sender, args) =>
+                {
+                    
+                })
+                .SetMessage("Czy napewno chcesz usun¹æ osobê ? \n[" +  order.details.client[indeks].ToStringWithoutToken()+ "]")
+                .SetTitle("PotwierdŸ operacje")
+                .Show();
         }
     }
 }

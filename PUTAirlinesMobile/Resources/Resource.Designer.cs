@@ -45,43 +45,52 @@ namespace PUTAirlinesMobile
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int background = 2130837504;
+			public const int addUserButton = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int blue = 2130837505;
+			public const int background = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int editTextBorder = 2130837506;
+			public const int background_tittle = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int icon = 2130837507;
+			public const int blue = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int logoHome = 2130837508;
+			public const int buttonAdd = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int mojekonto_button = 2130837509;
+			public const int editTextBorder = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int mojerezerwacje = 2130837510;
+			public const int icon = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int one_order = 2130837511;
+			public const int logoHome = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int registerIcon = 2130837512;
+			public const int mojekonto_button = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int someuser = 2130837513;
+			public const int mojerezerwacje = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int userIcon = 2130837514;
+			public const int one_order = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int zamknij = 2130837515;
+			public const int registerIcon = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int zarezerwuj = 2130837516;
+			public const int someuser = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int userIcon = 2130837517;
+			
+			// aapt resource value: 0x7f02000e
+			public const int zamknij = 2130837518;
+			
+			// aapt resource value: 0x7f02000f
+			public const int zarezerwuj = 2130837519;
 			
 			static Drawable()
 			{
@@ -111,8 +120,8 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060011
 			public const int DataHeaderClient = 2131099665;
 			
-			// aapt resource value: 0x7f060024
-			public const int DataRow = 2131099684;
+			// aapt resource value: 0x7f060023
+			public const int DataRow = 2131099683;
 			
 			// aapt resource value: 0x7f060012
 			public const int DataRowClient = 2131099666;
@@ -135,8 +144,8 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f06005b
 			public const int ResText = 2131099739;
 			
-			// aapt resource value: 0x7f060023
-			public const int Usun = 2131099683;
+			// aapt resource value: 0x7f06002b
+			public const int Usun = 2131099691;
 			
 			// aapt resource value: 0x7f06003d
 			public const int WyjdzZAplikacji = 2131099709;
@@ -192,8 +201,8 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f06001c
 			public const int h_dodlotu = 2131099676;
 			
-			// aapt resource value: 0x7f060028
-			public const int h_dprzylotu = 2131099688;
+			// aapt resource value: 0x7f060027
+			public const int h_dprzylotu = 2131099687;
 			
 			// aapt resource value: 0x7f060013
 			public const int h_mwylotu = 2131099667;
@@ -351,23 +360,23 @@ namespace PUTAirlinesMobile
 			// aapt resource value: 0x7f060063
 			public const int surName = 2131099747;
 			
-			// aapt resource value: 0x7f06002a
-			public const int t_dodlutu = 2131099690;
-			
 			// aapt resource value: 0x7f060029
-			public const int t_dprzylotu = 2131099689;
+			public const int t_dodlutu = 2131099689;
 			
-			// aapt resource value: 0x7f060027
-			public const int t_drezerwacji = 2131099687;
+			// aapt resource value: 0x7f060028
+			public const int t_dprzylotu = 2131099688;
 			
 			// aapt resource value: 0x7f060026
-			public const int t_mprzylotu = 2131099686;
+			public const int t_drezerwacji = 2131099686;
 			
 			// aapt resource value: 0x7f060025
-			public const int t_mwylotu = 2131099685;
+			public const int t_mprzylotu = 2131099685;
 			
-			// aapt resource value: 0x7f06002b
-			public const int t_o = 2131099691;
+			// aapt resource value: 0x7f060024
+			public const int t_mwylotu = 2131099684;
+			
+			// aapt resource value: 0x7f06002a
+			public const int t_o = 2131099690;
 			
 			// aapt resource value: 0x7f060007
 			public const int textView1 = 2131099655;

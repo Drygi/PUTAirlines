@@ -69,7 +69,6 @@ namespace PUTAirlinesMobile.Helper
             client = objClient;
             return returned;
         }
-
         public static bool findLogin(string login, MySqlConnection conn)
         {
             bool returned = true;
@@ -103,7 +102,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
         public static bool findIndividualNumber(string individualNumber, MySqlConnection conn)
         {
             MySqlDataReader rdr = null;
@@ -141,9 +139,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
-
-
         public static bool InsertToDataBase(Client client, MySqlConnection conn)
         {
 
@@ -336,7 +331,7 @@ namespace PUTAirlinesMobile.Helper
             string stringCMD = "SELECT reservation.ReservationDate , reservation.JSON, " +
                                         "flight.DepartureDate , flight.ArrivalDate, " +
                                         "airport.Name, airport.City, airport.Country,  " +
-                                       "airport2.Name, airport2.City, airport2.Country , reservation.ReservationID " +
+                                       "airport2.Name, airport2.City, airport2.Country , reservation.ReservationID , flight.PriceOfTicket " +
                                   /*
                                   0 - data rezerwacji
                                   1 - json osob zapisanych pod bilet
@@ -370,6 +365,7 @@ namespace PUTAirlinesMobile.Helper
                     order_1.NazwaLotniskaPrzylotu = result.GetString(7);
                     order_1.DataWylotu = result.GetString(2);
                     order_1.ReservationID = result.GetInt16(10);
+                    order_1.CenaBiletu = result.GetFloat(11);
                     MyOrderDataDetails d_order_1 = new MyOrderDataDetails();
                     d_order_1.DataPrzylotu = result.GetString(3);
                     d_order_1.DataRezerwacji = result.GetString(0);
@@ -435,6 +431,7 @@ namespace PUTAirlinesMobile.Helper
             conn.Close();
             return retuned;
         }
+
         public static bool InsertReservation(int clientID, int flightID, string JSON, double allCost,int countOfPeople,MySqlConnection conn)
         {
             bool returned = true;
@@ -468,6 +465,7 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
+
         public static bool updateCountOfClient(int flightID, int countOfClients, MySqlConnection conn)
         {
             bool returned = true;
@@ -641,6 +639,34 @@ namespace PUTAirlinesMobile.Helper
             return returned;
         }
 
+        public static bool DeleteLuggage(string ReservationID, string Token ,MySqlConnection conn)
+        {
+            bool returned = true;
+            try
+            {
+                conn.Open();
+                string insertLuggage = "DELETE FROM Luggage WHERE ReservationID=@thisReservationID AND userToken= @thisUserToken";
+                MySqlCommand cmdLuggage = new MySqlCommand(insertLuggage, conn);
+                cmdLuggage.Parameters.AddWithValue("@thisReservationID", ReservationID);
+                cmdLuggage.Parameters.AddWithValue("@thisUserToken", Token);
+                cmdLuggage.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                returned = false;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
+        }
+
         public static bool InsertLuggage(Luggage lugagge, int reservationID, MySqlConnection conn)
         {
             bool returned = true;
@@ -765,6 +791,44 @@ namespace PUTAirlinesMobile.Helper
             else
                 return true;
 
+        }
+
+        public static bool removeUser(string JSON , string token , int countOfClient, string ReservationID , double price , MySqlConnection conn)
+        {
+            bool returned = true;
+            try
+            {
+                conn.Open();
+                string insert = "UPDATE Reservation SET JSON = @thisJSON, Price = @thisPrice, countOfPeople= @thisCountOfPeople  WHERE ReservationID = @thisReservationID";
+
+                MySqlCommand cmd = new MySqlCommand(insert, conn);
+
+                cmd.Parameters.AddWithValue("@thisJSON", JSON);
+                cmd.Parameters.AddWithValue("@thisReservationID", ReservationID);
+                cmd.Parameters.AddWithValue("@thisPrice", price*countOfClient);
+                cmd.Parameters.AddWithValue("@thisCountOfPeople", countOfClient);
+                var r = cmd.ExecuteNonQuery();
+
+                conn.Close();
+
+                if(token!="brak")
+                {
+                    DeleteLuggage(ReservationID, token, conn);
+                }
+            }
+            catch (Exception ex)
+            {
+                returned = false;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
         }
     }
 }

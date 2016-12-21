@@ -103,7 +103,10 @@ namespace PUTAirlinesMobile
             }
 
             row.FindViewById<EditText>(Resource.Id.c_imie).Text = _DataList.details.client[groupPosition].Imie;
+            row.FindViewById<EditText>(Resource.Id.c_imie).Enabled = false;
             row.FindViewById<EditText>(Resource.Id.c_nazwisko).Text = _DataList.details.client[groupPosition].Nazwisko;
+            row.FindViewById<EditText>(Resource.Id.c_nazwisko).Enabled = false;
+
 
             CheckBox _isBagaz = row.FindViewById<CheckBox>(Resource.Id.isBagaz);
             _isBagaz.Click += (o, e) => {
@@ -112,12 +115,12 @@ namespace PUTAirlinesMobile
                 else
                     Set_unchecked(row);
             };
-            if (_DataList.details.client[groupPosition].UserToken!="brak")
+            if (_DataList.details.client[groupPosition].UserToken != "brak")
             {
                 var result = _DataList.luggages.First(s => s.UserToken == _DataList.details.client[groupPosition].UserToken);
                 Set_luggage(row, result);
 
-            }else
+            } else
             {
                 Set_unchecked(row);
             }
