@@ -102,6 +102,11 @@
 	* modyfikacja parametrow bagazu
 	* usuniecie bagazu
 
+	1.19
+	- brak mozliwosci wyszukiwania lotow dla daty z przeszlosci
+	- dodanie cen bagazu w zalenozsci od rozmiaru 
+	- poprawienie wywolywaniaw procedury wstawiania rezerwacji 
+	-dodanie w bazie funkcji removeOrder oraz jej wywolanie w MySQLHelper
 * Do zrobienia : 
   - zliczenie ceny
   - usuwanie / dodawanie osoby

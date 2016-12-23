@@ -181,7 +181,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
         public static bool UpdateDataBase(Client client, MySqlConnection conn)
         {
             bool returned = true;
@@ -253,8 +252,7 @@ namespace PUTAirlinesMobile.Helper
                 }
             }
         }
-
-       public static List<Flight> getFlight(DateTime tDate, int startID, int finishID, MySqlConnection conn)
+        public static List<Flight> getFlight(DateTime tDate, int startID, int finishID, MySqlConnection conn)
         {
             string stringCMD = "Select A.Name, A.City, AA.Name, AA.City, F.DepartureDate, F.FlightID, F.ConnectionID, F.PriceOfTicket ";
             stringCMD += "FROM Flight F, Airport A, Connection C, Airport AA WHERE C.ConnectionID";
@@ -291,7 +289,6 @@ namespace PUTAirlinesMobile.Helper
 
             return flight;
     }
-
         public static List<Airport> getAirports(MySqlConnection conn)
         {
             List<Airport> airports = new List<Airport>();
@@ -324,7 +321,6 @@ namespace PUTAirlinesMobile.Helper
 
             return airports;
         }
-
         public static List<MyOrderData> get_order_data(int ClientID, MySqlConnection conn)
         {
             List<MyOrderData> returned = new List<MyOrderData>();
@@ -403,7 +399,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
         public static List<Luggage> get_LuggageForReservation(int ReservationID , MySqlConnection conn)
         {
             List<Luggage> retuned = new List<Luggage>();
@@ -431,7 +426,6 @@ namespace PUTAirlinesMobile.Helper
             conn.Close();
             return retuned;
         }
-
         public static bool InsertReservation(int clientID, int flightID, string JSON, double allCost,int countOfPeople,MySqlConnection conn)
         {
             bool returned = true;
@@ -465,7 +459,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
         public static bool updateCountOfClient(int flightID, int countOfClients, MySqlConnection conn)
         {
             bool returned = true;
@@ -495,7 +488,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
         public static int getResevationID(int clientID, int flightID, MySqlConnection conn)
         {
             List<int> ids = new List<int>();
@@ -533,7 +525,6 @@ namespace PUTAirlinesMobile.Helper
             }
 
         }
-
         public static bool UpdateLuggage(Luggage lugagge , MySqlConnection conn)
         {
             bool returned = true;
@@ -573,7 +564,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
         public static bool UpdateJSON(string JSON, string ReservationID, MySqlConnection conn)
         {
             bool returned = true;
@@ -603,7 +593,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
         public static bool DeleteLuggage(string LugaggeID, string JSON , string ReservationID, MySqlConnection conn)
         {
             bool returned = true;
@@ -638,7 +627,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
         public static bool DeleteLuggage(string ReservationID, string Token ,MySqlConnection conn)
         {
             bool returned = true;
@@ -666,7 +654,6 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-
         public static bool InsertLuggage(Luggage lugagge, int reservationID, MySqlConnection conn)
         {
             bool returned = true;
@@ -706,7 +693,6 @@ namespace PUTAirlinesMobile.Helper
             return returned;
 
         }
-
         public static bool remove_order(int OrderID, int countOfUser, MySqlConnection conn)
         {
             int FlightID = 0;
@@ -749,30 +735,58 @@ namespace PUTAirlinesMobile.Helper
             return true;
         }
 
-        public static bool InsertIntoRes(int clientID,int flightId, string JSON, int countOfPeople, MySqlConnection conn)
+        public static bool removeOrder(int orderID,int countOfUser, MySqlConnection conn)
         {
-            int returned = 1;
+            int returned = 0;
             try
             {
-                MySqlCommand cmd = new MySqlCommand("InsertIntoReservation", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@_ClientID", clientID);
-                cmd.Parameters["@_ClientID"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@_Flightid", flightId);
-                cmd.Parameters["@_Flightid"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@_ReservationDate", DateTime.Now);
-                cmd.Parameters["@_ReservationDate"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@_LastModificationDate", DateTime.Now);
-                cmd.Parameters["@_LastModificationDate"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@_isRealized", 1);
-                cmd.Parameters["@_isRealized"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@_JSON", JSON);
-                cmd.Parameters["@_JSON"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@_CountOfPeople", countOfPeople);
-                cmd.Parameters["@_CountOfPeople"].Direction = ParameterDirection.Input;
-                cmd.Connection.Open();
-                returned =  cmd.ExecuteNonQuery();
-                cmd.Connection.Close();
+                string stringCMD = "SELECT RemoveOrder (@orderID,@countOfUser)";
+
+                MySqlCommand cmd = new MySqlCommand(stringCMD, conn);
+                cmd.Parameters.AddWithValue("@orderID", orderID);
+                cmd.Parameters.AddWithValue("@countUfUser", countOfUser);
+                conn.Open();
+                returned = cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                returned = 0;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            if (returned == 0)
+                return false;
+            else
+                return true;
+
+        }
+        public static bool InsertIntoRes(int clientID,int flightId, string JSON, int countOfPeople, MySqlConnection conn)
+        {
+            ///dodac tutaj cene bagazu ale to dopiero jak w funkcji sie to zmieni
+            int returned = 0;
+            try
+            {
+                string insertReservation = "SELECT InsertIntoReservation (@clientID,@flightID,@actualTime,@actualTime,@zero,@json,@people)";
+
+                MySqlCommand cmd = new MySqlCommand(insertReservation, conn);
+               //  cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@clientID", clientID);
+                cmd.Parameters.AddWithValue("@flightID", flightId);
+                cmd.Parameters.AddWithValue("@actualTime", DateTime.Now);
+                cmd.Parameters.AddWithValue("@zero", 1);
+               // cmd.Parameters.AddWithValue("@price", cost);
+                cmd.Parameters.AddWithValue("@people", countOfPeople);
+                cmd.Parameters.AddWithValue("@json", JSON);
+                conn.Open();
+                returned = cmd.ExecuteNonQuery();
+
             }
             catch (Exception ex)
             {

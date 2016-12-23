@@ -118,7 +118,7 @@
             android:id="@+id/laggTxt"
             android:editable="false" />
         <EditText
-            android:hint="Długość [mm]"
+            android:hint="Długość [cm]"
             android:text=""
             android:singleLine="true"
             android:background="#FFFFFF"
@@ -136,7 +136,7 @@
             android:paddingLeft="10dp"
             android:ellipsize="end" />
         <EditText
-            android:hint="Wysokość [mm]"
+            android:hint="Wysokość [cm]"
             android:text=""
             android:singleLine="true"
             android:background="#FFFFFF"
@@ -154,7 +154,7 @@
             android:paddingLeft="10dp"
             android:ellipsize="end" />
         <EditText
-            android:hint="Szerokość [mm]"
+            android:hint="Szerokość [cm]"
             android:text=""
             android:singleLine="true"
             android:background="#FFFFFF"

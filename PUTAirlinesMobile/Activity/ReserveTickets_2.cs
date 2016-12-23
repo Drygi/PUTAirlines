@@ -33,6 +33,7 @@ namespace PUTAirlinesMobile
         List<ClientShort> clientsShort = new List<ClientShort>();
         int reservationID;
         string userToken;
+        int luggagePrice;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -65,6 +66,8 @@ namespace PUTAirlinesMobile
             scroll_ = FindViewById<ScrollView>(Resource.Id.scrollViewLay);
             //scroll_.ScrollChange += Scroll__ScrollChange;
             txt = FindViewById<TextView>(Resource.Id.laggTxt);
+            luggagePrice = 0;
+
             counter = 0;
         }
 
@@ -107,20 +110,18 @@ namespace PUTAirlinesMobile
                         Flight f = GlobalMemory.mFlight;
                         f.CountOfClient += countOfPeople;
                         GlobalMemory.mFlight = f;
-                        double cost = Math.Round((f.Price * countOfPeople),2);
+                        double cost = Math.Round((f.Price * countOfPeople)+luggagePrice, 2);
 
-                      // MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort),cost,countOfPeople, connection);
+                        //MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort),cost,countOfPeople, connection);
                         MySQLHelper.InsertIntoRes(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), countOfPeople, connection);
-                        
+
                         MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
                         reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
                         if (reservationID == -1)
                             setAlert("Error");
-
                         foreach (var item in luggages)
                         {
                             MySQLHelper.InsertLuggage(item, reservationID, connection);
-
                         }
                         this.Finish();
                        
@@ -130,7 +131,19 @@ namespace PUTAirlinesMobile
                     {
                         counter++;
                         userToken = GlobalHelper.generateIdentify();
-                        luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected,userToken));
+                        int len = Convert.ToInt32(Lenght.Text.Trim());
+                        int hei = Convert.ToInt32(Height.Text.Trim());
+                        int wid = Convert.ToInt32(Width.Text.Trim());
+                        luggages.Add(new Luggage(len, hei, wid, Convert.ToInt32(Weight.Text.Trim()), isDanger.Checked, userToken));
+                        //+50zl za niebezpieczny bagaz
+                        if (isDanger.Checked)
+                        {
+                            luggagePrice += 50;
+                            setAlert("Dodatkowy koszt za niebezpieczny baga¿: 50 z³");
+                        }
+                        setAlert("Koszt baga¿u: " + getLuggagePrice(len, hei, wid)+" z³");
+
+                        luggagePrice += getLuggagePrice(len, hei, wid);
                         clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim(),userToken));
                         setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
                         setBackground("#C0C0C0", false);
@@ -138,14 +151,27 @@ namespace PUTAirlinesMobile
                         Name.Enabled = false;
                         LastName.SetBackgroundColor(Android.Graphics.Color.ParseColor("#C0C0C0"));
                         LastName.Enabled = false;
-                        finalPrice.Text = "Koszt: " + String.Format("{0:N2}",GlobalMemory.mFlight.Price * (countOfPeople) )+ " z³";
+                        finalPrice.Text = "Koszt: " + String.Format("{0:N2}",(GlobalMemory.mFlight.Price * (countOfPeople) +luggagePrice))+ " z³";
+                        
                         finalPrice.Visibility = ViewStates.Visible;
                         addLuggage.Text = "Zarezerwuj";
                     }
                     else
                     {
                         userToken = GlobalHelper.generateIdentify();
-                        luggages.Add(new Luggage(Convert.ToInt32(Lenght.Text.Trim()), Convert.ToInt32(Height.Text.Trim()), Convert.ToInt32(Width.Text.Trim()), Convert.ToInt32(Weight.Text.Trim()), isDanger.Selected,userToken));
+                        int len = Convert.ToInt32(Lenght.Text.Trim());
+                        int hei = Convert.ToInt32(Height.Text.Trim());
+                        int wid = Convert.ToInt32(Width.Text.Trim());
+                        luggages.Add(new Luggage(len, hei, wid, Convert.ToInt32(Weight.Text.Trim()), isDanger.Checked,userToken));
+                        //+50zl za niebezpieczny bagaz
+                        if (isDanger.Checked)
+                        {
+                            luggagePrice += 50;
+                            setAlert("Dodatkowy koszt za niebezpieczny baga¿: 50 z³");
+                        }
+                        setAlert("Koszt baga¿u: " + getLuggagePrice(len, hei, wid) + " z³");
+                        luggagePrice += getLuggagePrice(len,hei,wid);
+
                         clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim(),userToken));
                         counter++;
                         setAlert("Dodano baga¿ i osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
@@ -157,7 +183,7 @@ namespace PUTAirlinesMobile
                         Height.Text = "";
                         Width.Text = "";
                         Weight.Text = "";
-                        isDanger.Selected = false;
+                        isDanger.Checked = false;
                     }
 
                 }
@@ -174,20 +200,17 @@ namespace PUTAirlinesMobile
                     Flight f = GlobalMemory.mFlight;
                     f.CountOfClient += countOfPeople;
                     GlobalMemory.mFlight = f;
-                    double cost = Math.Round((f.Price * countOfPeople), 2);
-
-                    MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort),cost,countOfPeople, connection);
-                    MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
-                    reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
-
+                    double cost = Math.Round((f.Price * countOfPeople)+luggagePrice, 2);
+              
                     foreach (var item in luggages)
                     {
                         MySQLHelper.InsertLuggage(item, reservationID, connection);
-
-                    }                 
-                    this.Finish();
-                    
-
+                    }
+                   //  MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), cost, countOfPeople, connection);
+                    MySQLHelper.InsertIntoRes(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), countOfPeople, connection);
+                    MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
+                    reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
+                    this.Finish();                  
                 }
 
                 else if (counter == countOfPeople - 1)
@@ -202,7 +225,7 @@ namespace PUTAirlinesMobile
                     clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim(),"brak"));
                     setAlert("Dodano osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
 
-                    finalPrice.Text = "Koszt: " + String.Format("{0:N2}", GlobalMemory.mFlight.Price * (countOfPeople))+" z³";
+                    finalPrice.Text = "Koszt: " + String.Format("{0:N2}", (GlobalMemory.mFlight.Price * (countOfPeople))+luggagePrice)+" z³";
                     finalPrice.Visibility = ViewStates.Visible;
                     addLuggage.Text = "Zarezerwuj";
 
@@ -221,7 +244,7 @@ namespace PUTAirlinesMobile
                     Height.Text = "";
                     Width.Text = "";
                     Weight.Text = "";
-                    isDanger.Selected = false;
+                    isDanger.Checked = false;
 
                 }
 
@@ -270,5 +293,22 @@ namespace PUTAirlinesMobile
             return values;
         }
 
+
+        //funkcja zwraca koszt bagaazu
+        //1 dla bagazu jako plecak // + 30zl
+        // 2 dla œredniej torby // + 50zl
+        // 3 dla duzej torby // + 90zl
+        private int getLuggagePrice(double Lenght,double Height,double Width)
+        {
+            double sum = Lenght + Height + Width;
+            if (sum <= 135)
+                return 30;
+            else if (sum > 135 && sum <= 220)
+                return 50;
+            else if (sum > 220)
+                return 90;
+            else
+                return 0;
+        }
     }
 }

@@ -87,16 +87,22 @@ namespace PUTAirlinesMobile
 
         private void Search_Click(object sender, EventArgs e)
         {
-            flights = MySQLHelper.getFlight(timeMemory, startAirport.AirportID, finishAirport.AirportID, connection);
-            adapter = new ArrayAdapter<Flight>(this, Android.Resource.Layout.SimpleListItem1, flights);
-
-            if (flights == null)
-                setAlert("Brak mo¿liwoœci rezerwacji dla podanej daty");
-            else
+           
+            if (DateTime.Today <= timeMemory)
             {
-                resTxt.Visibility = ViewStates.Visible;
-                listV.Adapter = adapter;
+                flights = MySQLHelper.getFlight(timeMemory, startAirport.AirportID, finishAirport.AirportID, connection);
+                adapter = new ArrayAdapter<Flight>(this, Android.Resource.Layout.SimpleListItem1, flights);
+
+                if (adapter.IsEmpty)
+                    setAlert("Brak lotów. Przepraszamy.");
+                else
+                {
+                    resTxt.Visibility = ViewStates.Visible;
+                    listV.Adapter = adapter;
+                }
             }
+            else
+                setAlert("Poda³eœ z³¹ date");
         }
 
         private void Date_Click(object sender, EventArgs e)
