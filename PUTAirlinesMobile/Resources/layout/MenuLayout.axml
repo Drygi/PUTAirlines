@@ -4,29 +4,45 @@
     android:background="#0099FF"
     android:layout_height="match_parent"
     android:id="@+id/RelativeMenuLayout">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/WitajImage"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="0dp"
+        android:padding="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:src="@drawable/paneluzytkownika"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY" />
     <ImageButton
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:id="@+id/ButtonMojeKonto"
         android:layout_marginBottom="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:padding="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="5dp"
-        android:src="@drawable/mojekonto_button"
-        android:background="@android:color/transparent" />
+        android:src="@drawable/mojekonto"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:layout_below="@id/WitajImage" />
     <ImageButton
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:id="@+id/ButtonMojeRezerwacje"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:padding="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="15dp"
-        android:layout_toRightOf="@+id/ButtonMojeKonto"
+        android:layout_toRightOf="@id/ButtonMojeKonto"
         android:src="@drawable/mojerezerwacje"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:layout_marginBottom="15dp"
+        android:layout_below="@id/WitajImage" />
     <ImageButton
         android:layout_width="170.0dp"
         android:layout_height="170.0dp"
@@ -37,7 +53,8 @@
         android:layout_marginRight="5dp"
         android:layout_below="@+id/ButtonMojeKonto"
         android:src="@drawable/zarezerwuj"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY" />
     <ImageButton
         android:layout_width="170.0dp"
         android:layout_height="170.0dp"
@@ -50,5 +67,19 @@
         android:layout_below="@+id/ButtonMojeRezerwacje"
         android:layout_toRightOf="@+id/ButtonZarezerwuj"
         android:src="@drawable/zamknij"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/Znizka"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="40dp"
+        android:padding="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_below="@+id/ButtonZarezerwuj"
+        android:src="@drawable/znizka"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY" />
 </RelativeLayout>

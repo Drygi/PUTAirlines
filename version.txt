@@ -107,7 +107,13 @@
 	- dodanie cen bagazu w zalenozsci od rozmiaru 
 	- poprawienie wywolywaniaw procedury wstawiania rezerwacji 
 	-dodanie w bazie funkcji removeOrder oraz jej wywolanie w MySQLHelper
+
+	1.20
+	- zmiana GetOrderData na procedure skladowana 
+	- stworzenie szablonu Page ( przyklad : ManuPage)
+	- dodanie parametru do InsertRes (nie obsluzone !!! )
+
+
 * Do zrobienia : 
   - zliczenie ceny
-  - usuwanie / dodawanie osoby
   - poprawienie mini bledu (klikanie kilka razy w jedno row powoduje duplikowanie sie eventu .click )

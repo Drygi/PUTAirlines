@@ -324,54 +324,31 @@ namespace PUTAirlinesMobile.Helper
         public static List<MyOrderData> get_order_data(int ClientID, MySqlConnection conn)
         {
             List<MyOrderData> returned = new List<MyOrderData>();
-            string stringCMD = "SELECT reservation.ReservationDate , reservation.JSON, " +
-                                        "flight.DepartureDate , flight.ArrivalDate, " +
-                                        "airport.Name, airport.City, airport.Country,  " +
-                                       "airport2.Name, airport2.City, airport2.Country , reservation.ReservationID , flight.PriceOfTicket " +
-                                  /*
-                                  0 - data rezerwacji
-                                  1 - json osob zapisanych pod bilet
-                                  2 - data wylotu
-                                  3 - data przylotu
-                                  4 - nawa lotniska wylotu
-                                  5 - miejscowosc lotniska wylotu
-                                  6 - kraj lotniska wylotu
-                                  7 - nazwa lotniska przylotu
-                                  8 - miejscowosc lotniska przylotu
-                                  9 - kraj lotniska przylotu 
-                                  */
+            string SelectCMD = "call GetOrderData(@thisClientID)";
 
-                               "FROM Reservation reservation , Flight flight, Connection connection , Airport airport, Airport airport2 " +
-                               "WHERE reservation.ClientID = @thisClientID " +
-                                                                  "AND reservation.FlightID = flight.FlightID " +
-                                                                  "AND flight.ConnectionID = connection.ConnectionID " +
-                                                                  "AND connection.DepartureAirportID = airport.airportID " +
-                                                                  "AND connection.ArrivalAirportID = airport2.airportID ";
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand(stringCMD, conn);
-                cmd.Parameters.AddWithValue("@thisClientID", ClientID);
-                var result = cmd.ExecuteReader();
+            MySqlCommand cmd = new MySqlCommand(SelectCMD, conn);
+            cmd.Parameters.AddWithValue("@thisClientID", ClientID);
+            conn.Open();
+            var result = cmd.ExecuteReader();
 
-                while (result.Read())
+            while (result.Read())
                 {
                     MyOrderData order_1 = new MyOrderData();
-                    order_1.NazwaLotniskaOdlotu = result.GetString(4);
-                    order_1.NazwaLotniskaPrzylotu = result.GetString(7);
-                    order_1.DataWylotu = result.GetString(2);
-                    order_1.ReservationID = result.GetInt16(10);
-                    order_1.CenaBiletu = result.GetFloat(11);
+                    order_1.NazwaLotniskaOdlotu = result.GetString("NameDeparture");
+                    order_1.NazwaLotniskaPrzylotu = result.GetString("NameArrival");
+                    order_1.DataWylotu = result.GetString("DepartureDate");
+                    order_1.ReservationID = result.GetInt16("ReservationID");
+                    order_1.CenaBiletu = result.GetFloat("PriceOfTicket");
                     MyOrderDataDetails d_order_1 = new MyOrderDataDetails();
-                    d_order_1.DataPrzylotu = result.GetString(3);
-                    d_order_1.DataRezerwacji = result.GetString(0);
-                    d_order_1.KrajOdlotu = result.GetString(6);
-                    d_order_1.KrajPrzylotu = result.GetString(9);
-                    d_order_1.MiejscowoscOdlotu = result.GetString(5);
-                    d_order_1.MiejscowoscPrzylotu = result.GetString(8);
+                    d_order_1.DataPrzylotu = result.GetString("ArrivalDate");
+                    d_order_1.DataRezerwacji = result.GetString("ReservationDate");
+                    d_order_1.KrajOdlotu = result.GetString("CountryDeparture");
+                    d_order_1.KrajPrzylotu = result.GetString("CountryArrival");
+                    d_order_1.MiejscowoscOdlotu = result.GetString("CityDeparture");
+                    d_order_1.MiejscowoscPrzylotu = result.GetString("CityArrival");
 
 
-                    List<ClientShort> c_order_1 = GlobalHelper.parsing_JSON(result.GetString(1));
+                    List <ClientShort> c_order_1 = GlobalHelper.parsing_JSON(result.GetString(1));
 
                     d_order_1.client = c_order_1;
                     order_1.details = d_order_1;
@@ -385,19 +362,8 @@ namespace PUTAirlinesMobile.Helper
                     i.luggages = get_LuggageForReservation(i.ReservationID, conn);
                 }
 
-            }
-            catch (Exception ex)
-            {
-              
-            }
-            finally
-            {
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-            return returned;
+                return returned;
+
         }
         public static List<Luggage> get_LuggageForReservation(int ReservationID , MySqlConnection conn)
         {
@@ -734,7 +700,6 @@ namespace PUTAirlinesMobile.Helper
 
             return true;
         }
-
         public static bool removeOrder(int orderID,int countOfUser, MySqlConnection conn)
         {
             int returned = 0;
@@ -744,7 +709,7 @@ namespace PUTAirlinesMobile.Helper
 
                 MySqlCommand cmd = new MySqlCommand(stringCMD, conn);
                 cmd.Parameters.AddWithValue("@orderID", orderID);
-                cmd.Parameters.AddWithValue("@countUfUser", countOfUser);
+                cmd.Parameters.AddWithValue("@countOfUser", countOfUser);
                 conn.Open();
                 returned = cmd.ExecuteNonQuery();
 
@@ -769,19 +734,17 @@ namespace PUTAirlinesMobile.Helper
         }
         public static bool InsertIntoRes(int clientID,int flightId, string JSON, int countOfPeople, MySqlConnection conn)
         {
-            ///dodac tutaj cene bagazu ale to dopiero jak w funkcji sie to zmieni
             int returned = 0;
             try
             {
-                string insertReservation = "SELECT InsertIntoReservation (@clientID,@flightID,@actualTime,@actualTime,@zero,@json,@people)";
+                string insertReservation = "SELECT InsertIntoReservation (@clientID,@flightID,@actualTime,@actualTime,@zero,@LuggagePrice, @json,@people)";
 
                 MySqlCommand cmd = new MySqlCommand(insertReservation, conn);
-               //  cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@clientID", clientID);
                 cmd.Parameters.AddWithValue("@flightID", flightId);
                 cmd.Parameters.AddWithValue("@actualTime", DateTime.Now);
                 cmd.Parameters.AddWithValue("@zero", 1);
-               // cmd.Parameters.AddWithValue("@price", cost);
+              //  cmd.Parameters.AddWithValue("@LuggagePrice", LuggagePrice); // MUSISZ TO DOCIAGNAC !!!!!!
                 cmd.Parameters.AddWithValue("@people", countOfPeople);
                 cmd.Parameters.AddWithValue("@json", JSON);
                 conn.Open();
@@ -806,7 +769,6 @@ namespace PUTAirlinesMobile.Helper
                 return true;
 
         }
-
         public static bool removeUser(string JSON , string token , int countOfClient, string ReservationID , double price , MySqlConnection conn)
         {
             bool returned = true;

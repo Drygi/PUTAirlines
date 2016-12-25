@@ -1,44 +1,30 @@
-Images, layout descriptions, binary blobs and string dictionaries can be included 
-in your application as resource files.  Various Android APIs are designed to 
-operate on the resource IDs instead of dealing with images, strings or binary blobs 
-directly.
+CREATE DEFINER=`m1245_paragon`@`%` FUNCTION `InsertIntoReservation`(
+ _ClientID int(16),
+ _Flightid int(16),
+ _ReservationDate datetime,
+ _LastModificationDate datetime,
+ _isRealized int(1),
+ _LuggagePrice int(16),
+ _JSON varchar(256),
+ _CountOfPeople int(11)
+) RETURNS int(1)
+BEGIN
+declare _newCount int(11);
+declare _maxCount int(11);
+declare _Price double;
 
-For example, a sample Android app that contains a user interface layout (main.axml),
-an internationalization string table (strings.xml) and some icons (drawable-XXX/icon.png) 
-would keep its resources in the "Resources" directory of the application:
+SELECT f.CountOfClient, f.PriceOfTicket , m.CountOfSpace
+		INTO _newCount,_Price,_maxCount FROM Flight f,  Model m WHERE f.FlightID = _FlightID AND f.AirplaneID = m.ModelID;
 
-Resources/
-    drawable/
-        icon.png
 
-    layout/
-        main.axml
+SET _Price = _Price * _CountOfPeople + _LuggagePrice;
+SET _newCount =  _newCount + _CountOfPeople;
 
-    values/
-        strings.xml
+IF _maxCount<_newCount THEN
+	RETURN 0;
+else
+   INSERT INTO Reservation (ClientID,FlightID,ReservationDate,LastModificationDate,isRealized,JSON,Price,countOfPeople) VALUES (_ClientID,_FlightID,_ReservationDate,_LastModificationDate,_isRealized,_JSON,_Price,_CountOfPeople); 
+   RETURN 1;
+end if;
 
-In order to get the build system to recognize Android resources, set the build action to
-"AndroidResource".  The native Android APIs do not operate directly with filenames, but 
-instead operate on resource IDs.  When you compile an Android application that uses resources, 
-the build system will package the resources for distribution and generate a class called "R" 
-(this is an Android convention) that contains the tokens for each one of the resources 
-included. For example, for the above Resources layout, this is what the R class would expose:
-
-public class R {
-    public class drawable {
-        public const int icon = 0x123;
-    }
-
-    public class layout {
-        public const int main = 0x456;
-    }
-
-    public class strings {
-        public const int first_string = 0xabc;
-        public const int second_string = 0xbcd;
-    }
-}
-
-You would then use R.drawable.icon to reference the drawable/icon.png file, or R.layout.main 
-to reference the layout/main.axml file, or R.strings.first_string to reference the first 
-string in the dictionary file values/strings.xml.
+END
