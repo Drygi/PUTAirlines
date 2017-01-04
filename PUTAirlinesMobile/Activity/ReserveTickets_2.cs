@@ -113,7 +113,8 @@ namespace PUTAirlinesMobile
                         double cost = Math.Round((f.Price * countOfPeople)+luggagePrice, 2);
 
                         //MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort),cost,countOfPeople, connection);
-                        MySQLHelper.InsertIntoRes(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), countOfPeople, connection);
+                        if (MySQLHelper.InsertIntoRes(GlobalMemory.m_client.ID, f.FlightID, cost, GlobalHelper.ToJSON(clientsShort), countOfPeople, connection)==false)
+                            setAlert("Brak miejsc");
 
                         MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
                         reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
@@ -207,7 +208,10 @@ namespace PUTAirlinesMobile
                         MySQLHelper.InsertLuggage(item, reservationID, connection);
                     }
                    //  MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), cost, countOfPeople, connection);
-                    MySQLHelper.InsertIntoRes(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), countOfPeople, connection);
+                   if(MySQLHelper.InsertIntoRes(GlobalMemory.m_client.ID, f.FlightID,cost, GlobalHelper.ToJSON(clientsShort), countOfPeople, connection)==false)
+                        setAlert("Brak miejsc");
+
+
                     MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
                     reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
                     this.Finish();                  

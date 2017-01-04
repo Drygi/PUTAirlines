@@ -113,7 +113,8 @@
 	- stworzenie szablonu Page ( przyklad : ManuPage)
 	- dodanie parametru do InsertRes (nie obsluzone !!! )
 
-
+1.20.1
+- poprawienie InsertIntoReservation
 * Do zrobienia : 
   - zliczenie ceny
   - poprawienie mini bledu (klikanie kilka razy w jedno row powoduje duplikowanie sie eventu .click )

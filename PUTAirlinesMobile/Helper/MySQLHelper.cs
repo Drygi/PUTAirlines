@@ -732,19 +732,19 @@ namespace PUTAirlinesMobile.Helper
                 return true;
 
         }
-        public static bool InsertIntoRes(int clientID,int flightId, string JSON, int countOfPeople, MySqlConnection conn)
+        public static bool InsertIntoRes(int clientID,int flightId, double price, string JSON, int countOfPeople, MySqlConnection conn)
         {
             int returned = 0;
             try
             {
-                string insertReservation = "SELECT InsertIntoReservation (@clientID,@flightID,@actualTime,@actualTime,@zero,@LuggagePrice, @json,@people)";
+                string insertReservation = "SELECT InsertIntoReservation (@clientID,@flightID,@actualTime,@actualTime,@zero,@Price,@json,@people)";
 
                 MySqlCommand cmd = new MySqlCommand(insertReservation, conn);
                 cmd.Parameters.AddWithValue("@clientID", clientID);
                 cmd.Parameters.AddWithValue("@flightID", flightId);
                 cmd.Parameters.AddWithValue("@actualTime", DateTime.Now);
                 cmd.Parameters.AddWithValue("@zero", 1);
-              //  cmd.Parameters.AddWithValue("@LuggagePrice", LuggagePrice); // MUSISZ TO DOCIAGNAC !!!!!!
+                cmd.Parameters.AddWithValue("@Price",price); //koszt calkowity
                 cmd.Parameters.AddWithValue("@people", countOfPeople);
                 cmd.Parameters.AddWithValue("@json", JSON);
                 conn.Open();
