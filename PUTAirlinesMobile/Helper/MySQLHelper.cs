@@ -474,9 +474,7 @@ namespace PUTAirlinesMobile.Helper
                 {
                     ids.Add(result.GetInt32(0));
                 }
-                return ids[ids.Count - 1];
-
-
+                return ids.Last();
             }
             catch (Exception ex)
             {

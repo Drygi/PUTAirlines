@@ -100,7 +100,7 @@ namespace PUTAirlinesMobile
             {              
                 if (Name.Text.Trim() == String.Empty || LastName.Text.Trim() == String.Empty || Lenght.Text.Trim() == String.Empty || Height.Text.Trim() == String.Empty || Width.Text.Trim() == String.Empty || Weight.Text.Trim() == String.Empty)
                 {
-                    setAlert("Nie wypelniono wszystkich pól");
+                    setAlert("Nie wype³niono wszystkich pól");
                 }
                 else
                 {
@@ -203,19 +203,20 @@ namespace PUTAirlinesMobile
                     f.CountOfClient += countOfPeople;
                     GlobalMemory.mFlight = f;
                     double cost = Math.Round((f.Price * countOfPeople)+luggagePrice, 2);
-              
+
+                    //MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), cost, countOfPeople, connection);
+                   if(MySQLHelper.InsertIntoRes(GlobalMemory.m_client.ID, f.FlightID,cost, GlobalHelper.ToJSON(clientsShort), countOfPeople, connection)==false)
+                        setAlert("Brak miejsc");
+
+                    reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
                     foreach (var item in luggages)
                     {
                         MySQLHelper.InsertLuggage(item, reservationID, connection);
                     }
-                   //  MySQLHelper.InsertReservation(GlobalMemory.m_client.ID, f.FlightID, GlobalHelper.ToJSON(clientsShort), cost, countOfPeople, connection);
-                   if(MySQLHelper.InsertIntoRes(GlobalMemory.m_client.ID, f.FlightID,cost, GlobalHelper.ToJSON(clientsShort), countOfPeople, connection)==false)
-                        setAlert("Brak miejsc");
-
-
+                    //
                     // Metoda InsertReservation robi automatycznie update
                     //MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
-                    reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
+
                     this.Finish();                  
                 }
 

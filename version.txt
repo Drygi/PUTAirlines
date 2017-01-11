@@ -124,6 +124,7 @@
   - nowy standard naglowka 
 1.20.3
   - dodanie nag³owka dla Moje Zamowienia
+1.20.4
+ - poprawienie przekazywania reservationID przy 2 lub wiecej klientow 
 * Do zrobienia : 
-  - ogarnac dlaczego przekazywane jest ReservationID = 0 przy 2 lub wiecej klientow
   - poprawienie mini bledu (klikanie kilka razy w jedno row powoduje duplikowanie sie eventu .click )
