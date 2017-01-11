@@ -42,8 +42,7 @@ namespace PUTAirlinesMobile
             pBar = FindViewById<ProgressBar>(Resource.Id.ProgressBar);
             pBar.Visibility = ViewStates.Invisible;
 
-            login = FindViewById<TextView>(Resource.Id.loginText);
-            login.Text ="U¿ytkownik: "+ client.Login;
+          
 
             name = FindViewById<EditText>(Resource.Id.yourName);
             name.Text = client.Name;

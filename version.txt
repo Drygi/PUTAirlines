@@ -126,5 +126,7 @@
   - dodanie nag³owka dla Moje Zamowienia
 1.20.4
  - poprawienie przekazywania reservationID przy 2 lub wiecej klientow 
+ 1.21
+ - dodanie nag³ówków oraz edycja ikon
 * Do zrobienia : 
   - poprawienie mini bledu (klikanie kilka razy w jedno row powoduje duplikowanie sie eventu .click )
