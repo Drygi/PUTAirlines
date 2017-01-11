@@ -339,6 +339,7 @@ namespace PUTAirlinesMobile.Helper
                     order_1.DataWylotu = result.GetString("DepartureDate");
                     order_1.ReservationID = result.GetInt16("ReservationID");
                     order_1.CenaBiletu = result.GetFloat("PriceOfTicket");
+                    order_1.KosztRezerwacji = result.GetFloat("Price");
                     MyOrderDataDetails d_order_1 = new MyOrderDataDetails();
                     d_order_1.DataPrzylotu = result.GetString("ArrivalDate");
                     d_order_1.DataRezerwacji = result.GetString("ReservationDate");

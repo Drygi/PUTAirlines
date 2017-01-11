@@ -116,7 +116,8 @@ namespace PUTAirlinesMobile
                         if (MySQLHelper.InsertIntoRes(GlobalMemory.m_client.ID, f.FlightID, cost, GlobalHelper.ToJSON(clientsShort), countOfPeople, connection)==false)
                             setAlert("Brak miejsc");
 
-                        MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
+                        // Metoda InsertReservation robi automatycznie update
+                        //MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
                         reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
                         if (reservationID == -1)
                             setAlert("Error");
@@ -212,7 +213,8 @@ namespace PUTAirlinesMobile
                         setAlert("Brak miejsc");
 
 
-                    MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
+                    // Metoda InsertReservation robi automatycznie update
+                    //MySQLHelper.updateCountOfClient(f.FlightID, counter, connection);
                     reservationID = MySQLHelper.getResevationID(GlobalMemory.m_client.ID, f.FlightID, connection);
                     this.Finish();                  
                 }

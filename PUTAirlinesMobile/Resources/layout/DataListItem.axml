@@ -88,6 +88,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/t_o"
         android:layout_marginLeft="35dp" />
+    <TextView
+        android:text="Koszt rezerwacji:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/h_cena"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <TextView
+        android:text="Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/t_cena"
+        android:layout_marginLeft="35dp" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

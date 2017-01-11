@@ -3,7 +3,6 @@
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">PUTAirlinesMobile</string>
       <style name="Theme.Splash" parent="android:Theme">
-        <item name="android:windowBackground">@drawable/logoHome </item>
         <item name="android:windowNoTitle">true</item>
      </style>
   

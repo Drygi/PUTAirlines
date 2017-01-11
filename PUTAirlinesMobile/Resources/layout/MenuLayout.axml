@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#0099FF"
+    android:background="#053b6d"
     android:layout_height="match_parent"
     android:id="@+id/RelativeMenuLayout">
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:id="@+id/WitajImage"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="0dp"
         android:padding="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        android:src="@drawable/paneluzytkownika"
+        android:src="@drawable/paneluzytkownika3"
         android:background="@android:color/transparent"
         android:scaleType="fitXY" />
     <ImageButton
@@ -21,7 +21,7 @@
         android:layout_height="170dp"
         android:id="@+id/ButtonMojeKonto"
         android:layout_marginBottom="15dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:padding="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="5dp"
@@ -33,7 +33,7 @@
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:id="@+id/ButtonMojeRezerwacje"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:padding="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="15dp"

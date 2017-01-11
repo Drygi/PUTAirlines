@@ -98,6 +98,8 @@ namespace PUTAirlinesMobile
 
             row.FindViewById<TextView>(Resource.Id.t_o).Text = temp;
 
+            row.FindViewById<TextView>(Resource.Id.t_cena).Text = DataList[groupPosition].KosztRezerwacji.ToString()+" z³";
+
             if(!click_is_declared[groupPosition].edit)
             {
                 row.FindViewById<Button>(Resource.Id.Edytuj).Click += (o, e) => 
