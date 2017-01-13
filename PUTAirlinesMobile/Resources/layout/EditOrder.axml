@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue">
+    android:background="@drawable/background_tittle">
     <TextView
         android:text="Liczba zarezerwowanych miejsc : {0}"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -32,6 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listviewClientOfReservation"
-        android:background="@drawable/background"
+        android:background="#053b6d"
         android:minHeight="25px" />
 </LinearLayout>
