@@ -529,18 +529,20 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-        public static bool UpdateJSON(string JSON, string ReservationID, MySqlConnection conn)
+        public static bool UpdateJSONAndPrice(string JSON,string Price, string ReservationID, MySqlConnection conn)
         {
             bool returned = true;
             try
             {
                 conn.Open();
-                string insert = "UPDATE Reservation SET JSON = @thisJSON WHERE ReservationID = @thisReservationID";
+                string insert = "UPDATE Reservation SET JSON = @thisJSON, Price = @thisPrice WHERE ReservationID = @thisReservationID";
 
                 MySqlCommand cmd = new MySqlCommand(insert, conn);
 
                 cmd.Parameters.AddWithValue("@thisJSON", JSON);
+                cmd.Parameters.AddWithValue("@thisPrice", Price);
                 cmd.Parameters.AddWithValue("@thisReservationID", ReservationID);
+                
 
                 var r = cmd.ExecuteNonQuery();
             }
@@ -558,7 +560,7 @@ namespace PUTAirlinesMobile.Helper
             }
             return returned;
         }
-        public static bool DeleteLuggage(string LugaggeID, string JSON , string ReservationID, MySqlConnection conn)
+        public static bool DeleteLuggageAndChangePrice(string LugaggeID, string JSON ,string Price, string ReservationID, MySqlConnection conn)
         {
             bool returned = true;
             try
@@ -570,10 +572,11 @@ namespace PUTAirlinesMobile.Helper
                 cmdLuggage.ExecuteNonQuery();
                 conn.Close();
                 conn.Open();
-                string updateReservation = "UPDATE Reservation SET  JSON=@thisJSON " +
+                string updateReservation = "UPDATE Reservation SET  JSON=@thisJSON, Price=@thisPrice " +
                     "WHERE ReservationID = @thisReservationID";
                 cmdLuggage = new MySqlCommand(updateReservation, conn);
                 cmdLuggage.Parameters.AddWithValue("@thisJSON", JSON);
+                cmdLuggage.Parameters.AddWithValue("@thisPrice", Price);
                 cmdLuggage.Parameters.AddWithValue("@thisReservationID", ReservationID);
                 cmdLuggage.ExecuteNonQuery();
 

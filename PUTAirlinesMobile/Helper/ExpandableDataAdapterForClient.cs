@@ -19,6 +19,8 @@ namespace PUTAirlinesMobile
         private Activity _context;
         private MyOrderData _DataList;
         private EditOrder _obj;
+        private int _actualClick;
+        private bool _hasClicked;
         public ExpandableDataAdapterForClient(Activity newContext, MyOrderData newList, EditOrder a)
         {
             _obj = a;
@@ -96,6 +98,8 @@ namespace PUTAirlinesMobile
 
         public override View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
         {
+            _actualClick = groupPosition;
+            _hasClicked = false;
             View row = convertView;
             if (row == null)
             {
@@ -134,47 +138,62 @@ namespace PUTAirlinesMobile
 
         private void Valid_and_update(View row , int groudPosition)
         {
-            var result = _DataList.luggages.Find(s => s.UserToken == _DataList.details.client[groudPosition].UserToken);
-            if(result!=null)
+            if(_actualClick == groudPosition && !_hasClicked)
             {
-                if (Valid_luggage_field(row))
+                _hasClicked = true;
+                var result = _DataList.luggages.Find(s => s.UserToken == _DataList.details.client[groudPosition].UserToken);
+                if (result != null)
                 {
-                    if (!Valid_luggage_field_if_change(row, result))
+                    if (Valid_luggage_field(row))
                     {
-                        _obj.setAlert("Brak zmian. ");
-                    }else
+                        List<int> changeParametr;
+                        if (!Valid_luggage_field_if_change(row, result))
+                        {
+                            _obj.setAlert("Brak zmian. ");
+                        }
+                        else
+                        {
+                            // Zmieniono parametry bagazu
+                            Helper.MySQLHelper.UpdateLuggage(Get_New_luggage(row, result), _obj.connection);
+                            _obj.setAlert("Zmieniono parametry baga¿u pomyœlnie. ");
+                        }
+                    }
+                    else
                     {
-                        Helper.MySQLHelper.UpdateLuggage(Get_New_luggage(row, result), _obj.connection);
-                        _obj.setAlert("Zmieniono parametry baga¿u pomyœlnie. ");
+                        // usunieto bagaz
+                        float newPrice = _DataList.KosztRezerwacji;
+                        if (result.IsDangerous) newPrice -= 50;
+                        newPrice -= ReserveTickets_2.getLuggagePrice(result.Lenght, result.Height, result.Width);
+                        _DataList.details.client[groudPosition].UserToken = "brak";
+                        string newJSON = JsonConvert.SerializeObject(new ClientShortJSON() { users = _DataList.details.client.ToArray() });
+
+                        Helper.MySQLHelper.DeleteLuggageAndChangePrice(result.LuggageID.ToString(), newJSON, newPrice.ToString(), _DataList.ReservationID.ToString(), _obj.connection);
+                        _obj.setAlert("Baga¿ zosta³ usuniêty dla klienta " + _DataList.details.client[groudPosition].ToStringWithoutToken() + ".");
+
                     }
                 }
                 else
                 {
-                    _DataList.details.client[groudPosition].UserToken = "brak";
-                    string newJSON = JsonConvert.SerializeObject(new ClientShortJSON() { users = _DataList.details.client.ToArray() });
-                    Helper.MySQLHelper.DeleteLuggage(result.LuggageID.ToString(), newJSON, _DataList.ReservationID.ToString(), _obj.connection);
-                    _obj.setAlert("Baga¿ zosta³ usuniêty dla klienta " + _DataList.details.client[groudPosition].ToStringWithoutToken() + ".");
+                    // dodano bagaz
+                    if (Valid_luggage_field(row))
+                    {
+                        string Token = Helper.GlobalHelper.generateIdentify();
+                        _DataList.details.client[groudPosition].UserToken = Token;
+                        string newJSON = JsonConvert.SerializeObject(new ClientShortJSON() { users = _DataList.details.client.ToArray() });
+                        Helper.Luggage newLuggage = Create_Luggage(row, Token);
+                        Helper.MySQLHelper.InsertLuggage(newLuggage, newLuggage.ReservationID, _obj.connection);
+                        float newPrice = _DataList.KosztRezerwacji + ReserveTickets_2.getLuggagePrice(newLuggage.Lenght, newLuggage.Height, newLuggage.Width);
+                        if (newLuggage.IsDangerous) newPrice += 50;
+                        Helper.MySQLHelper.UpdateJSONAndPrice(newJSON,newPrice.ToString(), _DataList.ReservationID.ToString(), _obj.connection);
+                        _obj.setAlert("Baga¿ zosta³ dodany dla klienta " + _DataList.details.client[groudPosition].ToStringWithoutToken() + ".");
 
+                    }
+                    else
+                    {
+                        _obj.setAlert("Brak zmian. ");
+                    }
                 }
-            }
-            else
-            {
-                if(Valid_luggage_field(row))
-                {
-                    string Token = Helper.GlobalHelper.generateIdentify();
-                    _DataList.details.client[groudPosition].UserToken = Token;
-                    string newJSON = JsonConvert.SerializeObject(new ClientShortJSON() { users = _DataList.details.client.ToArray() });
-                    Helper.Luggage newLuggage = Create_Luggage(row, Token);
-                    Helper.MySQLHelper.InsertLuggage(newLuggage, newLuggage.ReservationID, _obj.connection);
-                    Helper.MySQLHelper.UpdateJSON(newJSON, _DataList.ReservationID.ToString(), _obj.connection);
-                    _obj.setAlert("Baga¿ zosta³ dodany dla klienta " + _DataList.details.client[groudPosition].ToStringWithoutToken() + ".");
-
-                }
-                else
-                {
-                    _obj.setAlert("Brak zmian. ");
-                }
-            }
+            }           
         }
 
         private bool Valid_luggage_field(View row)
@@ -202,14 +221,13 @@ namespace PUTAirlinesMobile
 
         private bool Valid_luggage_field_if_change(View row , Helper.Luggage luggage)
         {
-            string temp = row.FindViewById<EditText>(Resource.Id.b_dlugosc).Text;
+            bool result = false;
             if (row.FindViewById<EditText>(Resource.Id.b_dlugosc).Text != luggage.Lenght.ToString()) return true;
             if (row.FindViewById<EditText>(Resource.Id.b_wysokosc).Text != luggage.Height.ToString()) return true;
             if (row.FindViewById<EditText>(Resource.Id.b_szerokosc).Text != luggage.Width.ToString()) return true;
             if (row.FindViewById<EditText>(Resource.Id.b_waga).Text != luggage.Weight.ToString()) return true;
             if (row.FindViewById<CheckBox>(Resource.Id.is_dangerous).Checked != luggage.IsDangerous) return true;
-
-            return false;
+            return result;
         }
 
         private Helper.Luggage Get_New_luggage(View row , Helper.Luggage old)

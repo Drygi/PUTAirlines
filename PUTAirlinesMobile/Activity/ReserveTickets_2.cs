@@ -239,7 +239,7 @@ namespace PUTAirlinesMobile
                 }
                 else
                 {        
-                    clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim(),"brak baga¿u"));
+                    clientsShort.Add(new ClientShort(Name.Text.Trim(), LastName.Text.Trim(),"brak"));
 
                     counter++;
                     setAlert("Dodano osobê nr " + counter.ToString() + " Pozosta³o " + (countOfPeople - counter).ToString());
@@ -305,7 +305,7 @@ namespace PUTAirlinesMobile
         //1 dla bagazu jako plecak // + 30zl
         // 2 dla œredniej torby // + 50zl
         // 3 dla duzej torby // + 90zl
-        private int getLuggagePrice(double Lenght,double Height,double Width)
+        public static int getLuggagePrice(double Lenght,double Height,double Width)
         {
             double sum = Lenght + Height + Width;
             if (sum <= 135)

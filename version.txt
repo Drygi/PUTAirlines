@@ -128,5 +128,11 @@
  - poprawienie przekazywania reservationID przy 2 lub wiecej klientow 
  1.21
  - dodanie nag³ówków oraz edycja ikon
-* Do zrobienia : 
-  - poprawienie mini bledu (klikanie kilka razy w jedno row powoduje duplikowanie sie eventu .click )
+
+ 1.22
+   - poprawienie mini bledu (klikanie kilka razy w jedno row powoduje duplikowanie sie eventu .click )
+   - update ceny rezerwacji je¿eli : bagaz zosta³ dodany , bagaz zosta³ usuniety
+
+
+   * do zrobienia 
+   - update ceny rezerwacji je¿eli : parametry bagazu zostaly zmienione na tyle ze inna jest cena bazu , uzytkownik zostaje usuniety (-bilet , -bagaz)

@@ -30,7 +30,7 @@ namespace PUTAirlinesMobile
             init_title();
             connection = Helper.MySQLHelper.getConnection("Server=mysql8.mydevil.net;Port=3306;Database=m1245_paragon;User=m1245_paragon;Password=KsiVnj8HQz32VxT8eNPd"); 
             MyOrderData order = GlobalMemory.order[GlobalMemory.actual_edited];
-            set_title(order.details.client.Count, order.CenaBiletu, order.CenaBiletu*order.details.client.Count());
+            set_title(order.details.client.Count, order.CenaBiletu, order.KosztRezerwacji);
             listView = FindViewById<ExpandableListView>(Resource.Id.listviewClientOfReservation);
             listView.SetAdapter(new ExpandableDataAdapterForClient(this, order,this));
         }
