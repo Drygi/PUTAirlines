@@ -490,6 +490,38 @@ namespace PUTAirlinesMobile.Helper
             }
 
         }
+
+        public static bool UpdatePrice(string Price , string ReservationID,MySqlConnection conn)
+        {
+            bool returned = true;
+            try
+            {
+                conn.Open();
+                string insert = "UPDATE Reservation SET Price = @thisPrice WHERE ReservationID = @thisReservationID";
+
+                MySqlCommand cmd = new MySqlCommand(insert, conn);
+
+                cmd.Parameters.AddWithValue("@thisPrice", Price);
+                cmd.Parameters.AddWithValue("@thisReservationID", ReservationID);
+
+
+                var r = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                returned = false;
+            }
+            finally
+            {
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return returned;
+        }
+
         public static bool UpdateLuggage(Luggage lugagge , MySqlConnection conn)
         {
             bool returned = true;

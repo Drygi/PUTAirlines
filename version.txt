@@ -133,6 +133,5 @@
    - poprawienie mini bledu (klikanie kilka razy w jedno row powoduje duplikowanie sie eventu .click )
    - update ceny rezerwacji je¿eli : bagaz zosta³ dodany , bagaz zosta³ usuniety
 
-
-   * do zrobienia 
-   - update ceny rezerwacji je¿eli : parametry bagazu zostaly zmienione na tyle ze inna jest cena bazu , uzytkownik zostaje usuniety (-bilet , -bagaz)
+1.23
+   - update ceny rezerwacji je¿eli : parametry bagazu zostaly zmienione na tyle ze inna jest cena bagazu

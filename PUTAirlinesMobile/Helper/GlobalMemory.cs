@@ -9,6 +9,6 @@ namespace PUTAirlinesMobile
         public static Flight mFlight { get; set; }
         public static List<MyOrderData> order { get; set; }
         public static int actual_edited { get; set; }
-
+        public static MenuPage _menuPage { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace PUTAirlinesMobile
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.MenuLayout);
+            GlobalMemory._menuPage = this;
             initControlos();  
         }
 
@@ -62,6 +63,14 @@ namespace PUTAirlinesMobile
         private void Account_Click(object sender, EventArgs e)
         {
             StartActivity(typeof(AccountPage));
+        }
+
+        public void setAlert(string message)
+        {
+            Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+            Android.App.AlertDialog alertDialog = alert.Create();
+            alertDialog.SetTitle(message);
+            alertDialog.Show();
         }
     }
 }

@@ -136,6 +136,26 @@ namespace PUTAirlinesMobile
             return row;
         }
 
+        int ChangePriceLuggage(Helper.Luggage oldLuggage, Helper.Luggage newLuggage)
+        {
+            int change = 0;
+
+            int priceOld = ReserveTickets_2.getLuggagePrice(oldLuggage.Lenght, oldLuggage.Height, oldLuggage.Width);
+            int priceNew = ReserveTickets_2.getLuggagePrice(newLuggage.Lenght, newLuggage.Height, newLuggage.Width);
+
+            if(oldLuggage.IsDangerous && !newLuggage.IsDangerous)
+            {
+                change -= 50;
+            }
+
+            if(!oldLuggage.IsDangerous && newLuggage.IsDangerous)
+            {
+                change += 50;
+            }
+
+            return change - (priceOld - priceNew);
+        }
+
         private void Valid_and_update(View row , int groudPosition)
         {
             if(_actualClick == groudPosition && !_hasClicked)
@@ -146,16 +166,20 @@ namespace PUTAirlinesMobile
                 {
                     if (Valid_luggage_field(row))
                     {
-                        List<int> changeParametr;
                         if (!Valid_luggage_field_if_change(row, result))
                         {
-                            _obj.setAlert("Brak zmian. ");
+                            GlobalMemory._menuPage.setAlert("Brak zmian. ");
                         }
                         else
                         {
+                            var newLuggage = Get_New_luggage(row, result);
                             // Zmieniono parametry bagazu
-                            Helper.MySQLHelper.UpdateLuggage(Get_New_luggage(row, result), _obj.connection);
-                            _obj.setAlert("Zmieniono parametry baga¿u pomyœlnie. ");
+                            Helper.MySQLHelper.UpdateLuggage(newLuggage, _obj.connection);
+                            Helper.MySQLHelper.UpdatePrice((_DataList.KosztRezerwacji+ChangePriceLuggage(result, newLuggage)).ToString(),_DataList.ReservationID.ToString(), _obj.connection);
+
+
+                            GlobalMemory._menuPage.setAlert("Zmieniono parametry baga¿u pomyœlnie. ");
+                            _obj.Finish();
                         }
                     }
                     else
@@ -168,7 +192,8 @@ namespace PUTAirlinesMobile
                         string newJSON = JsonConvert.SerializeObject(new ClientShortJSON() { users = _DataList.details.client.ToArray() });
 
                         Helper.MySQLHelper.DeleteLuggageAndChangePrice(result.LuggageID.ToString(), newJSON, newPrice.ToString(), _DataList.ReservationID.ToString(), _obj.connection);
-                        _obj.setAlert("Baga¿ zosta³ usuniêty dla klienta " + _DataList.details.client[groudPosition].ToStringWithoutToken() + ".");
+                        GlobalMemory._menuPage.setAlert("Baga¿ zosta³ usuniêty dla klienta " + _DataList.details.client[groudPosition].ToStringWithoutToken() + ".");
+                        _obj.Finish();
 
                     }
                 }
@@ -185,12 +210,14 @@ namespace PUTAirlinesMobile
                         float newPrice = _DataList.KosztRezerwacji + ReserveTickets_2.getLuggagePrice(newLuggage.Lenght, newLuggage.Height, newLuggage.Width);
                         if (newLuggage.IsDangerous) newPrice += 50;
                         Helper.MySQLHelper.UpdateJSONAndPrice(newJSON,newPrice.ToString(), _DataList.ReservationID.ToString(), _obj.connection);
-                        _obj.setAlert("Baga¿ zosta³ dodany dla klienta " + _DataList.details.client[groudPosition].ToStringWithoutToken() + ".");
+                        GlobalMemory._menuPage.setAlert("Baga¿ zosta³ dodany dla klienta " + _DataList.details.client[groudPosition].ToStringWithoutToken() + ".");
+                        _obj.Finish();
 
                     }
                     else
                     {
-                        _obj.setAlert("Brak zmian. ");
+                        GlobalMemory._menuPage.setAlert("Brak zmian. ");
+                        _obj.Finish();
                     }
                 }
             }           
