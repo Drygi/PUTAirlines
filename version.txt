@@ -135,3 +135,6 @@
 
 1.23
    - update ceny rezerwacji je¿eli : parametry bagazu zostaly zmienione na tyle ze inna jest cena bagazu
+
+1.24 
+   - skalowanie przyciskow na MenuLayout
