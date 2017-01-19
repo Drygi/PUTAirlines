@@ -22,38 +22,9 @@ namespace PUTAirlinesMobile
             SetContentView(Resource.Layout.MenuLayout);
             
             GlobalMemory._menuPage = this;
-            initControlos();
-     
-            var metrics = Resources.DisplayMetrics;
-            var widthInDp = ConvertPixelsToDp(metrics.WidthPixels);
-            setWidth(widthInDp);
+            initControlos();               
         }
-
-
-        private void setWidth(int maxWidth)
-        {
-            maxWidth -= 40;
-
-
-            this.account.LayoutParameters.Width = maxWidth;
-            this.reservation.LayoutParameters.Width = maxWidth;
-            this.myOrder.LayoutParameters.Width = maxWidth;
-            this.logout.LayoutParameters.Width = maxWidth;
-
-            this.account.LayoutParameters.Height = maxWidth;
-            this.reservation.LayoutParameters.Height = maxWidth;
-            this.myOrder.LayoutParameters.Height = maxWidth;
-            this.logout.LayoutParameters.Height = maxWidth;
-
-        }
-
-
-        private int ConvertPixelsToDp(float pixelValue)
-        {
-            var dp = (int)((pixelValue) / Resources.DisplayMetrics.Density);
-            return dp;
-        }
-
+  
         private void initControlos()
         {
             account = FindViewById<ImageButton>(Resource.Id.ButtonMojeKonto);
